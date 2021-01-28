@@ -22,13 +22,13 @@ namespace Negoc.Contollers
         }
         public IActionResult Index()
         {
-            return View(servicioProd.GetProductos());
+            return View();
         }
-        public IActionResult GetProductos(long CategoriaId, byte GeneroId, int PagNumero,int PagCantidad,int TipoOrden)
+        public IActionResult GetProductos(long CategoriaId, byte GeneroId, int PagNumero, int PagCantidad, int TipoOrden)
         {
             var res = servicioProd.GetProductos(CategoriaId, GeneroId, PagNumero, PagCantidad,TipoOrden);
-
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+            return View("Index", res);
+            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
 
         public IActionResult GetProductosCat(long CategoriaId)

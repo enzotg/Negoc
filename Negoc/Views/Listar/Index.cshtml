@@ -1,5 +1,5 @@
 ﻿@using Newtonsoft.Json;
-@model IEnumerable<Negoc.Models.Producto>
+@model IEnumerable<Negoc.ViewModels.ProductoList>
 
 @{
     ViewData["Title"] = "Index";
@@ -26,7 +26,21 @@
 </div>
 <div id="ContenedorProd" class="contenedor">
 
+    @foreach (var item in Model)
+    {
+        <div class="item producto">
+            <img  class="producto-imagen"  src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+            <span class="producto-oferta">Oferta</span> 
+            <span class="producto-precio">@item.Precio</span>
+            <span class="producto-off">20%</span>
+            <span class="producto-off"></span>
+            <span class="producto-descr">@item.Nombre</span>
+        </div>
+
+    }
+
 </div>
+
 <div class="alert alert-primary">
     <ul class="pagination justify-content-md-center">
         <li class="page-item">
@@ -38,7 +52,7 @@
             <input type="text" class="page-link" value="1" id="txtPageNumber" readonly style="width:36px;" />
         </li>
         <li class="page-item">
-            <a class="page-link" href="javascript:moverPag(1);" aria-label="Next">
+            <a class="page-link" href="javascript:moverPag(1);" id="pagSiguiente" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
@@ -47,20 +61,20 @@
 <script>
 
     window.addEventListener("load", window_onload);
-    
-    window.onscroll = function (ev) {
-        if ((window.innerHeight + window.pageYOffset + 0) >= document.body.offsetHeight) { //mac window.pageYOffset+1
-            console.log("you're at the bottom of the page");
-        }
-    };
 
-    function mostrarBarra() {
-        if (document.getElementById("subCategorias").classList[1] == null)
-            document.getElementById("subCategorias").classList += " activo";
-        else
-            document.getElementById("subCategorias").classList = "subcategorias";
+    function getQryVal() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        var catId = urlParams.get('CategoriaId');
+        var genId = urlParams.get('GeneroId');
+        var pagNum = urlParams.get('PagNumero');
+        var pagSiz = urlParams.get('PagCantidad');
+        var tipoOrden = urlParams.get('TipoOrden');
+
+        document.getElementById("selectId").value = tipoOrden; 
+        document.getElementById("txtPageNumber").value = pagNum; 
     }
-
     function moverPag(n) {
 
         const queryString = window.location.search;
@@ -76,106 +90,32 @@
         
         if (pagNum <= 0) return;        
         
-        var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
-        
-        $.ajax({
-            url: urlProd,
-            method: "GET",
-            dataType: 'json'
-        }).then(function (data) {
-            var productos = JSON.parse(data);
-            if (productos.length > 0) {
+        var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);        
+        var cant = @Model.Count();      
 
-                LimpiarProd();
-                CargarProd(productos);                
-            }
-            else {
-                pagNum -=n;                                
-            }      
-            
-
-            queryStringNue = getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
-            setUrl(queryStringNue);
-            document.getElementById("txtPageNumber").value = pagNum;                
-        });    
-
+        window.location.href = urlProd;
+  
     }
-    function setUrl(queryStringNue) {
 
-        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringNue;
-        window.history.pushState('', '', newurl);
-        //window.history.replaceState('', '', newurl);
-        
-    }
     function getQryNue(catId, genId, pagNum, pagSiz, tipoOrden) {
 
         var queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
         return queryStringNue;
     }
 
-    function filtro (gen, cat, pagN, pagC, tipoO) {
-        this.GeneroId = gen;
-        this.CategoriaId = cat;
-        this.PagNumero = pagN;
-        this.PagCantidad = pagC;
-        this.TipoOrden = tipoO;
+    function window_onload() {                                   
+        getQryVal();
+        //getCats();        
     }
-    window.onpopstate = function (e) {
-        console.log(e);
-        if (e != null)
-            //window.location.href = window.location.href; 
-            moverPag(0);
-        
-    }
-    function window_onload() {
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        var urlProd = "";
-        var catId = urlParams.get('CategoriaId');
-        var genId = urlParams.get('GeneroId');
-        var pagNum = urlParams.get('PagNumero');
-        var pagSiz = urlParams.get('PagCantidad');
-        var tipoOrden = urlParams.get('TipoOrden');
 
-        if (!tipoOrden) {
-            tipoOrden = 1;
-            document.getElementById("selectId").value = tipoOrden;
-        }
-        if (!pagNum) pagNum = 1;
-        if (!pagSiz) pagSiz = 3;
 
-        var mfiltro = new filtro(catId, genId, pagNum, pagSiz, 1);
 
-        if (sessionStorage.getItem("sfiltro")) {
-            console.log(sessionStorage.getItem("sfiltro"));
-        }
-        else {
-            sessionStorage.setItem("sfiltro", JSON.stringify(mfiltro));
-        }
-
-        queryStringNue = getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
-        setUrl(queryStringNue);
-        urlProd = "/Listar/GetProductos" + queryStringNue;
-
-        //CargarProd(JSON.parse(Model));
-        
-        //var yourJavaScriptArray = //Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
-        //CargarProd(yourJavaScriptArray);
-       
-        
-        $.ajax({
-            url: urlProd,
-            method: "GET",
-            dataType: 'json'//,
-            //data: mfiltro
-        }).then(function (data) {
-            var productos = JSON.parse(data);
-            CargarProd(productos);
-        });
-        
-        getCats();
-        
+    function mostrarBarra() {
+        if (document.getElementById("subCategorias").classList[1] == null)
+            document.getElementById("subCategorias").classList += " activo";
+        else
+            document.getElementById("subCategorias").classList = "subcategorias";
     }
 
     function getCats() {
@@ -261,51 +201,9 @@
             CargarProd(productos);
         });
     }
-    function LimpiarProd() {
-        var contain = document.getElementById("ContenedorProd");
-        while (contain.firstElementChild)
-            contain.removeChild(contain.firstElementChild);
-    }
-    function CargarProd(lista) {
 
-        var contain = document.getElementById("ContenedorProd");
-        lista.forEach((elem, index, array) => {
-
-            var divProd = document.createElement("div");
-            divProd.classList = "item producto";
-            var imagen = document.createElement("img");
-            var oferta = document.createElement("span");
-            var precio = document.createElement("span");
-            var off = document.createElement("span");
-            var envio = document.createElement("span");
-            var descr = document.createElement("span");
-
-            imagen.className = "producto-imagen";
-            imagen.src = "/Listar/GetImagePr/" + elem.ProductoId;
-            oferta.className = "producto-oferta";
-            oferta.innerText = "Oferta";
-            precio.className = "producto-precio";
-            precio.innerText = elem.PrecioStr;
-            off.className = "producto-off";
-            off.innerText = "20%";
-            envio.className = "producto-off";
-            envio.innerText = "Envio gratis";
-            descr.className = "producto-descr";
-            descr.innerText = elem.Nombre;
-
-            divProd.appendChild(imagen);
-            divProd.appendChild(oferta);
-            divProd.appendChild(precio);
-            divProd.appendChild(off);
-            divProd.appendChild(document.createElement("br"));
-            divProd.appendChild(envio);
-            divProd.appendChild(document.createElement("br"));
-            divProd.appendChild(descr);
-
-            contain.appendChild(divProd);
-
-        });
-    }
+    
+    
 
 
 </script>

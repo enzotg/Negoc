@@ -156,6 +156,15 @@ namespace Negoc.Services
             if (categoriaId != 0)
             {
                 exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));
+                
+                
+                foreach(var cat in this.GetCategorias(categoriaId))
+                {
+                    exprWhere = Expression.Or(exprWhere,
+                        Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(Convert.ToInt64(cat.CategoriaId))));
+                }
+
+
             }
             if (generoId != 0)
             {
@@ -211,7 +220,7 @@ namespace Negoc.Services
 
             var res = 
                 result
-                 .Select(x => ToProdList(x))
+                 .Select(x => ToProdList(x))                 
                 .ToList();
             if (res == null)
                 return new List<ProductoList>();
