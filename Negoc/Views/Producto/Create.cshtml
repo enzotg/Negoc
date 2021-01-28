@@ -1,0 +1,119 @@
+﻿@model Negoc.Models.Producto
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Producto</h4>
+<hr />
+<div class="container">    
+    <form asp-action="Create" class="submit-form" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Nombre" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="Nombre" class="form-control col-md-8" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="CategoriaId" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="CategoriaId" class="form-control" />
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="MarcaId" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="MarcaId" class="form-control" />
+                <span asp-validation-for="MarcaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="GeneroId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="GeneroId" class="form-control" />
+                <span asp-validation-for="GeneroId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="ColorId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="ColorId" class="form-control" />
+                <span asp-validation-for="ColorId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="TalleId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="TalleId" class="form-control" />
+                <span asp-validation-for="TalleId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Precio" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="PrecioLista" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="PrecioLista" class="form-control" />
+                <span asp-validation-for="PrecioLista" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="PrecioStr" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="PrecioStr" class="form-control" />
+                <span asp-validation-for="PrecioStr" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label>Imagenes</label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="FormFile" type="file" multiple />
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+            </div>
+
+            <div class="col-sm-4 col-md-2">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,283 @@
+﻿@model IEnumerable<Negoc.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="alert  alert-primary">
+    <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
+        Categorias
+    </a>
+    <select class="btn btn-outline-primary " onchange="moverPag(0)" id="selectId">
+        <option value="1">Menor precio</option>
+        <option value="2">Mayor precio</option>
+        <option value="3">A-Z</option>
+        <option value="4">Z-A</option>
+    </select>
+</div>
+<div class="alert   alert-info" style="display:inline-flex;width:100%">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        Remeras
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Talle
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        Genero
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+
+<div id="subCategorias" class="subcategorias">
+
+    <div id="categorias">
+
+    </div>
+</div>
+<div id="ContenedorProd" class="contenedor">
+
+</div>
+
+
+<script>
+
+    window.addEventListener("load", window_onload);
+
+
+    window.onscroll = function (ev) {
+        if ((window.innerHeight + window.pageYOffset + 0) >= document.body.offsetHeight) { //mac window.pageYOffset+1
+            console.log("you're at the bottom of the page");
+        }
+    };
+
+    function mostrarBarra() {
+        if (document.getElementById("subCategorias").classList[1] == null)
+            document.getElementById("subCategorias").classList += " activo";
+        else
+            document.getElementById("subCategorias").classList = "subcategorias";
+    }
+
+    function selectOrden(e) {
+
+
+
+    }
+
+    function moverPag(n) {
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        var catId = urlParams.get('CategoriaId');
+        var genId = urlParams.get('GeneroId');
+        var pagNum = urlParams.get('PageNumber');
+        var pagSiz = urlParams.get('PageSize');
+        var tipoOrden = document.getElementById("selectId").value; //urlParams.get('TipoOrden');
+
+        pagNum = parseInt(pagNum) + n;
+
+        if (pagNum <= 0) return;
+
+        var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
+
+        $.ajax({
+            url: urlProd,
+            method: "GET",
+            dataType: 'json'
+        }).then(function (data) {
+            var productos = JSON.parse(data);
+            if (productos.length > 0) {
+
+                LimpiarProd();
+                CargarProd(productos);
+            }
+            else {
+                pagNum -= n;
+            }
+
+            queryStringNue = getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
+            setUrl(queryStringNue);
+            document.getElementById("txtPageNumber").value = pagNum;
+        });
+
+    }
+    function setUrl(queryStringNue) {
+
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringNue;
+        window.history.pushState('', '', newurl);
+
+    }
+    function getQryNue(catId, genId, pagNum, pagSiz, tipoOrden) {
+
+        var queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&PageNumber=" + pagNum + "&PageSize=" + pagSiz + "&TipoOrden=" + tipoOrden;
+        return queryStringNue;
+    }
+
+    function window_onload() {
+        //document.getElementById("txtPageNumber").value = "1";
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var urlProd = "";
+
+        var catId = urlParams.get('CategoriaId');
+        var genId = urlParams.get('GeneroId');
+        var pagNum = 1;
+        var pagSiz = 3;
+
+        if (catId != null)
+            urlProd = "/Listar/GetProductosCat?CategoriaId=" + catId;
+        if (genId != null)
+            urlProd = "/Listar/GetProductosCatGen?CategoriaId=" + catId + "&GeneroId=" + genId;
+
+        urlProd = "/Listar/GetProductos?CategoriaId=" + catId + "&GeneroId=" + genId + "&PageNumber=" + pagNum + "&PageSize=" + pagSiz;
+
+        //GetProductos
+        $.ajax({
+            url: urlProd,
+            method: "GET",
+            dataType: 'json'
+        }).then(function (data) {
+            var productos = JSON.parse(data);
+            CargarProd(productos);
+        });
+
+        $.ajax(
+            {
+                url: "/Listar/GetCategorias?CategoriaId=0&NivelId=5",
+                method: "GET",
+                dataType: 'json'
+            }
+        ).then(function (data) {
+            var res = JSON.parse(data);
+            var contain = document.getElementById("categorias");
+            res.forEach((elem, index, array) => {
+                if (elem.NivelId == 1) {
+                    var divR = document.createElement("div");
+                    divR.id = elem.CategoriaId;
+
+                    var spText = document.createElement("span");
+                    spText.innerText = elem.Nombre;
+                    spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
+                    var spIco = document.createElement("span");
+                    spIco.innerHTML = "|+|";
+                    spIco.className = "categoria-icono";
+                    spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
+
+                    divR.appendChild(spIco);
+                    divR.appendChild(spText);
+
+                    contain.appendChild(divR);
+                }
+                else {
+                    var nodo = document.getElementById(elem.ParentId);
+                    if (nodo == null) { //no existe
+                    }
+                    else {
+                        var divR = document.createElement("div");
+                        divR.style.display = "none";
+                        divR.id = elem.CategoriaId;
+                        nodo.appendChild(divR);
+
+                        var spText = document.createElement("span");
+                        spText.innerText = elem.Nombre;
+                        spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
+                        var spIco = document.createElement("span");
+                        spIco.innerHTML = "|+|";
+                        spIco.className = "categoria-icono";
+                        spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
+
+                        divR.appendChild(spIco);
+                        divR.appendChild(spText);
+
+                    }
+                }
+            });
+        });
+    }
+
+    function disp(e) {
+
+        if (e.target.innerHTML.indexOf("+") < 0)
+            e.target.innerHTML = e.target.innerHTML.replace("-", "+");
+        else
+            e.target.innerHTML = e.target.innerHTML.replace("+", "-");
+
+        e.target.parentElement.childNodes.forEach((elem, index, array) => {
+            if (elem.tagName == "DIV") {
+                if (elem.style.display != "none")
+                    elem.style.display = "none";
+                else
+                    elem.style.display = "block";
+            }
+        });
+    }
+    function CategoriaClick(e) {
+
+        $.ajax({
+            url: "/Listar/GetProductosCat?CategoriaId=" + e.target.parentElement.id,
+            method: "GET",
+            dataType: 'json'
+        }).then(function (data) {
+            mostrarBarra();
+            var productos = JSON.parse(data);
+            CargarProd(productos);
+        });
+    }
+    function LimpiarProd() {
+        var contain = document.getElementById("ContenedorProd");
+        while (contain.firstElementChild)
+            contain.removeChild(contain.firstElementChild);
+    }
+    function CargarProd(lista) {
+
+        var contain = document.getElementById("ContenedorProd");
+        lista.forEach((elem, index, array) => {
+
+            var divProd = document.createElement("div");
+            divProd.classList = "item producto";
+            var imagen = document.createElement("img");
+            var oferta = document.createElement("span");
+            var precio = document.createElement("span");
+            var off = document.createElement("span");
+            var envio = document.createElement("span");
+            var descr = document.createElement("span");
+
+            imagen.className = "producto-imagen";
+            imagen.src = "/Listar/GetImagePr/" + elem.ProductoId;
+            oferta.className = "producto-oferta";
+            oferta.innerText = "Oferta";
+            precio.className = "producto-precio";
+            precio.innerText = elem.PrecioStr;
+            off.className = "producto-off";
+            off.innerText = "20%";
+            envio.className = "producto-off";
+            envio.innerText = "Envio gratis";
+            descr.className = "producto-descr";
+            descr.innerText = elem.Nombre;
+
+            divProd.appendChild(imagen);
+            divProd.appendChild(oferta);
+            divProd.appendChild(precio);
+            divProd.appendChild(off);
+            divProd.appendChild(document.createElement("br"));
+            divProd.appendChild(envio);
+            divProd.appendChild(document.createElement("br"));
+            divProd.appendChild(descr);
+
+            contain.appendChild(divProd);
+
+        });
+    }
+
+
+</script>
+

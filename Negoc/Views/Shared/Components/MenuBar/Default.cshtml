@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Negoc.Models.Categoria>
+
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+        <div>&#127968;</div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown active ">
+                <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hombre
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+
+                    @foreach (var m in Model)
+                    {
+                        @if (m.NivelId == 1)
+                        {
+                            <a class="dropdown-item font-weight-bold" href="/Listar?CategoriaId=@m.CategoriaId&GeneroId=1&PageNumber=1&PageSize=3">@m.Nombre</a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" href="/Listar?CategoriaId=@m.CategoriaId&GeneroId=1&PageNumber=1&PageSize=3">-@m.Nombre</a>
+                        }
+                    }
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Listar?CategoriaId=0&GeneroId=1">Todo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mujer
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    @foreach (var m in Model)
+                    {
+                        @if (m.NivelId == 1)
+                        {
+                            <a class="dropdown-item font-weight-bold" href="/Listar?CategoriaId=@m.CategoriaId&GeneroId=2">@m.Nombre</a>
+                        }
+                        else
+                        {
+                            <a class="dropdown-item" href="/Listar?CategoriaId=@m.CategoriaId&GeneroId=2">-@m.Nombre</a>
+                        }
+                    }
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Listar?CategoriaId=1&GeneroId=2">Todo</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="~/Producto/" id="" role="button">
+                    Productos
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" style="margin-left:auto;">
+            <input class="form-control mr-sm-2 " style="width:60%;margin-right:2px;" type="search" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </div>
+
+</nav>
+

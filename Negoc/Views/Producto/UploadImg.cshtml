@@ -1,0 +1,42 @@
+﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@model Negoc.Models.Producto;
+
+@{
+    ViewData["Title"] = "UploadImg";
+}
+
+<h2>UploadImg</h2>
+
+<h4>Producto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UploadImg" class="submit-form" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductoId" class="control-label"></label>
+                <input asp-for="ProductoId" class="form-control" />
+                <span asp-validation-for="ProductoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormFile"></label>
+                <input asp-for="FormFile" type="file" multiple/>
+            </div>
+
+            <div class="form-group">
+                <button id="formButton" type="submit" class="btn btn-outline-primary">
+                    Add
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

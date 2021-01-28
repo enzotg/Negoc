@@ -1,0 +1,208 @@
+﻿@{
+    ViewData["Title"] = "_Layout";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/lib/cardcarr/cardcarr.css" rel="stylesheet" />
+
+    <title></title>
+
+    <style>
+
+        *, html {
+            font-family: Arial,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            background-color: whitesmoke;
+            /*justify-content:   space-around;*/
+        }
+
+        .item {
+            flex-grow: 0; /*0 no crece*/
+            flex-shrink: 0;
+            flex-basis: 172px;
+            max-width: 172px;
+            min-width: 172px;
+            border-radius: 4px;
+            height: 350px;
+            padding: 6px;
+            margin: 4px;
+            overflow: hidden;
+            border: .7px solid silver;
+        }
+
+        .item-gr-carr {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+        }
+
+        .producto {
+            background-color: white;
+            position: relative;
+        }
+
+        .producto-imagen {
+            width: 146px;
+            height: 146px;
+            margin: auto;
+            display: block;
+        }
+
+        .producto-precio {
+            line-height: 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .producto-off {
+            padding-left: .25rem;
+            color: green;
+            line-height: 2.0rem;
+            font-size: .8rem;
+        }
+
+        .producto-descr {
+            font-size: .9rem;
+        }
+
+        .producto-oferta {
+            background-color: coral;
+            color: white;
+            border-radius: 12px;
+            padding: .4rem;
+            position: absolute;
+            top: 0rem;
+            margin: 1rem;
+            font-size: .8rem;
+        }
+
+        .subcategorias {
+            z-index: 1000;
+            opacity: 1;
+            position: absolute;
+            background-color: aliceblue;
+            min-width: 200px;
+            width: 20%;
+            height: 100vh;
+            left: -300px;
+        }
+
+        .activo {
+            left: 0;
+        }
+
+        .subcategorias span {
+            padding-left: 4px;
+        }
+
+            .subcategorias span:hover {
+                background-color: lightblue;
+                transition: background-color .5s;
+                border-radius: 2px;
+                cursor: pointer;
+            }
+
+        .categoria-icono {
+            font-family: 'Lucida Console', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: silver;
+            border-radius: 2px;
+        }
+
+        #categorias {
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+            #categorias div {
+                padding-left: 8px;
+            }
+
+            #categorias > div > span:nth-child(2) {
+                text-decoration: underline;
+            }
+
+
+        .nav-item:hover {
+            background-color: blueviolet;
+            color: black;
+        }
+
+        .carousel-control-prev {
+            width: 5%;
+        }
+
+        .carousel-control-prev-icon {
+            background-image: url('/images/arrow_left.png');
+            background-repeat: no-repeat;
+            background-position-y: 50%;
+            background-position-x: 50%;
+        }
+
+        .carousel-control-next {
+            width: 5%;
+        }
+
+        .carousel-control-next-icon {
+            background-image: url('/images/arrow_right.png');
+            background-repeat: no-repeat;
+            background-position-y: 50%;
+            background-position-x: 50%;
+        }
+        /****************/
+        .blog .carousel-indicators {
+            left: 0;
+            top: auto;
+            bottom: -40px;
+            opacity: 1;
+        }
+
+        #blogCarousel {
+            max-height: 200px;
+        }
+
+            #blogCarousel .row {
+                width: 100%;
+                flex-wrap: nowrap;
+            }
+
+                #blogCarousel .row img {
+                    max-width: 100%;
+                    margin: auto;
+                    display: block;
+                }
+
+            #blogCarousel .col-md-3 {
+                flex-shrink: 1;
+            }
+
+        .dropdown-item{
+            line-height:1.2rem;
+        }
+    </style>
+
+</head>
+<body>    
+    @await Component.InvokeAsync("MenuBar", new { CategoriaId = Convert.ToInt64(0), NivelId = Convert.ToInt64(2) })
+
+    @RenderBody()
+
+    <div class="text-black-50  card-footer ">Terminos</div>
+</body>
+</html>
+
+@RenderSection("Scripts", false)

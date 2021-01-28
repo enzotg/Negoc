@@ -1,0 +1,48 @@
+.contprinc {
+    position: relative;
+    min-height: 360px;
+    border-top: 1px solid rgb(235, 231, 231);
+    border-bottom: 1px solid rgb(235, 231, 231);
+    border-radius: 2px;
+}
+.contcards{
+    display: flex;            
+    justify-content:    space-around;
+    flex-flow: row;            
+    overflow: hidden;
+
+}
+.contcards-item{
+    flex: 0 0 auto;    
+    background-color: white;    
+}
+.contprinc-control-ant{
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    text-shadow: silver 2px 2px 2px;            
+    font-size: x-large ;
+     
+    position: absolute;            
+    width: 30px;                   
+    z-index: 1000;
+    color: black;
+    opacity: .7;
+    cursor:pointer;
+}
+.contprinc-control-sig {
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    text-shadow: silver 2px 2px 2px;
+    font-size: x-large;
+    position: absolute;
+    width: 30px;
+    z-index: 1000;
+    color: black;
+    opacity: .7;
+    cursor: pointer;
+
+    right: 0;
+    text-align: right;
+}

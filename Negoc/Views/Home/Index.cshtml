@@ -1,0 +1,163 @@
+﻿
+
+@section Scripts    {
+    <script src="~/lib/cardcarr/cardcarr.JS"></script>
+}
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" style=" width:100%; max-height: 400px !important;border:2px solid black">
+        <div class="carousel-item active">
+            <img src="~/images/b1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/b2.jpg" class="d-block w-100" alt="...">
+        </div>
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                <a class="carousel-control-prev" href="#blogCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#blogCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-basquet.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-ciclismo.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-futbol.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-natacion.png" />
+                                </a>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-basquet.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-basquet.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-futbol.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+                                    <img src="~/images/deporte-menu-rugby.png" />
+                                </a>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+                </div>
+                <!--.carousel-inner-->
+            </div>
+            <!--.Carousel-->
+        </div>
+    </div>
+</div>
+
+<hr />
+<div class="alert alert-primary text-center" >
+    <span   >Productos</span>
+    
+</div>
+<hr />
+<div id="contprinc" class="contprinc">
+    <span class="contprinc-control-ant" id="contprinc-Ant">
+        <span>⏪</span>
+    </span>
+    <span class="contprinc-control-sig" id="contprinc-Sig">
+        <span>⏩</span>
+    </span>
+
+    <div id="contcards" class="contcards">
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=1"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
+        </div>
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=2"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
+        </div>
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=3"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
+        </div>
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=4"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
+        </div>
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=5"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
+        </div>
+        <div class="contcards-item">
+            <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=3"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un   </span></div>
+        </div>
+
+    </div>
+</div>
+
+<hr />
+<div class="contcards">
+    <span class="alert alert-primary">
+        Pagá con tarjeta o en efectivo
+
+        Con Mercado Pago, tenés cuotas sin interés con tarjeta o efectivo en puntos de pago. ¡Y siempre es seguro!
+    </span>
+    <span class="alert alert-info">
+        Envío gratis desde $ 2.500
+
+        Solo por estar registrado en Mercado Libre tenés envíos gratis en miles de productos. Es un beneficio de Mercado Puntos.
+    </span>
+    <span class="alert alert-secondary">
+        Seguridad, de principio a fin
+
+        ¿No te gusta? ¡Devolvelo! En Mercado Libre, no hay nada que no puedas hacer, porque estás siempre protegido.
+    </span>
+
+</div>
+
+
