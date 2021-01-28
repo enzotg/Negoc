@@ -1,43 +1,25 @@
-﻿@model IEnumerable<Negoc.Models.Producto>
+﻿@using Newtonsoft.Json;
+@model IEnumerable<Negoc.Models.Producto>
 
 @{
     ViewData["Title"] = "Index";
 }
-<div class="alert  alert-primary">
-    <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
+<div class="alert  alert-primary" >
+    <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary" >
         Categorias
     </a>
-    <select class="btn btn-outline-primary " onchange="moverPag(0)" id="selectId">
+    <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">        
         <option value="1">Menor precio</option>
         <option value="2">Mayor precio</option>
         <option value="3">A-Z</option>
         <option value="4">Z-A</option>
     </select>
-</div>
-<div class="alert   alert-info" style="display:inline-flex;width:100%">
-    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        Remeras
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        Talle
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
-        Genero
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
 
+
+</div>
 
 <div id="subCategorias" class="subcategorias">
-
+    
     <div id="categorias">
 
     </div>
@@ -45,13 +27,27 @@
 <div id="ContenedorProd" class="contenedor">
 
 </div>
-
-
+<div class="alert alert-primary">
+    <ul class="pagination justify-content-md-center">
+        <li class="page-item">
+            <a class="page-link" href="javascript:moverPag(-1);" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <input type="text" class="page-link" value="1" id="txtPageNumber" readonly style="width:36px;" />
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:moverPag(1);" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
 <script>
 
     window.addEventListener("load", window_onload);
-
-
+    
     window.onscroll = function (ev) {
         if ((window.innerHeight + window.pageYOffset + 0) >= document.body.offsetHeight) { //mac window.pageYOffset+1
             console.log("you're at the bottom of the page");
@@ -65,27 +61,23 @@
             document.getElementById("subCategorias").classList = "subcategorias";
     }
 
-    function selectOrden(e) {
-
-    }
-
     function moverPag(n) {
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-
+        
         var catId = urlParams.get('CategoriaId');
         var genId = urlParams.get('GeneroId');
-        var pagNum = urlParams.get('PageNumber');
-        var pagSiz = urlParams.get('PageSize');
+        var pagNum = urlParams.get('PagNumero');
+        var pagSiz = urlParams.get('PagCantidad');
         var tipoOrden = document.getElementById("selectId").value; //urlParams.get('TipoOrden');
 
         pagNum = parseInt(pagNum) + n;
-
-        if (pagNum <= 0) return;
-
+        
+        if (pagNum <= 0) return;        
+        
         var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
-
+        
         $.ajax({
             url: urlProd,
             method: "GET",
@@ -95,59 +87,98 @@
             if (productos.length > 0) {
 
                 LimpiarProd();
-                CargarProd(productos);
+                CargarProd(productos);                
             }
             else {
-                pagNum -= n;
-            }
+                pagNum -=n;                                
+            }      
+            
 
             queryStringNue = getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
             setUrl(queryStringNue);
-            document.getElementById("txtPageNumber").value = pagNum;
-        });
+            document.getElementById("txtPageNumber").value = pagNum;                
+        });    
 
     }
     function setUrl(queryStringNue) {
 
         var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryStringNue;
         window.history.pushState('', '', newurl);
-
+        //window.history.replaceState('', '', newurl);
+        
     }
     function getQryNue(catId, genId, pagNum, pagSiz, tipoOrden) {
 
-        var queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&PageNumber=" + pagNum + "&PageSize=" + pagSiz + "&TipoOrden=" + tipoOrden;
+        var queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
         return queryStringNue;
     }
 
+    function filtro (gen, cat, pagN, pagC, tipoO) {
+        this.GeneroId = gen;
+        this.CategoriaId = cat;
+        this.PagNumero = pagN;
+        this.PagCantidad = pagC;
+        this.TipoOrden = tipoO;
+    }
+    window.onpopstate = function (e) {
+        console.log(e);
+        if (e != null)
+            //window.location.href = window.location.href; 
+            moverPag(0);
+        
+    }
     function window_onload() {
-        //document.getElementById("txtPageNumber").value = "1";
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         var urlProd = "";
-
         var catId = urlParams.get('CategoriaId');
         var genId = urlParams.get('GeneroId');
-        var pagNum = 1;
-        var pagSiz = 3;
+        var pagNum = urlParams.get('PagNumero');
+        var pagSiz = urlParams.get('PagCantidad');
+        var tipoOrden = urlParams.get('TipoOrden');
 
-        if (catId != null)
-            urlProd = "/Listar/GetProductosCat?CategoriaId=" + catId;
-        if (genId != null)
-            urlProd = "/Listar/GetProductosCatGen?CategoriaId=" + catId + "&GeneroId=" + genId;
+        if (!tipoOrden) {
+            tipoOrden = 1;
+            document.getElementById("selectId").value = tipoOrden;
+        }
+        if (!pagNum) pagNum = 1;
+        if (!pagSiz) pagSiz = 3;
 
-        urlProd = "/Listar/GetProductos?CategoriaId=" + catId + "&GeneroId=" + genId + "&PageNumber=" + pagNum + "&PageSize=" + pagSiz;
+        var mfiltro = new filtro(catId, genId, pagNum, pagSiz, 1);
 
-        //GetProductos
+        if (sessionStorage.getItem("sfiltro")) {
+            console.log(sessionStorage.getItem("sfiltro"));
+        }
+        else {
+            sessionStorage.setItem("sfiltro", JSON.stringify(mfiltro));
+        }
+
+        queryStringNue = getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);
+        setUrl(queryStringNue);
+        urlProd = "/Listar/GetProductos" + queryStringNue;
+
+        //CargarProd(JSON.parse(Model));
+        
+        //var yourJavaScriptArray = //Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+        //CargarProd(yourJavaScriptArray);
+       
+        
         $.ajax({
             url: urlProd,
             method: "GET",
-            dataType: 'json'
+            dataType: 'json'//,
+            //data: mfiltro
         }).then(function (data) {
             var productos = JSON.parse(data);
             CargarProd(productos);
         });
+        
+        getCats();
+        
+    }
 
+    function getCats() {
         $.ajax(
             {
                 url: "/Listar/GetCategorias?CategoriaId=0&NivelId=5",
