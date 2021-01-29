@@ -46,7 +46,11 @@ namespace Negoc.Contollers
             var res = servicioProd.GetCategorias(CategoriaId , NivelId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        
+        public IActionResult GetMarcas()
+        {
+            var res = servicioProd.GetMarcas();
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
 
 
         //----------------

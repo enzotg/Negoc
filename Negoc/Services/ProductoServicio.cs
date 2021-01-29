@@ -155,16 +155,13 @@ namespace Negoc.Services
             Expression exprWhere=null;
             if (categoriaId != 0)
             {
-                exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));
-                
+                exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));                
                 
                 foreach(var cat in this.GetCategorias(categoriaId))
                 {
                     exprWhere = Expression.Or(exprWhere,
                         Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(Convert.ToInt64(cat.CategoriaId))));
                 }
-
-
             }
             if (generoId != 0)
             {
@@ -174,7 +171,6 @@ namespace Negoc.Services
                     exprWhere = Expression.And(exprWhere,
                         Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId)));
             }
-
 
             /*Expression wh = Expression.AndAlso(
                 Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId)),
@@ -218,8 +214,7 @@ namespace Negoc.Services
                 .Skip((pageNumber-1) * pageSize)
                 .Take(pageSize);
 
-            var res = 
-                result
+            var res = result
                  .Select(x => ToProdList(x))                 
                 .ToList();
             if (res == null)
@@ -231,6 +226,11 @@ namespace Negoc.Services
         public List<Producto> GetProductos(int Cant = 20)
         {
             return _context.Producto.Take(Cant).ToList();
+        }
+
+        public List<Marca> GetMarcas()
+        {
+            return _context.Marca.ToList();
         }
 
         public List<ProductoList> GetProductosList(int Cant = 20)

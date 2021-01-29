@@ -4,18 +4,44 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="alert  alert-primary" >
-    <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary" >
-        Categorias
-    </a>
-    <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">        
-        <option value="1">Menor precio</option>
-        <option value="2">Mayor precio</option>
-        <option value="3">A-Z</option>
-        <option value="4">Z-A</option>
-    </select>
-
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Ordenar</label>
+            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
+                <option value="1">Menor precio</option>
+                <option value="2">Mayor precio</option>
+                <option value="3">A-Z</option>
+                <option value="4">Z-A</option>
+            </select>
+        </div>
+        <label>Filtrar</label>
+        <div class="col-sm-2">
+            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectMarcas">
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
+                <option value="0">(Color)</option>
+                <option value="1">Adid</option>
+                <option value="2">Pum</option>
+                <option value="3">A-Z</option>
+                <option value="4">Z-A</option>
+            </select>
+        </div>
+        <div class="col-sm-2">            
+            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
+                <option value="0">(Precio)</option>
+                <option value="1">Adid</option>
+                <option value="2">Pum</option>
+                <option value="3">A-Z</option>
+                <option value="4">Z-A</option>
+            </select>
+        </div>
+        <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
+            Categorias
+        </a>
+    </div>
 </div>
 
 <div id="subCategorias" class="subcategorias">
@@ -72,8 +98,8 @@
         var pagSiz = urlParams.get('PagCantidad');
         var tipoOrden = urlParams.get('TipoOrden');
 
-        document.getElementById("selectId").value = tipoOrden; 
-        document.getElementById("txtPageNumber").value = pagNum; 
+        document.getElementById("selectId").value = tipoOrden;
+        document.getElementById("txtPageNumber").value = pagNum;
     }
     function moverPag(n) {
 
@@ -93,8 +119,7 @@
         var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);        
         var cant = @Model.Count();      
 
-        window.location.href = urlProd;
-  
+        window.location.href = urlProd;  
     }
 
     function getQryNue(catId, genId, pagNum, pagSiz, tipoOrden) {
@@ -103,8 +128,37 @@
         return queryStringNue;
     }
 
+    function getMarcas() {
+
+        $.ajax({
+            url: '/Listar/GetMarcas',
+            type: 'Get',
+            dataType:'json'
+        }).then(function (data){
+            var arr = JSON.parse(data);
+
+            var select = document.getElementById("selectMarcas");
+            var op = document.createElement("option");
+            op.value = "0";
+            op.innerText = "(Marca)";
+            select.appendChild(op);
+
+            arr.forEach(
+                (elem, index, array) => {
+
+                    op = document.createElement("option");
+                    op.value = elem.MarcaId;
+                    op.innerText = elem.Nombre;
+                    select.appendChild(op);
+            });
+
+        });
+
+    }
+
     function window_onload() {                                   
         getQryVal();
+        getMarcas();
         //getCats();        
     }
 
