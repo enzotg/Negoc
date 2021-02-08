@@ -147,17 +147,17 @@ namespace Negoc.Services
                 .Select(x => ToProdList(x))
                 .ToList();
         }
-        public List<ProductoList> GetProductos(long categoriaId, byte generoId, int pageNumber, int pageSize, int TipoOrden)
+        private IQueryable<Producto> ArmarQry(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var entidad = _context.Producto;
             var item = Expression.Parameter(typeof(Producto), "item");
 
-            Expression exprWhere=null;
+            Expression exprWhere = null;
             if (categoriaId != 0)
             {
-                exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));                
-                
-                foreach(var cat in this.GetCategorias(categoriaId))
+                exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));
+
+                foreach (var cat in this.GetCategorias(categoriaId))
                 {
                     exprWhere = Expression.Or(exprWhere,
                         Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(Convert.ToInt64(cat.CategoriaId))));
@@ -165,28 +165,61 @@ namespace Negoc.Services
             }
             if (generoId != 0)
             {
-                if(exprWhere==null)
+                if (exprWhere == null)
                     exprWhere = Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId));
                 else
                     exprWhere = Expression.And(exprWhere,
                         Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId)));
             }
+            if (MarcaId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "MarcaId"), Expression.Constant(MarcaId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "MarcaId"), Expression.Constant(MarcaId)));
+            }
+            if (ColorId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "ColorId"), Expression.Constant(ColorId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "ColorId"), Expression.Constant(ColorId)));
+            }
+            if (PrecioD != 0 && PrecioH != 0)
+            {
+                if (exprWhere == null)
+                {
+                    exprWhere = Expression.AndAlso(
+                        Expression.GreaterThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioD)),
+                        Expression.LessThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioH)));
+                }
+                    
+                else
+                    exprWhere = Expression.And(exprWhere, Expression.AndAlso(
+                        Expression.GreaterThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioD)),
+                        Expression.LessThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioH))));
+            }
+            if(Descripcion != ""&&Descripcion!=null&&Descripcion!="null")
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Call(Expression.Property(item, "Descripcion"), typeof(string).GetMethod("Contains", new[] { typeof(string) }),Expression.Constant(Descripcion));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Call(Expression.Property(item, "Descripcion"), typeof(string).GetMethod("Contains", new[] { typeof(string) }), Expression.Constant(Descripcion)));
+            }
 
-            /*Expression wh = Expression.AndAlso(
-                Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId)),
-                Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId)));
-                */            
 
             var param = Expression.Parameter(typeof(Producto), "producto");
-            
             var lambda = Expression.Lambda<Func<Producto, bool>>(exprWhere, item);
-
             var result = entidad
                     .Include(x => x.Categoria)
-                    .Include(x => x.Marca)                    
+                    .Include(x => x.Marca)    
+                    .Include(x => x.Color)
                     .Where(lambda);
 
-            if (TipoOrden == 1 )
+            if (TipoOrden == 1)
             {
                 Expression<Func<Producto, Double>> or = Expression.Lambda<Func<Producto, Double>>(Expression.Property(param, "Precio"), param);
                 result = result.OrderBy(or);
@@ -206,10 +239,18 @@ namespace Negoc.Services
                 Expression<Func<Producto, String>> or = Expression.Lambda<Func<Producto, String>>(Expression.Property(param, "Nombre"), param);
                 result = result.OrderByDescending(or);
             }
+
+            return result;
+
+        }
+        public List<ProductoList> GetProductos(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        {
+
             if (pageNumber==0 || pageSize==0)
                 return new List<ProductoList>();
 
-
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            
             result = result
                 .Skip((pageNumber-1) * pageSize)
                 .Take(pageSize);
@@ -217,10 +258,41 @@ namespace Negoc.Services
             var res = result
                  .Select(x => ToProdList(x))                 
                 .ToList();
+
             if (res == null)
                 return new List<ProductoList>();
             else
                 return res;
+        }
+
+        public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var r = result                
+                .GroupBy(x => x.MarcaId)
+                .Select(y => new Marca
+                {
+                    MarcaId = y.Key,
+                    Nombre = y.Min(x=>x.Marca.Nombre)                    
+                })
+                .ToList();
+
+            return r;
+        }
+ 
+        public List<Color> GetColores(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var r = result                
+                .GroupBy(x => x.ColorId)
+                .Select(y => new Color
+                {
+                    ColorId = y.Key,
+                    Nombre = y.Min(x => x.Color.Nombre)
+                })
+                .ToList();
+
+            return r;
         }
 
         public List<Producto> GetProductos(int Cant = 20)

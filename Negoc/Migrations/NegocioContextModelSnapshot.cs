@@ -34,6 +34,23 @@ namespace Negoc.Migrations
                     b.ToTable("Categoria");
                 });
 
+            modelBuilder.Entity("Negoc.Models.Color", b =>
+                {
+                    b.Property<long>("ColorId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HexCode")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(30);
+
+                    b.HasKey("ColorId");
+
+                    b.ToTable("Color");
+                });
+
             modelBuilder.Entity("Negoc.Models.Marca", b =>
                 {
                     b.Property<long>("MarcaId")
@@ -69,13 +86,14 @@ namespace Negoc.Migrations
 
             modelBuilder.Entity("Negoc.Models.Producto", b =>
                 {
-                    b.Property<long>("ProductoId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<long>("ProductoId");
 
                     b.Property<long>("CategoriaId");
 
-                    b.Property<byte>("ColorId");
+                    b.Property<long>("ColorId");
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(100);
 
                     b.Property<byte>("GeneroId");
 
@@ -97,6 +115,8 @@ namespace Negoc.Migrations
 
                     b.HasIndex("CategoriaId");
 
+                    b.HasIndex("ColorId");
+
                     b.HasIndex("MarcaId");
 
                     b.ToTable("Producto");
@@ -115,6 +135,11 @@ namespace Negoc.Migrations
                     b.HasOne("Negoc.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Negoc.Models.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Negoc.Models.Marca", "Marca")

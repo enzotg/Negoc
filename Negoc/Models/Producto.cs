@@ -10,6 +10,7 @@ namespace Negoc.Models
 {
     public class Producto
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long ProductoId { get; set; }
 
         //[Display(Name = "Producto nombre")]
@@ -22,9 +23,12 @@ namespace Negoc.Models
 
         public byte GeneroId { get; set; }
 
-        public byte ColorId { get; set; }
+        public long ColorId { get; set; }               
 
         public long TalleId { get; set; }
+
+        [MaxLength(100)]        
+        public string Descripcion { get; set; }
 
         public double Precio { get; set; }
 
@@ -41,6 +45,9 @@ namespace Negoc.Models
         public Categoria Categoria { get; set; }
 
         public Marca Marca { get; set; }
+
+        public Color Color { get; set; }
+
 
     }
 }

@@ -5,58 +5,83 @@
     ViewData["Title"] = "Index";
 }
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2">
-            <label>Ordenar</label>
-            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
-                <option value="1">Menor precio</option>
-                <option value="2">Mayor precio</option>
-                <option value="3">A-Z</option>
-                <option value="4">Z-A</option>
-            </select>
+
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <label>Ordenar</label>
+        <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
+            <option value="1">Menor precio</option>
+            <option value="2">Mayor precio</option>
+            <option value="3">A-Z</option>
+            <option value="4">Z-A</option>
+        </select>
+    </div>
+    <label>Filtrar</label>
+    <div class="col-sm-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categoria
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="selectCategorias">
+                <div id="categorias">
+
+                </div>
+            </div>
         </div>
-        <label>Filtrar</label>
-        <div class="col-sm-2">
-            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectMarcas">
-            </select>
+    </div>
+    <div class="col-sm-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="selectMarcasB" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Marca
+            </button>
+            <div class="dropdown-menu" aria-labelledby="selectMarcasB" id="selectMarcas">
+                <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+            </div>
         </div>
-        <div class="col-sm-2">
-            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
-                <option value="0">(Color)</option>
-                <option value="1">Adid</option>
-                <option value="2">Pum</option>
-                <option value="3">A-Z</option>
-                <option value="4">Z-A</option>
-            </select>
+    </div>
+    <div class="col-sm-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Color
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="selectColores">
+
+            </div>
         </div>
-        <div class="col-sm-2">            
-            <select class="btn btn-outline-primary" onchange="moverPag(0)" id="selectId">
-                <option value="0">(Precio)</option>
-                <option value="1">Adid</option>
-                <option value="2">Pum</option>
-                <option value="3">A-Z</option>
-                <option value="4">Z-A</option>
-            </select>
+    </div>
+    <div class="col-sm-2">
+        <label>Precio</label>
+        <input type="number" id="precioD" value="0.00" placeholder="Mínimo" step=".1" />
+        <input type="number" id="precioH" value="0.00" placeholder="Máximo" step=".1" />
+    </div>
+
+    <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
+        Categorias
+    </a>
+    <div class="container-fluid alert-primary">
+        <h5 class="alert alert-primary">Filtros</h5>
+        <div class="alert alert-secondary" id="listaFiltros">
+
+
         </div>
-        <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
-            Categorias
-        </a>
     </div>
 </div>
 
 <div id="subCategorias" class="subcategorias">
-    
-    <div id="categorias">
 
-    </div>
+
 </div>
+
+<hr />
+
 <div id="ContenedorProd" class="contenedor">
 
     @foreach (var item in Model)
     {
         <div class="item producto">
-            <img  class="producto-imagen"  src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
-            <span class="producto-oferta">Oferta</span> 
+            <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+            <span class="producto-oferta">Oferta</span>
             <span class="producto-precio">@item.Precio</span>
             <span class="producto-off">20%</span>
             <span class="producto-off"></span>
@@ -84,82 +109,188 @@
         </li>
     </ul>
 </div>
+<input type="text" class="page-link" value="3" id="txtPageSize" readonly style="width:36px;" />
+
 <script>
 
     window.addEventListener("load", window_onload);
 
+    function AgregarFiltro(Nombre, valor) {
+
+        if (valor == 0 || valor == null) return;
+
+        var cont = document.getElementById("listaFiltros");
+        var btn = document.createElement("button");
+        var spA = document.createElement("span");
+        var spB = document.createElement("span");
+
+        var b = document.getElementById("filtro" + Nombre);
+        if(b) b.remove();
+
+        btn.type = "button";
+        btn.classList = "btn btn-outline-dark";
+        btn.name = valor;
+        btn.id = "filtro" + Nombre;
+        spA.innerText = Nombre;
+        spB.innerText = "X";
+        spB.classList = "badge badge-light";
+        btn.onclick = function (e) { Cerrar(e); }
+
+        btn.appendChild(spA);
+        btn.appendChild(spB);
+        cont.appendChild(btn);
+
+    }
+    function Cerrar(e) {
+        e.currentTarget.remove();
+    }
+    function getFromQry(e) {
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        return urlParams.get(e) == undefined ? 0 : urlParams.get(e);
+    }
+
     function getQryVal() {
+        //Leer todos los param y cargarlos en filtros
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
         var catId = urlParams.get('CategoriaId');
         var genId = urlParams.get('GeneroId');
+        var marcaId = urlParams.get('MarcaId');
+        var colorId = urlParams.get('ColorId');
+        var precioD = urlParams.get('precioD');
+        var precioH = urlParams.get('precioH');
+        var descripcion = urlParams.get('descripcion');
         var pagNum = urlParams.get('PagNumero');
         var pagSiz = urlParams.get('PagCantidad');
         var tipoOrden = urlParams.get('TipoOrden');
 
-        document.getElementById("selectId").value = tipoOrden;
+        document.getElementById("precioD").value = precioD;
+        document.getElementById("precioH").value = precioH;
         document.getElementById("txtPageNumber").value = pagNum;
+        document.getElementById("txtPageSize").value = pagSiz;
+        document.getElementById("selectId").value = tipoOrden;
+
+        AgregarFiltro("Categoria", catId);
+        AgregarFiltro("Genero", genId);
+        AgregarFiltro("Marca", marcaId);
+        AgregarFiltro("Color", colorId);
+        AgregarFiltro("Precio", precioD);
+        AgregarFiltro("Descripcion", descripcion);
+
     }
     function moverPag(n) {
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        
-        var catId = urlParams.get('CategoriaId');
-        var genId = urlParams.get('GeneroId');
-        var pagNum = urlParams.get('PagNumero');
-        var pagSiz = urlParams.get('PagCantidad');
-        var tipoOrden = document.getElementById("selectId").value; //urlParams.get('TipoOrden');
-
+        var pagNum = document.getElementById("txtPageNumber").value;
         pagNum = parseInt(pagNum) + n;
-        
-        if (pagNum <= 0) return;        
-        
-        var urlProd = "/Listar/GetProductos" + getQryNue(catId, genId, pagNum, pagSiz, tipoOrden);        
-        var cant = @Model.Count();      
 
-        window.location.href = urlProd;  
+        if (pagNum <= 0) return;
+
+        document.getElementById("txtPageNumber").value = pagNum;
+
+        var urlProd = "/Listar/GetProductos" + getQryNue(1);
+        var cant = @Model.Count();
+
+        window.location.href = urlProd;
     }
+    //CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden
+    function getQryNue(e) {
+        // 1  es todos
+        //get query con todos los param
+        //get query sin pag numero pag cant
 
-    function getQryNue(catId, genId, pagNum, pagSiz, tipoOrden) {
+        var catId = document.getElementById("filtroCategoria") != null ? document.getElementById("filtroCategoria").name : 0;
+        var genId = document.getElementById("filtroGenero") != null ? document.getElementById("filtroGenero").name : 0;
+        var marcaId = document.getElementById("filtroMarca") != null ? document.getElementById("filtroMarca").name : 0;
+        var colorId = document.getElementById("filtroColor") != null ? document.getElementById("filtroColor").name : 0;
+        var descripcion = document.getElementById("filtroDescripcion") != null ? document.getElementById("filtroDescripcion").name : '';
+        var precioD = 0;
+        var precioH = 0;
 
-        var queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
+        if (document.getElementById("filtroPrecio")) {
+            precioD = document.getElementById("precioD").value;
+            precioH = document.getElementById("precioH").value;
+        }
+
+        var tipoOrden = document.getElementById("selectId").value;
+        var pagNum = document.getElementById("txtPageNumber").value;
+        var pagSiz = document.getElementById("txtPageSize").value ;
+        var queryStringNue = '';
+
+        if(e == 1)
+            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&descripcion=" + descripcion + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
+        else
+            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&descripcion=" + descripcion + "&TipoOrden=" + tipoOrden;
+
         return queryStringNue;
     }
+    function reempQry(qry, reem) {
 
+        var str = qry.toString();
+        var ini = str.indexOf(reem);
+        var fin = str.indexOf("&", ini);
+        return str.substring(0, ini) + reem + "0" + str.substring(fin);
+    }
     function getMarcas() {
 
+        var res = reempQry(getQryNue(), "MarcaId=");
+        var urlg = "/Listar/GetMarcas" + res;
+
         $.ajax({
-            url: '/Listar/GetMarcas',
+            url: urlg,
             type: 'Get',
             dataType:'json'
         }).then(function (data){
             var arr = JSON.parse(data);
-
             var select = document.getElementById("selectMarcas");
-            var op = document.createElement("option");
-            op.value = "0";
-            op.innerText = "(Marca)";
-            select.appendChild(op);
 
             arr.forEach(
                 (elem, index, array) => {
-
-                    op = document.createElement("option");
-                    op.value = elem.MarcaId;
+                    var op = document.createElement("a");
+                    op.href = "javascript:void(0)";
+                    op.className = "dropdown-item";
                     op.innerText = elem.Nombre;
+                    op.onclick = () => { AgregarFiltro("Marca", elem.MarcaId); moverPag(0); }
                     select.appendChild(op);
-            });
+                });
 
         });
-
     }
 
-    function window_onload() {                                   
+    function getColores() {
+
+        var res = reempQry(getQryNue(), "ColorId=");
+        var urlg = "/Listar/GetColores" + res;
+
+        $.ajax({
+            url: urlg,
+            type: 'Get',
+            dataType: 'json'
+        }).then(function (data) {
+            var arr = JSON.parse(data);
+            var select = document.getElementById("selectColores");
+
+            arr.forEach(
+                (elem, index, array) => {
+                    var op = document.createElement("a");
+                    op.href = "javascript:void(0)";
+                    op.className = "dropdown-item";
+                    op.innerText = elem.Nombre;
+                    op.onclick = () => { AgregarFiltro("Color", elem.ColorId); moverPag(0); }
+                    select.appendChild(op);
+                });
+
+        });
+    }
+
+    function window_onload() {
+
         getQryVal();
         getMarcas();
-        //getCats();        
+        getColores();
+        getCats();
     }
 
 
@@ -256,8 +387,8 @@
         });
     }
 
-    
-    
+
+
 
 
 </script>

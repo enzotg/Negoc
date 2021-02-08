@@ -24,9 +24,9 @@ namespace Negoc.Contollers
         {
             return View();
         }
-        public IActionResult GetProductos(long CategoriaId, byte GeneroId, int PagNumero, int PagCantidad, int TipoOrden)
+        public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
         {
-            var res = servicioProd.GetProductos(CategoriaId, GeneroId, PagNumero, PagCantidad,TipoOrden);
+            var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId,  ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
             return View("Index", res);
             //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
@@ -46,12 +46,16 @@ namespace Negoc.Contollers
             var res = servicioProd.GetCategorias(CategoriaId , NivelId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        public IActionResult GetMarcas()
+        public IActionResult GetMarcas(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
-            var res = servicioProd.GetMarcas();
+            var res = servicioProd.GetMarcas(CategoriaId, GeneroId,MarcaId, ColorId,PrecioD, PrecioH, Descripcion, TipoOrden);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-
+        public IActionResult GetColores(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
 
         //----------------
         public IActionResult GetImagePr(long id)

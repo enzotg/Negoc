@@ -22,6 +22,20 @@ namespace Negoc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Color",
+                columns: table => new
+                {
+                    ColorId = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nombre = table.Column<string>(maxLength: 30, nullable: true),
+                    HexCode = table.Column<string>(maxLength: 20, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Color", x => x.ColorId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Marca",
                 columns: table => new
                 {
@@ -38,14 +52,14 @@ namespace Negoc.Migrations
                 name: "Producto",
                 columns: table => new
                 {
-                    ProductoId = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProductoId = table.Column<long>(nullable: false),
                     Nombre = table.Column<string>(maxLength: 50, nullable: true),
                     CategoriaId = table.Column<long>(nullable: false),
                     MarcaId = table.Column<long>(nullable: false),
                     GeneroId = table.Column<byte>(nullable: false),
-                    ColorId = table.Column<byte>(nullable: false),
+                    ColorId = table.Column<long>(nullable: false),
                     TalleId = table.Column<long>(nullable: false),
+                    Descripcion = table.Column<string>(maxLength: 100, nullable: true),
                     Precio = table.Column<double>(nullable: false),
                     PrecioLista = table.Column<double>(nullable: false),
                     PrecioStr = table.Column<string>(maxLength: 30, nullable: true)
@@ -58,6 +72,12 @@ namespace Negoc.Migrations
                         column: x => x.CategoriaId,
                         principalTable: "Categoria",
                         principalColumn: "CategoriaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Producto_Color_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Color",
+                        principalColumn: "ColorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Producto_Marca_MarcaId",
@@ -99,6 +119,11 @@ namespace Negoc.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Producto_ColorId",
+                table: "Producto",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Producto_MarcaId",
                 table: "Producto",
                 column: "MarcaId");
@@ -114,6 +139,9 @@ namespace Negoc.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categoria");
+
+            migrationBuilder.DropTable(
+                name: "Color");
 
             migrationBuilder.DropTable(
                 name: "Marca");
