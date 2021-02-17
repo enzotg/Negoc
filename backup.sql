@@ -1,3 +1,5 @@
-﻿
-restore database negoc from disk=N'd:\negocback.bak'  
+﻿BACKUP DATABASE negoc
+TO disk=N'd:\negocback.bak'   with init
+
+GO
 
