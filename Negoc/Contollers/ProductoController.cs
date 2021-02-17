@@ -95,7 +95,8 @@ namespace Negoc.Controllers
                 servicioProd.Modificar(producto);
                 servicioProd.AgregarImg(producto.ProductoId, Request.Form.Files, _appEnvironment.WebRootPath);
 
-                return View(servicioProd.GetProducto(producto.ProductoId));
+                //return View(servicioProd.GetProducto(producto.ProductoId));
+                return RedirectToAction("Index","Producto");
             }
             catch
             {

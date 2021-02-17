@@ -25,6 +25,8 @@ namespace Negoc.ViewModels
         public string PrecioStr { get; set; }
 
         public double PrecioLista { get; set; }
+
+        public string Descripcion { get; set; }
         
         //public string[] Imagenes { get; set; }
 

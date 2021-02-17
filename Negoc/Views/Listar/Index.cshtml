@@ -24,8 +24,10 @@
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categoria
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/Listar/GetProductos?CategoriaId=0&GeneroId=1&PagNumero=1&PagCantidad=3&TipoOrden=1">Todo</a>
+                    <div id="selectCategorias" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <div id="categorias">
+
+                        </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
@@ -33,31 +35,37 @@
                         Genero
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/Listar/GetProductos?CategoriaId=0&GeneroId=1&PagNumero=1&PagCantidad=3&TipoOrden=1">Todo</a>
+                        
                     </div>
                 </li>
                 <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Marca
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/Listar/GetProductos?CategoriaId=0&GeneroId=1&PagNumero=1&PagCantidad=3&TipoOrden=1">Todo</a>
+                    <div id="selectMarcas" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+
                     </div>
                 </li>
                 <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Color
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/Listar/GetProductos?CategoriaId=0&GeneroId=1&PagNumero=1&PagCantidad=3&TipoOrden=1">Todo</a>
+                    <div id="selectColores" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+
                     </div>
                 </li>
                 <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Precio
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="/Listar/GetProductos?CategoriaId=0&GeneroId=1&PagNumero=1&PagCantidad=3&TipoOrden=1">Todo</a>
+                    <div id="selectPrecio" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <div class="container-fluid text-center">
+                            <input type="number" id="precioD" value="0.00" placeholder="Mínimo" step=".1" />
+                            <input type="number" id="precioH" value="0.00" placeholder="Máximo" step=".1" />
+                            <hr />
+
+                            <input type="button" name="name" value="Aplicar" class="btn btn-outline-primary" onclick="FiltrarPrecio();" />
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -81,81 +89,11 @@
             </li>
         </ul>
     </nav>
-</div>
-<hr />
 
 
-<div>
-    <div style="border:1px silver solid; margin:4px;padding:16px">
-        <h5 class="alert alert-primary">Filtrar</h5>
-        <div class="row">
-            <div class="col-sm-4">
-                <div style="display:inline-flex">
-                    <label>Ordenar: </label>
-                    <select class="btn btn-secondary dropdown-toggle" onchange="moverPag(0)" id="selectId">
-                        <option value="1">Menor precio</option>
-                        <option value="2">Mayor precio</option>
-                        <option value="3">A-Z</option>
-                        <option value="4">Z-A</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categoria
-                    </button>
-                    <div class="dropdown-menu  dropdown-menu" aria-labelledby="dropdownMenuButton" id="selectCategorias">
-                        <div id="categorias">
+</div> 
+<div id="listaFiltros" style="border:1px solid silver; border-radius:8px;padding:4px;margin:8px  ">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="selectMarcasB" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Marca
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="selectMarcasB" id="selectMarcas">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Color
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="selectColores">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Precio
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="selectPrecio">
-                        <div class="container-fluid text-center">
-                            <input type="number" id="precioD" value="0.00" placeholder="Mínimo" step=".1" />
-                            <input type="number" id="precioH" value="0.00" placeholder="Máximo" step=".1" />
-                            <hr />
-
-                            <input type="button" name="name" value="Aplicar" class="btn btn-outline-primary" onclick="FiltrarPrecio();" />
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div id="listaFiltros">
-
-            </div>
-        </div>
-    </div>
 </div>
 <hr />
 
@@ -166,14 +104,14 @@
         <div class="item producto">
             <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
             <span class="producto-oferta">Oferta</span>
-            <span class="producto-precio">@item.Precio</span>
+            <span class="producto-precio">@item.Precio.ToString("C2")</span>
             <span class="producto-off">20%</span>
             <span class="producto-off"></span>
-            <span class="producto-descr">@item.Nombre</span>
+            <span class="producto-descr">@item.Descripcion</span>
         </div>
 
     }
-
+    
 </div>
 
 <div class="alert alert-primary">
@@ -222,7 +160,7 @@
         spA.innerText = Nombre;
         spB.innerText = "X";
         spB.classList = "badge badge-light";
-        spB.style = "border:1px solid silver;border-radius:6px;";
+        spB.style = "border:1px solid silver;border-radius:6px;margin:4px";
         btn.onclick = function (e) { Cerrar(e); }
 
         btn.appendChild(spA);

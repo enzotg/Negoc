@@ -24,6 +24,8 @@ namespace Negoc.Services
 
         public void Agregar(Producto producto, Microsoft.AspNetCore.Http.IFormFileCollection files, string WebRootPath)
         {
+            producto.Descripcion = CalcDescr(producto);
+
             _context.Producto.Add(producto);
             _context.SaveChanges();
             long productoId = producto.ProductoId;
@@ -72,8 +74,23 @@ namespace Negoc.Services
                 p.PrecioLista = producto.PrecioLista;
                 p.PrecioStr = producto.PrecioStr;
                 p.TalleId = producto.TalleId;
+                p.Descripcion = CalcDescr(producto);
                 _context.SaveChanges();
             }
+        }
+        private string CalcDescr(Producto producto)
+        {
+            var cat = _context.Categoria.FirstOrDefault(x => x.CategoriaId == producto.CategoriaId);
+            var mar = _context.Marca.FirstOrDefault(x => x.MarcaId == producto.MarcaId);
+
+            if (cat == null) return "";
+            if (mar == null) return "";
+
+            return 
+                cat.Nombre + " " +
+                mar.Nombre + " " +
+                producto.Nombre ;
+
         }
 
         public List<Categoria> GetCategorias(long CategoriaId)
@@ -328,20 +345,9 @@ namespace Negoc.Services
             res.Precio = producto.Precio;
             res.PrecioStr =  producto.Precio.ToString("C2", CultureInfo.CurrentCulture);
             res.PrecioLista = producto.PrecioLista;
+            res.Descripcion = producto.Descripcion;
 
-            return res;
-            /*
-            return new ProductoList()
-            {
-                ProductoId = producto.ProductoId,
-                Categoria = producto.Categoria.Nombre,
-                Marca = producto.Marca.Nombre,
-                Nombre = producto.Nombre,
-                Precio = producto.Precio,
-                PrecioStr = producto.Precio.ToString("C0", CultureInfo.CurrentCulture),
-                PrecioLista = producto.PrecioLista
-            };*/
-            
+            return res;            
         }
         //------------        
 
