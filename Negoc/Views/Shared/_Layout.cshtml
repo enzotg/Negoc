@@ -132,6 +132,12 @@
             #categorias div {
                 padding-left: 8px;
             }
+            #categorias div span{
+                cursor:default;
+            }
+            #categorias div span:nth-child(2){
+                cursor:pointer;
+            }
 
             #categorias > div > span:nth-child(2) {
                 text-decoration: underline;
@@ -191,9 +197,18 @@
                 flex-shrink: 1;
             }
 
+
+        .dropdown-toggle{
+            width:100%;
+        }
+        .dropdown-toggle::after {
+             
+            margin-right:0;
+        }
         .dropdown-item {
             line-height: 1.2rem;
         }
+
     </style>
 
 </head>

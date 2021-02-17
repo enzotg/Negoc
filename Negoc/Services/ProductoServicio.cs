@@ -210,6 +210,9 @@ namespace Negoc.Services
                         Expression.Call(Expression.Property(item, "Descripcion"), typeof(string).GetMethod("Contains", new[] { typeof(string) }), Expression.Constant(Descripcion)));
             }
 
+            //--------
+            if (exprWhere == null)
+                exprWhere = Expression.GreaterThan(Expression.Property(item, "ProductoId"), Expression.Constant(Convert.ToInt64(0)));
 
             var param = Expression.Parameter(typeof(Producto), "producto");
             var lambda = Expression.Lambda<Func<Producto, bool>>(exprWhere, item);
