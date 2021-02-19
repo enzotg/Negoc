@@ -21,7 +21,7 @@ namespace Negoc.Data
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Marca> Marca { get; set; }
         public DbSet<Color> Color { get; set; }
-
+        public DbSet<Genero> Genero { get; set; }
         
     }
 }

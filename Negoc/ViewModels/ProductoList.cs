@@ -18,6 +18,8 @@ namespace Negoc.ViewModels
 
         public string Marca { get; set; }
 
+        public string Genero { get; set; }
+
         public byte GeneroId { get; set; }
 
         public double Precio { get; set; }
@@ -27,7 +29,10 @@ namespace Negoc.ViewModels
         public double PrecioLista { get; set; }
 
         public string Descripcion { get; set; }
-        
+
+        public float DescuentoPorc { get; set; }
+
+        public bool EnvioGratis { get; set; }
         //public string[] Imagenes { get; set; }
 
     }

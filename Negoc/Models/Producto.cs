@@ -36,7 +36,12 @@ namespace Negoc.Models
 
         [MaxLength(30)]
         public string PrecioStr { get; set; }
-                
+
+        public float DescuentoPorc { get; set; }
+
+        [MaxLength(2000)]
+        public string Detalle { get; set; }
+
         [NotMapped]
         public IFormFile FormFile { get; set; }
 
@@ -47,6 +52,8 @@ namespace Negoc.Models
         public Marca Marca { get; set; }
 
         public Color Color { get; set; }
+
+        public Genero Genero { get; set; }
 
 
     }

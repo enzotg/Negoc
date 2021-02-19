@@ -30,6 +30,12 @@ namespace Negoc.Contollers
             return View("Index", res);
             //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+        public IActionResult GetProductosCantPag(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
+        {
+            var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
+            return Json( res);
+            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
 
         public IActionResult GetProductosCat(long CategoriaId)
         {
@@ -56,6 +62,7 @@ namespace Negoc.Contollers
             var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+
 
         //----------------
         public IActionResult GetImagePr(long id)

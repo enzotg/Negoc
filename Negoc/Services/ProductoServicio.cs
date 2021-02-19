@@ -16,6 +16,8 @@ namespace Negoc.Services
     public class ProductoServicio
     {
         NegocioContext _context;
+        static double Monto_Envio_Gratis = 5000;
+
 
         public ProductoServicio(NegocioContext Context)
         {
@@ -75,6 +77,8 @@ namespace Negoc.Services
                 p.PrecioStr = producto.PrecioStr;
                 p.TalleId = producto.TalleId;
                 p.Descripcion = CalcDescr(producto);
+                p.DescuentoPorc = producto.DescuentoPorc;
+                p.Detalle = producto.Detalle;
                 _context.SaveChanges();
             }
         }
@@ -87,8 +91,7 @@ namespace Negoc.Services
             if (mar == null) return "";
 
             return 
-                cat.Nombre + " " +
-                mar.Nombre + " " +
+                cat.NombreSing + " " +                
                 producto.Nombre ;
 
         }
@@ -103,12 +106,6 @@ namespace Negoc.Services
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
             return arbol.GetTodosChilds(CategoriaId).Where(x=>x.NivelId <= NivelId).ToList();
         }
-        /*public async Task<List<Categoria>> GetCategoriasAsync(long CategoriaId, long NivelId)
-        {
-            ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
-            var res =  arbol.GetTodosChilds(CategoriaId).Where(x => x.NivelId <= NivelId).ToList();
-            return   await res.ToAsyncEnumerable() ;
-        }*/
         public Producto GetProducto(long ProductoId)
         {
             return _context.Producto
@@ -130,12 +127,14 @@ namespace Negoc.Services
             res.AddRange(_context.Producto
                 .Include(x=>x.Categoria)
                 .Include(x=> x.Marca)
+                .Include(x => x.Genero)
                 .Where(x => x.CategoriaId == CategoriaId));
 
             foreach (var c in arbol.GetTodosChilds(CategoriaId))
                 res.AddRange(_context.Producto
                     .Include(x => x.Categoria)
                     .Include(x => x.Marca)
+                    .Include(x => x.Genero)
                     .Where(x => x.CategoriaId == c.CategoriaId));
 
             return res
@@ -152,12 +151,14 @@ namespace Negoc.Services
             res.AddRange(_context.Producto
                 .Include(x => x.Categoria)
                 .Include(x => x.Marca)
+                .Include(x => x.Genero)
                 .Where(x => x.CategoriaId == CategoriaId && x.GeneroId == GeneroId));
 
             foreach (var c in arbol.GetTodosChilds(CategoriaId))
                 res.AddRange(_context.Producto
                     .Include(x => x.Categoria)
                     .Include(x => x.Marca)
+                    .Include(x => x.Genero)
                     .Where(x => x.CategoriaId == c.CategoriaId));
 
             return res
@@ -237,6 +238,7 @@ namespace Negoc.Services
                     .Include(x => x.Categoria)
                     .Include(x => x.Marca)    
                     .Include(x => x.Color)
+                    .Include(x => x.Genero)
                     .Where(lambda);
 
             if (TipoOrden == 1)
@@ -285,6 +287,14 @@ namespace Negoc.Services
                 return res;
         }
 
+        public long GetProductosCantPag(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        {            
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var res = Math.Ceiling( Convert.ToDouble(result.ToList().Count()) / Convert.ToDouble(pageSize) );
+                
+            return (long)res;
+        }
+
         public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
@@ -330,6 +340,7 @@ namespace Negoc.Services
             return _context.Producto
                 .Include(x => x.Categoria)
                 .Include(x => x.Marca)
+                .Include(x=>x.Genero)
                 .Take(Cant)
                 .Select(x=> ToProdList(x))
                 .ToList();
@@ -346,7 +357,10 @@ namespace Negoc.Services
             res.PrecioStr =  producto.Precio.ToString("C2", CultureInfo.CurrentCulture);
             res.PrecioLista = producto.PrecioLista;
             res.Descripcion = producto.Descripcion;
-
+            res.Genero = producto.Genero.Nombre;
+            res.DescuentoPorc = producto.DescuentoPorc;           
+            res.EnvioGratis = producto.Precio >= Monto_Envio_Gratis;
+            
             return res;            
         }
         //------------        

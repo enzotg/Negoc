@@ -12,12 +12,17 @@ namespace Negoc.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long CategoriaId { get; set; }
 
-        [Display(Name = "Producto nombre")]
+        [Display(Name = "Nombre")]
+        [MaxLength(50)]
         public string Nombre { get; set; }
 
         public long? ParentId { get; set; }
 
         public int NivelId { get; set; }
+
+        [Display(Name = "Nombre singular")]
+        [MaxLength(50)]
+        public string NombreSing { get; set; }
 
     }
 }

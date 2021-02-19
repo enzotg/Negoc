@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Negoc.Data;
 using Negoc.Models;
 using Negoc.Services;
@@ -44,6 +45,7 @@ namespace Negoc.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
+            CargarLists();
             return View();
         }
 
@@ -52,6 +54,7 @@ namespace Negoc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Producto producto)
         {
+            CargarLists();
             try
             {                
                 servicioProd.Agregar(producto, Request.Form.Files, _appEnvironment.WebRootPath);
@@ -80,6 +83,8 @@ namespace Negoc.Controllers
         // GET: Producto/Edit/5
         public ActionResult Edit(int id)
         {
+            CargarLists();
+            //servicioProd.GetCategorias(0).Select(x => new sele)
             return View(servicioProd.GetProducto(id));
         }
 
@@ -125,6 +130,47 @@ namespace Negoc.Controllers
             {
                 return View();
             }
+        }
+
+        private void CargarLists()
+        {
+            var lCat =
+                servicioProd.GetCategorias(0)
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Nombre,
+                        Value = x.CategoriaId.ToString()
+                    }).ToList();
+
+            ViewBag.cat = lCat;
+
+            var lMar =
+                (new MarcaServicio(_context).GetTodos())
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Nombre,
+                        Value = x.MarcaId.ToString()
+                    }).ToList();
+            ViewBag.mar = lMar;
+
+            var lGen =
+                (new GeneroServicio(_context).GetTodos())
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Nombre,
+                        Value = x.GeneroId.ToString()
+                    }).ToList();
+            ViewBag.gen = lGen;
+
+            var lCol =
+                (new ColorServicio(_context).GetTodos())
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Nombre,
+                        Value = x.ColorId.ToString()
+                    }).ToList();
+            ViewBag.col = lCol;
+
         }
     }
 }

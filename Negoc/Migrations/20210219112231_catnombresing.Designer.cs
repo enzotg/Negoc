@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Negoc.Data;
 
 namespace Negoc.Migrations
 {
     [DbContext(typeof(NegocioContext))]
-    partial class NegocioContextModelSnapshot : ModelSnapshot
+    [Migration("20210219112231_catnombresing")]
+    partial class catnombresing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,9 +113,6 @@ namespace Negoc.Migrations
                         .HasMaxLength(100);
 
                     b.Property<float>("DescuentoPorc");
-
-                    b.Property<string>("Detalle")
-                        .HasMaxLength(2000);
 
                     b.Property<byte>("GeneroId");
 

@@ -10,7 +10,7 @@ using Negoc.Data;
 namespace Negoc.Migrations
 {
     [DbContext(typeof(NegocioContext))]
-    [Migration("20210208192331_ini")]
+    [Migration("20210218175857_ini")]
     partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,17 @@ namespace Negoc.Migrations
                     b.HasKey("ColorId");
 
                     b.ToTable("Color");
+                });
+
+            modelBuilder.Entity("Negoc.Models.Genero", b =>
+                {
+                    b.Property<byte>("GeneroId");
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("GeneroId");
+
+                    b.ToTable("Genero");
                 });
 
             modelBuilder.Entity("Negoc.Models.Marca", b =>
@@ -97,6 +108,8 @@ namespace Negoc.Migrations
                     b.Property<string>("Descripcion")
                         .HasMaxLength(100);
 
+                    b.Property<float>("DescuentoPorc");
+
                     b.Property<byte>("GeneroId");
 
                     b.Property<long>("MarcaId");
@@ -118,6 +131,8 @@ namespace Negoc.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("ColorId");
+
+                    b.HasIndex("GeneroId");
 
                     b.HasIndex("MarcaId");
 
@@ -142,6 +157,11 @@ namespace Negoc.Migrations
                     b.HasOne("Negoc.Models.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Negoc.Models.Genero", "Genero")
+                        .WithMany()
+                        .HasForeignKey("GeneroId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Negoc.Models.Marca", "Marca")

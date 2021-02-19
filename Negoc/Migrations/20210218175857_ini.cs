@@ -36,6 +36,18 @@ namespace Negoc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Genero",
+                columns: table => new
+                {
+                    GeneroId = table.Column<byte>(nullable: false),
+                    Nombre = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genero", x => x.GeneroId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Marca",
                 columns: table => new
                 {
@@ -62,7 +74,8 @@ namespace Negoc.Migrations
                     Descripcion = table.Column<string>(maxLength: 100, nullable: true),
                     Precio = table.Column<double>(nullable: false),
                     PrecioLista = table.Column<double>(nullable: false),
-                    PrecioStr = table.Column<string>(maxLength: 30, nullable: true)
+                    PrecioStr = table.Column<string>(maxLength: 30, nullable: true),
+                    DescuentoPorc = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,6 +91,12 @@ namespace Negoc.Migrations
                         column: x => x.ColorId,
                         principalTable: "Color",
                         principalColumn: "ColorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Producto_Genero_GeneroId",
+                        column: x => x.GeneroId,
+                        principalTable: "Genero",
+                        principalColumn: "GeneroId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Producto_Marca_MarcaId",
@@ -124,6 +143,11 @@ namespace Negoc.Migrations
                 column: "ColorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Producto_GeneroId",
+                table: "Producto",
+                column: "GeneroId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Producto_MarcaId",
                 table: "Producto",
                 column: "MarcaId");
@@ -142,6 +166,9 @@ namespace Negoc.Migrations
 
             migrationBuilder.DropTable(
                 name: "Color");
+
+            migrationBuilder.DropTable(
+                name: "Genero");
 
             migrationBuilder.DropTable(
                 name: "Marca");
