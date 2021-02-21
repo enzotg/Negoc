@@ -143,6 +143,9 @@
 <script>
 
     window.addEventListener("load", window_onload);
+
+
+
     function FiltrarPrecio() {
         AgregarFiltro("Precio", 1);
         moverPag(0);
@@ -196,7 +199,7 @@
         var colorId = urlParams.get('ColorId');
         var precioD = urlParams.get('PrecioD');
         var precioH = urlParams.get('PrecioH');
-        var descripcion = urlParams.get('descripcion');
+        var descripcion = urlParams.get('Descripcion');
         var pagNum = urlParams.get('PagNumero');
         var pagSiz = urlParams.get('PagCantidad');
         var tipoOrden = urlParams.get('TipoOrden');
@@ -256,9 +259,9 @@
         var queryStringNue = '';
 
         if(e == 1)
-            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&descripcion=" + descripcion + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
+            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&Descripcion=" + descripcion + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
         else
-            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&descripcion=" + descripcion + "&TipoOrden=" + tipoOrden;
+            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&Descripcion=" + descripcion + "&TipoOrden=" + tipoOrden;
 
         return queryStringNue;
     }

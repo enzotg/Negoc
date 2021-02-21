@@ -58,11 +58,17 @@
                 </a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" style="margin-left:auto;">
-            <input class="form-control mr-sm-2 " style="width:60%;margin-right:2px;" type="search" placeholder="Buscar" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        <div class="form-inline my-2 my-lg-0" style="margin-left:auto;" >
+            <input class="form-control mr-sm-2 " style="width:60%;margin-right:2px;" type="search" placeholder="Buscar" aria-label="Search" id="txtABuscar">
+            <button class="btn btn-outline-info my-2 my-sm-0" onclick="buscarDescr()">Buscar</button>
+        </div>
     </div>
 
 </nav>
-
+<script>
+    function buscarDescr() {
+        
+        window.location.href = "/Listar/GetProductos?CategoriaId=0&GeneroId=0&MarcaId=0&ColorId=0&PrecioD=0&PrecioH=0&Descripcion=" +
+            document.getElementById("txtABuscar").value +  "&PagNumero=1&PagCantidad=3&TipoOrden=1";
+    }
+</script>
