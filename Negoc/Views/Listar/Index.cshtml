@@ -85,6 +85,10 @@
 
 </div>
 <hr />
+<h1>Contean</h1>
+<h2>Contean</h2>
+<span class="card-header">Zapat</span>
+
 
 <div id="ContenedorProd" class="contenedor">
 
@@ -92,12 +96,13 @@
     {
     <div class="item producto">
         <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
-        @if (item.DescuentoPorc < 0)
+        @if (item.DescuentoPorc > 0)
         {
             <span class="producto-oferta">Oferta</span>
-            <span class="producto-off">@item.DescuentoPorc</span>
         }
         <span class="producto-precio">@item.Precio.ToString("C0")</span>
+        @if (item.DescuentoPorc > 0)
+        {<span class="producto-off">-@item.DescuentoPorc%</span>}
 
         <div>
             <span class="producto-marca">@item.Marca</span>

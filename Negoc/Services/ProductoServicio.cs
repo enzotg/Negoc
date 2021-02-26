@@ -26,6 +26,7 @@ namespace Negoc.Services
 
         public void Agregar(Producto producto, Microsoft.AspNetCore.Http.IFormFileCollection files, string WebRootPath)
         {
+
             producto.Descripcion = CalcDescr(producto);
 
             _context.Producto.Add(producto);
