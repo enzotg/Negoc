@@ -85,10 +85,6 @@
 
 </div>
 <hr />
-<h1>Contean</h1>
-<h2>Contean</h2>
-<span class="card-header">Zapat</span>
-
 
 <div id="ContenedorProd" class="contenedor">
 
@@ -117,7 +113,7 @@
                 <p class="producto-envio">Envio gratis</p>
             </div>
         }
-
+        @Html.ActionLink("Ir", "GetProductoList", new {  ProductoId = item.ProductoId  })
     </div>
 
     }

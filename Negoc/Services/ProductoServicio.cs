@@ -346,6 +346,15 @@ namespace Negoc.Services
                 .Select(x=> ToProdList(x))
                 .ToList();
         }
+        public ProductoList GetProductoList(long ProductoId)
+        {
+            return _context.Producto
+                .Include(x => x.Categoria)
+                .Include(x => x.Marca)
+                .Include(x => x.Genero)                
+                .Select(x => ToProdList(x))
+                .FirstOrDefault();
+        }
         public static ProductoList ToProdList(Producto producto)
         {
             var res = new ProductoList();

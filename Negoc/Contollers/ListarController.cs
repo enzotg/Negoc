@@ -62,7 +62,11 @@ namespace Negoc.Contollers
             var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-
+        public IActionResult GetProductoList(long ProductoId)
+        {
+            var res = servicioProd.GetProductoList(ProductoId);
+            return View("Producto", res);
+        }
 
         //----------------
         public IActionResult GetImagePr(long id)
