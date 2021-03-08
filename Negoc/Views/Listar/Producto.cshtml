@@ -1,85 +1,166 @@
 ﻿@model Negoc.ViewModels.ProductoList
-
+@section Scripts    {
+    <script src="~/lib/productoun/productoun.js"></script>
+}
 @{
     ViewData["Title"] = "Producto";
 }
 
-<h1>Producto</h1>
+<div class="container-produn">
+    <div class="produn-col1">
+        <div class="produn-princ">
+            <div class="thumb">
+                <ul class="thumb-ul">
+                    <li>
+                        <div class="thumb-img-cont">
+                            <img class="thumb-img" src="./prod1.jpg" onclick="VerImgPrinc(this);" alt="...">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod2.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
+                    </li>
+                    <li>
+                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod3.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
+                    </li>
+                    <li>
+                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod4.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="produn-princ-img">
+                <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
+                <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
+                <img src="./prod1.jpg" onclick="mostrarGal();" alt="..." id="produnImagen">
+            </div>
+        </div>
+    </div>
+    <div class="produn-col1">
+        <h3>@Html.DisplayFor(model => model.Marca)</h3>
+        <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
+        <h3>@Html.DisplayFor(model => model.Precio)</h3>
+    </div>
+</div>
+<div class="container-produn">
+    <div class="produn-col1">
+        <h4>Descripcion </h4>
+        <p>
+            -La tecnología Dri-FIT elimina el sudor de la piel para una rápida evaporación, ayudándote a mantenerte seco, cómodo y concentrado.
+            -La tela de malla proporciona transpirabilidad, por lo que te mantiene fresco cuando tu entrenamiento se calienta.
+        </p>
+    </div>
+    <div class="produn-col1">
+        <h3>Envio</h3>
+    </div>
+</div>
+
+<div class="container-slide-back ">
+    <a class="prev-slide" onclick="mover(-1)">&#10094;</a>
+    <a class="next-slide" onclick="mover(1)">&#10095;</a>
+    <button type="button" class="cerrar-container-slide close" data-dismiss="modal" aria-label="Close" onclick="cerrarContainer()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="container-img">
+        <div class="slide  inactivo ">
+            <img src="./prod1.jpg" class="" alt="...">
+        </div>
+        <div class="slide inactivo ">
+            <img src="./prod2.jpg" class="" alt="...">
+        </div>
+        <div class="slide inactivo ">
+            <img src="./prod3.jpg" class="" alt="...">
+        </div>
+        <div class="slide inactivo ">
+            <img src="./prod4.jpg" class="" alt="...">
+        </div>
+    </div>
+    <div class="dot-div">
+        <span class="dot" onclick="IrA(0)"></span>
+        <span class="dot" onclick="IrA(1)"></span>
+        <span class="dot" onclick="IrA(2)"></span>
+        <span class="dot" onclick="IrA(3)"></span>
+    </div>
+</div>
+
+<hr />
+<hr />
+<hr />
+
 
 <div>
     <h4>ProductoList</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProductoId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ProductoId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Categoria)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Categoria)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Marca)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Marca)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Genero)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Genero)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.GeneroId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.GeneroId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Precio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Precio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PrecioStr)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PrecioStr)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PrecioLista)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PrecioLista)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DescuentoPorc)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DescuentoPorc)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EnvioGratis)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EnvioGratis)
         </dd>
     </dl>
