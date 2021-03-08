@@ -11,26 +11,21 @@
         <div class="produn-princ">
             <div class="thumb">
                 <ul class="thumb-ul">
-                    <li>
-                        <div class="thumb-img-cont">
-                            <img class="thumb-img" src="./prod1.jpg" onclick="VerImgPrinc(this);" alt="...">
-                        </div>
-                    </li>
-                    <li>
-                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod2.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
-                    </li>
-                    <li>
-                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod3.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
-                    </li>
-                    <li>
-                        <div class="thumb-img-cont"><img class="thumb-img" src="./prod4.jpg" onclick="VerImgPrinc(this);" alt="..."></div>
-                    </li>
+                    @foreach (var item in Model.Imagenes)
+                    {
+                        <li>
+                            <div class="thumb-img-cont">
+                                <img class="thumb-img" src="/Listar/GetImage/@item.ProdImagenId" onclick="VerImgPrinc(this);" alt="@item.Nombre">
+                            </div>
+                        </li>
+
+                    }
                 </ul>
             </div>
             <div class="produn-princ-img">
                 <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
                 <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
-                <img src="./prod1.jpg" onclick="mostrarGal();" alt="..." id="produnImagen">
+                <img  src="/Listar/GetImage/@Model.Imagenes.FirstOrDefault().ProdImagenId" onclick="mostrarGal();" alt="..." id="produnImagen">
             </div>
         </div>
     </div>

@@ -349,9 +349,11 @@ namespace Negoc.Services
         public ProductoList GetProductoList(long ProductoId)
         {
             return _context.Producto
+                .Where(x=>x.ProductoId == ProductoId)
                 .Include(x => x.Categoria)
                 .Include(x => x.Marca)
                 .Include(x => x.Genero)                
+                .Include(x=>x.Imagenes)
                 .Select(x => ToProdList(x))
                 .FirstOrDefault();
         }
@@ -370,6 +372,16 @@ namespace Negoc.Services
             res.Genero = producto.Genero.Nombre;
             res.DescuentoPorc = producto.DescuentoPorc;           
             res.EnvioGratis = producto.Precio >= Monto_Envio_Gratis;
+            if(producto.Imagenes != null)
+                res.Imagenes = producto.Imagenes.Select(
+                    x => new ProdImagenList
+                    {
+                        ImageMimeType = x.ImageMimeType,
+                        Nombre = x.Nombre,
+                        ProdImagenId = x.ProdImagenId,
+                        ProductoId = x.ProductoId
+                    }
+                    );
             
             return res;            
         }

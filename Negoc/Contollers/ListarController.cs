@@ -73,30 +73,34 @@ namespace Negoc.Contollers
         {
             
             string ImageMimeType = "image/jpeg";
-            var requested = servicioProd.GetProducto(id);                
+            var requested = servicioProd.GetProducto(id);
+            if (requested.Imagenes.FirstOrDefault() != null)
 
-            if (requested != null)
-            {                
-                string fullPath =  requested.Imagenes.FirstOrDefault().Nombre;
-                if (System.IO.File.Exists(fullPath))
+                if (requested != null && requested.Imagenes.FirstOrDefault() != null)
                 {
-                    FileStream fileOnDisk = new FileStream(fullPath, FileMode.Open);
-                    byte[] fileBytes;
-                    using (BinaryReader br = new BinaryReader(fileOnDisk))
+                    string fullPath = requested.Imagenes.FirstOrDefault().Nombre;
+                    if (System.IO.File.Exists(fullPath))
                     {
-                        fileBytes = br.ReadBytes((int)fileOnDisk.Length);
+                        FileStream fileOnDisk = new FileStream(fullPath, FileMode.Open);
+                        byte[] fileBytes;
+                        using (BinaryReader br = new BinaryReader(fileOnDisk))
+                        {
+                            fileBytes = br.ReadBytes((int)fileOnDisk.Length);
+                        }
+                        return File(fileBytes, ImageMimeType);
                     }
-                    return File(fileBytes, ImageMimeType);
+                    else
+                    {
+                        return NotFound();
+                    }
                 }
                 else
-                {                    
-                     return NotFound();                    
+                {
+                    return NotFound();
                 }
-            }
             else
-            {
                 return NotFound();
-            }            
+
         }
         public IActionResult GetImage(long id)
         {

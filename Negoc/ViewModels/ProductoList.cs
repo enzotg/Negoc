@@ -33,7 +33,8 @@ namespace Negoc.ViewModels
         public float DescuentoPorc { get; set; }
 
         public bool EnvioGratis { get; set; }
-        //public string[] Imagenes { get; set; }
+                
+        public IEnumerable<ProdImagenList> Imagenes { get; set; }
 
     }
 }
