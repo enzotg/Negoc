@@ -91,7 +91,9 @@
     @foreach (var item in Model)
     {
     <div class="item producto">
-        <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+        <a href="/Listar/GetProductoList?ProductoId=@item.ProductoId">            
+            <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+        </a>
         @if (item.DescuentoPorc > 0)
         {
             <span class="producto-oferta">Oferta</span>
@@ -102,7 +104,7 @@
 
         <div>
             <span class="producto-marca">@item.Marca</span>
-        </div>n
+        </div>
         <hr />
         <div>
             <p class="producto-descr">@item.Descripcion</p>
@@ -112,8 +114,7 @@
             <div>
                 <p class="producto-envio">Envio gratis</p>
             </div>
-        }
-        @Html.ActionLink("Ir", "GetProductoList", new {  ProductoId = item.ProductoId  })
+        }        
     </div>
 
     }

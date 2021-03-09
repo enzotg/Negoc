@@ -87,13 +87,16 @@ namespace Negoc.Services
         {
             var cat = _context.Categoria.FirstOrDefault(x => x.CategoriaId == producto.CategoriaId);
             var mar = _context.Marca.FirstOrDefault(x => x.MarcaId == producto.MarcaId);
+            var gen = _context.Genero.FirstOrDefault(x => x.GeneroId == producto.GeneroId);
 
             if (cat == null) return "";
             if (mar == null) return "";
 
             return 
                 cat.NombreSing + " " +                
-                producto.Nombre ;
+                mar.Nombre + " " +
+                producto.Nombre + " - " +
+                gen.Nombre;
 
         }
 
