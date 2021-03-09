@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Negoc.Data;
 
 namespace Negoc.Migrations
 {
     [DbContext(typeof(NegocioContext))]
-    partial class NegocioContextModelSnapshot : ModelSnapshot
+    [Migration("20210309131017_deporte2")]
+    partial class deporte2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,8 +153,6 @@ namespace Negoc.Migrations
 
                     b.HasIndex("ColorId");
 
-                    b.HasIndex("DeporteId");
-
                     b.HasIndex("GeneroId");
 
                     b.HasIndex("MarcaId");
@@ -178,11 +178,6 @@ namespace Negoc.Migrations
                     b.HasOne("Negoc.Models.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Negoc.Models.Deporte", "Deporte")
-                        .WithMany()
-                        .HasForeignKey("DeporteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Negoc.Models.Genero", "Genero")

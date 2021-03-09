@@ -38,6 +38,11 @@ namespace Negoc.Services
             _context.Categoria.Add(new Models.Categoria { CategoriaId = 101, Nombre = "Deportivas", NivelId = 2, ParentId = 11, NombreSing = "Deportiva" });
             _context.Categoria.Add(new Models.Categoria { CategoriaId = 102, Nombre = "Camisetas", NivelId = 2, ParentId = 11, NombreSing = "Camiseta" });
 
+            _context.Genero.Add(new Genero { GeneroId = 1, Nombre = "Hombre" });
+            _context.Genero.Add(new Genero { GeneroId = 2, Nombre = "Mujer" });
+            _context.Genero.Add(new Genero { GeneroId = 3, Nombre = "Niño" });
+            _context.Genero.Add(new Genero { GeneroId = 4, Nombre = "Sin" });
+
             _context.Color.Add(new Models.Color { ColorId=1, Nombre="Azul"});
 
             _context.Add(new Producto { ProductoId = 1, Nombre = "Manchester City 20/21", CategoriaId = 11, MarcaId = 3, GeneroId = 1, ColorId = 1, TalleId = 1, Descripcion = "", Precio = 5999, PrecioLista = 5999, PrecioStr = "5999", DescuentoPorc = 0, Detalle = "" });

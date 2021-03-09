@@ -22,6 +22,7 @@ namespace Negoc.Data
         public DbSet<Marca> Marca { get; set; }
         public DbSet<Color> Color { get; set; }
         public DbSet<Genero> Genero { get; set; }
-        
+        public DbSet<Deporte> Deporte { get; set; }
+
     }
 }

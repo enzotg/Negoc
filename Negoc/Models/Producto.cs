@@ -27,6 +27,8 @@ namespace Negoc.Models
 
         public long TalleId { get; set; }
 
+        public long DeporteId { get; set; }
+
         [MaxLength(100)]        
         public string Descripcion { get; set; }
 
@@ -55,6 +57,7 @@ namespace Negoc.Models
 
         public Genero Genero { get; set; }
 
+        public Deporte Deporte { get; set; }
 
     }
 }

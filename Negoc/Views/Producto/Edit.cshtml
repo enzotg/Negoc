@@ -54,6 +54,15 @@
         </div>
         <div class="row">
             <div class="col-sm-4 col-md-2">
+                <label asp-for="DeporteId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                @Html.DropDownListFor(x => x.DeporteId, (IEnumerable<SelectListItem>)ViewBag.dep, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="DeporteId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
                 <label asp-for="ColorId" class="control-label"></label>
             </div>
             <div class="col-sm-4 col-md-2">

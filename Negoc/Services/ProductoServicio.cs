@@ -43,8 +43,8 @@ namespace Negoc.Services
                 if (file != null && file.Length > 0)
                 {
                     var folder = Path.Combine(WebRootPath, "images\\producto");
-                    var fileName = Path.Combine(folder,
-                        Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName));
+                    //var fileName = Path.Combine(folder, Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName));
+                    var fileName = Path.Combine(folder, (file.FileName));
 
                     using (var stream = System.IO.File.Create(fileName))
                     {
@@ -88,15 +88,19 @@ namespace Negoc.Services
             var cat = _context.Categoria.FirstOrDefault(x => x.CategoriaId == producto.CategoriaId);
             var mar = _context.Marca.FirstOrDefault(x => x.MarcaId == producto.MarcaId);
             var gen = _context.Genero.FirstOrDefault(x => x.GeneroId == producto.GeneroId);
+            string sgen = "";
 
             if (cat == null) return "";
             if (mar == null) return "";
 
+            if (gen.GeneroId < 4)
+                sgen = " - " + gen.Nombre;
+
             return 
                 cat.NombreSing + " " +                
                 mar.Nombre + " " +
-                producto.Nombre + " - " +
-                gen.Nombre;
+                producto.Nombre + 
+                sgen;
 
         }
 
@@ -372,6 +376,7 @@ namespace Negoc.Services
             res.PrecioStr =  producto.Precio.ToString("C2", CultureInfo.CurrentCulture);
             res.PrecioLista = producto.PrecioLista;
             res.Descripcion = producto.Descripcion;
+            res.Detalle = producto.Detalle;
             res.Genero = producto.Genero.Nombre;
             res.DescuentoPorc = producto.DescuentoPorc;           
             res.EnvioGratis = producto.Precio >= Monto_Envio_Gratis;

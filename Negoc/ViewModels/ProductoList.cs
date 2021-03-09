@@ -30,6 +30,8 @@ namespace Negoc.ViewModels
 
         public string Descripcion { get; set; }
 
+        public string Detalle { get; set; }
+
         public float DescuentoPorc { get; set; }
 
         public bool EnvioGratis { get; set; }

@@ -6,75 +6,75 @@
     ViewData["Title"] = "Producto";
 }
 
-<div class="container-produn">
-    <div class="produn-col1">
-        <div class="produn-princ">
-            <div class="thumb">
-                <ul class="thumb-ul">
-                    @foreach (var item in Model.Imagenes)
-                    {
-                        <li>
-                            <div class="thumb-img-cont">
-                                <img class="thumb-img" src="/Listar/GetImage/@item.ProdImagenId" onclick="VerImgPrinc(this);" alt="@item.Nombre">
-                            </div>
-                        </li>
+<div style="background-color: whitesmoke;padding:8px;">
+        <div class="container-produn">
+            <div class="produn-col1">
+                <div class="produn-princ">
+                    <div class="thumb">
+                        <ul class="thumb-ul">
+                            @foreach (var item in Model.Imagenes)
+                            {
+                                <li>
+                                    <div class="thumb-img-cont">
+                                        <img class="thumb-img" src="/Listar/GetImage/@item.ProdImagenId" onclick="VerImgPrinc(this);" alt="@item.Nombre">
+                                    </div>
+                                </li>
 
-                    }
-                </ul>
+                            }
+                        </ul>
+                    </div>
+                    <div class="produn-princ-img">
+                        <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
+                        <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
+                        <img src="/Listar/GetImage/@Model.Imagenes.FirstOrDefault().ProdImagenId" onclick="mostrarGal();" alt="..." id="produnImagen">
+                    </div>
+                </div>
             </div>
-            <div class="produn-princ-img">
-                <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
-                <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
-                <img  src="/Listar/GetImage/@Model.Imagenes.FirstOrDefault().ProdImagenId" onclick="mostrarGal();" alt="..." id="produnImagen">
+            <div class="produn-col1">
+                <h6> @Html.DisplayFor(model => model.Marca)</h6>
+                <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
+
+                <h4 style="line-height:4rem;">$ @Html.DisplayFor(model => model.Precio)</h4>
+
             </div>
         </div>
+        <div class="container-produn">
+            <div class="produn-col1">
+                <h4 style="line-height:2rem;">Descripcion </h4>
+                <p>
+                    @Model.Detalle
+
+            </p>
+        </div>
+        <div class="produn-col1">
+
+        </div>
     </div>
-    <div class="produn-col1">
-        <h6> @Html.DisplayFor(model => model.Marca)</h6>
-        <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
-        <span class="alert alert-secondary " style="line-height:4rem;width:100%;margin-bottom:8px;display: inline-block;"></span>
 
-        <h3>$@Html.DisplayFor(model => model.Precio)</h3>
+    <div class="container-slide-back ">
+        <a class="prev-slide" onclick="mover(-1)">&#10094;</a>
+        <a class="next-slide" onclick="mover(1)">&#10095;</a>
+        <button type="button" class="cerrar-container-slide close" data-dismiss="modal" aria-label="Close" onclick="cerrarContainer()">
+            <span aria-hidden="true">&times;</span>
+        </button>
 
+        <div class="container-img">
+            @foreach (var item in Model.Imagenes)
+            {
+                <div class="slide inactivo">
+                    <img src="/Listar/GetImage/@item.ProdImagenId" alt="...">
+                </div>
+            }
+        </div>
+        <div class="dot-div">
+            @{int i = 0;}
+            @foreach (var item in Model.Imagenes)
+            {
+                <span class="dot" onclick="IrA(@i)"></span>
+                i++;
+            }
+        </div>
     </div>
 </div>
-<div class="container-produn">
-    <div class="produn-col1">
-        <h4 style="line-height:2rem;">Descripcion </h4>
-        <p>            
-            -La tecnología Dri-FIT elimina el sudor de la piel para una rápida evaporación, ayudándote a mantenerte seco, cómodo y concentrado.
-            -La tela de malla proporciona transpirabilidad, por lo que te mantiene fresco cuando tu entrenamiento se calienta.
-        </p>
-    </div>
-    <div class="produn-col1">
-        <h4 style="line-height:2rem;">Descripcion </h4>
-    </div>
-</div>
-
-<div class="container-slide-back ">
-    <a class="prev-slide" onclick="mover(-1)">&#10094;</a>
-    <a class="next-slide" onclick="mover(1)">&#10095;</a>
-    <button type="button" class="cerrar-container-slide close" data-dismiss="modal" aria-label="Close" onclick="cerrarContainer()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-
-    <div class="container-img">
-        @foreach (var item in Model.Imagenes)
-        {
-            <div class="slide inactivo">
-                <img src="/Listar/GetImage/@item.ProdImagenId" alt="...">
-            </div>
-        }
-    </div>
-    <div class="dot-div">
-        @{int i = 0;}
-        @foreach (var item in Model.Imagenes)
-        {
-            <span class="dot" onclick="IrA(@i)"></span>
-            i++;            
-        }
-    </div>
-</div>
-
 <hr />
 

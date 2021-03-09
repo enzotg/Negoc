@@ -171,6 +171,15 @@ namespace Negoc.Controllers
                     }).ToList();
             ViewBag.col = lCol;
 
+            var lDep =
+                (new DeporteServicio(_context).GetTodos())
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Nombre,
+                        Value = x.DeporteId.ToString()
+                    }).ToList();
+            ViewBag.dep = lDep;
+
         }
     }
 }
