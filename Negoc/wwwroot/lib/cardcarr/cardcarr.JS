@@ -7,7 +7,7 @@ var cssTransB;
 
 
 window.addEventListener("load", function (event) {
-    cardInit();    
+    //cardInit();    
 }, false);
 
 window.addEventListener("resize", function (event) {

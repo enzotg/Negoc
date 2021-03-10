@@ -100,7 +100,9 @@
         }
         <span class="producto-precio">@item.Precio.ToString("C0")</span>
         @if (item.DescuentoPorc > 0)
-        {<span class="producto-off">-@item.DescuentoPorc%</span>}
+        {
+            <span class="producto-off">-@item.DescuentoPorc%</span>
+        }
 
         <div>
             <span class="producto-marca">@item.Marca</span>

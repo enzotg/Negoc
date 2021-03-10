@@ -353,6 +353,24 @@ namespace Negoc.Services
                 .Select(x=> ToProdList(x))
                 .ToList();
         }
+        public IEnumerable<ProductoList> GetProductosEnOferta(long OfertaId)
+        {
+            var res = _context
+                .OfertaProducto
+                .Where(x => x.Oferta.OfertaId == OfertaId)
+                .Include(x => x.Oferta)
+                .Include(x => x.Producto)
+                .Include(x => x.Producto.Color)
+                .Include(x => x.Producto.Categoria)
+                .Include(x => x.Producto.Marca)
+                .Include(x => x.Producto.Genero)
+                .Include(x => x.Producto.Imagenes)                
+                .ToList();
+
+            var pr = res.Select(x => ToProdList(x.Producto));
+
+            return pr;
+        }
         public ProductoList GetProductoList(long ProductoId)
         {
             return _context.Producto

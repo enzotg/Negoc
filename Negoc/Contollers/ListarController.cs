@@ -67,7 +67,11 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductoList(ProductoId);
             return View("Producto", res);
         }
-
+        public IActionResult GetProductosEnOferta(long OfertaId)
+        {
+            var res = servicioProd.GetProductosEnOferta(OfertaId);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
         //----------------
         public IActionResult GetImagePr(long id)
         {

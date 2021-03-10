@@ -35,6 +35,11 @@
                 <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
 
                 <h4 style="line-height:4rem;">$ @Html.DisplayFor(model => model.Precio)</h4>
+                <div>
+                    <button class="btn btn-primary" style="width:100%;" onclick="AgregarCarr(@Model.ProductoId)">
+                        Agregar
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -77,4 +82,25 @@
     </div>
 </div>
 <hr />
+
+<script>
+    function CarroItem(prodId, cant) {
+        this.ProductoId = prodId;
+        this.Cantidad = cant;
+    }
+    function AgregarCarr(ProductoId) {
+
+        var key = "Carro";
+        var carro = [];
+
+        if (localStorage.getItem(key))
+            carro = JSON.parse(localStorage.getItem(key));
+        
+        var item = new CarroItem(ProductoId, 1);
+        
+        carro.push(item);
+        localStorage.setItem(key, JSON.stringify(carro));
+    }
+</script>
+
 
