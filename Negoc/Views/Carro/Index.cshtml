@@ -1,0 +1,31 @@
+﻿
+<div id="ContenedorProd" class="contenedor">
+    <h1>Carro</h1>
+    <div class="item">
+        <div id="carro"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+    var key = "Carro";
+    var carro = [];
+    if (localStorage.getItem(key)) {
+
+        carro = JSON.parse(localStorage.getItem(key));
+        document.getElementById("carro").innerText = carro;
+        var cont = document.getElementById("ContenedorProd");
+        carro.forEach((elem, index, array) => {
+            var div = document.createElement("div");
+            div.innerText = elem.ProductoId;
+            cont.appendChild(div);
+
+        });
+
+    }
+        
+
+
+</script>
