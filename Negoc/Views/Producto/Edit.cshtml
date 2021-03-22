@@ -1,0 +1,201 @@
+﻿@model Negoc.Models.Producto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Producto</h4>
+<hr />
+<div class="container-fluid">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ProductoId" id="ProductoId" />
+
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Nombre" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="Nombre" class="form-control col-md-8" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="CategoriaId" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-8">
+                @Html.DropDownListFor(x => x.CategoriaId, (IEnumerable<SelectListItem>)ViewBag.cat, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="MarcaId" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-8">
+                @Html.DropDownListFor(x => x.MarcaId, (IEnumerable<SelectListItem>)ViewBag.mar, htmlAttributes: new { @class = "form-control" })
+
+                <span asp-validation-for="MarcaId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="GeneroId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+
+                @Html.DropDownListFor(x => x.GeneroId, (IEnumerable<SelectListItem>)ViewBag.gen, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="GeneroId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="DeporteId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                @Html.DropDownListFor(x => x.DeporteId, (IEnumerable<SelectListItem>)ViewBag.dep, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="DeporteId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="ColorId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                @Html.DropDownListFor(x => x.ColorId, (IEnumerable<SelectListItem>)ViewBag.col, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="ColorId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="TalleId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="TalleId" class="form-control" />
+                <span asp-validation-for="TalleId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Precio" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="PrecioLista" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="PrecioLista" class="form-control" />
+                <span asp-validation-for="PrecioLista" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="PrecioStr" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="PrecioStr" class="form-control" />
+                <span asp-validation-for="PrecioStr" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="DescuentoPorc" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="DescuentoPorc" class="form-control" />
+                <span asp-validation-for="DescuentoPorc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Descripcion" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Detalle" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <textarea asp-for="Detalle" class="form-control" rows="6">
+                </textarea>
+                <span asp-validation-for="Detalle" class="text-danger"></span>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label class="control-label">Imagenes</label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <span>Agregar imagen:</span>
+                <input id="file" asp-for="FormFile" type="file" multiple />
+
+                <div class="contenedor">
+
+                    @foreach (var i in Model.Imagenes)
+                    {
+                        <div class="item">
+                            <img src="/Listar/GetImage/@i.ProdImagenId" class="img-fluid" />
+                            <div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+            </div>
+
+            <div class="col-sm-4 col-md-2">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <form   class="submit-form"  enctype="multipart/form-data" id="IdUp" onsubmit="AgregarImagen()"  >
+            
+    </form>
+
+</div>
+
+<script>
+    function AgregarImagen() {
+
+        var formData = new FormData(document.getElementById("IdUp"));
+        var id = document.getElementById("ProductoId").value;
+
+        $.ajax({
+            url: "/Producto/UploadImg?ProductoId=" + id,
+            type: "post",
+            dataType: "html",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        })
+            .done(function (res) {
+                console.log("Respuesta: " + res);
+                
+            });
+    }
+
+</script>
