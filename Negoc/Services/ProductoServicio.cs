@@ -114,6 +114,16 @@ namespace Negoc.Services
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
             return arbol.GetTodosChilds(CategoriaId).Where(x=>x.NivelId <= NivelId).ToList();
         }
+        public List<Categoria> GetParents(long ProductoId)
+        {
+            ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
+            long cat = _context.Producto.FirstOrDefault(x => x.ProductoId == ProductoId).CategoriaId;
+
+            var res = arbol.GetTodosParents(cat);
+            res.Add(_context.Categoria.FirstOrDefault(x => x.CategoriaId == cat));
+
+            return res;
+        }
         public Producto GetProducto(long ProductoId)
         {
             return _context.Producto

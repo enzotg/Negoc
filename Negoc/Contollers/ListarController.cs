@@ -47,6 +47,11 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductos(CategoriaId, GeneroId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+        public IActionResult GetCategoriasParents(long ProductoId)
+        {
+            var res = servicioProd.GetParents(ProductoId);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
         public IActionResult GetCategorias(long CategoriaId, long NivelId)
         {
             var res = servicioProd.GetCategorias(CategoriaId , NivelId);
