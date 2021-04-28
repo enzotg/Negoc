@@ -24,15 +24,15 @@ namespace Negoc.Contollers
         {
             return View();
         }
-        public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
+        public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int PagNumero=1, int PagCantidad=10, int TipoOrden=1)
         {
-            var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId,  ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
+            var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
             return View("Index", res);
             //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        public IActionResult GetProductosCantPag(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
+        public IActionResult GetProductosCantPag(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
         {
-            var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
+            var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
             return Json( res);
             //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
@@ -47,21 +47,32 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductos(CategoriaId, GeneroId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+        public IActionResult GetCategoriasParents(long ProductoId)
+        {
+            var res = servicioProd.GetParents(ProductoId);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
         public IActionResult GetCategorias(long CategoriaId, long NivelId)
         {
             var res = servicioProd.GetCategorias(CategoriaId , NivelId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        public IActionResult GetMarcas(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        public IActionResult GetMarcas(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
-            var res = servicioProd.GetMarcas(CategoriaId, GeneroId,MarcaId, ColorId,PrecioD, PrecioH, Descripcion, TipoOrden);
+            var res = servicioProd.GetMarcas(CategoriaId, GeneroId,MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        public IActionResult GetColores(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        public IActionResult GetColores(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
-            var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+        public IActionResult GetDeportes(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var res = servicioProd.GetDeportes(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+        }
+
         public IActionResult GetProductoList(long ProductoId)
         {
             var res = servicioProd.GetProductoList(ProductoId);

@@ -33,7 +33,7 @@ namespace Negoc.Services
         {
             var categ = _categorias.FirstOrDefault(x => x.CategoriaId == catId);
 
-            if (!categ.ParentId.HasValue)
+            if (!categ.ParentId.HasValue || categ.ParentId==0)
                 return;
             else
             {

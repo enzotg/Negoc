@@ -70,6 +70,7 @@ namespace Negoc.Services
             {
                 p.CategoriaId = producto.CategoriaId;
                 p.ColorId = producto.ColorId;
+                p.DeporteId = producto.DeporteId;
                 p.GeneroId = producto.GeneroId;
                 p.MarcaId = producto.MarcaId;
                 p.Nombre = producto.Nombre;
@@ -80,6 +81,7 @@ namespace Negoc.Services
                 p.Descripcion = CalcDescr(producto);
                 p.DescuentoPorc = producto.DescuentoPorc;
                 p.Detalle = producto.Detalle;
+
                 _context.SaveChanges();
             }
         }
@@ -109,10 +111,21 @@ namespace Negoc.Services
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());            
             return arbol.GetTodosChilds(CategoriaId);
         }
+
         public List<Categoria> GetCategorias(long CategoriaId, long NivelId)
         {
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
             return arbol.GetTodosChilds(CategoriaId).Where(x=>x.NivelId <= NivelId).ToList();
+        }
+        public List<Categoria> GetParents(long ProductoId)
+        {
+            ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
+            long cat = _context.Producto.FirstOrDefault(x => x.ProductoId == ProductoId).CategoriaId;
+
+            var res = arbol.GetTodosParents(cat);
+            res.Add(_context.Categoria.FirstOrDefault(x => x.CategoriaId == cat));
+
+            return res;
         }
         public Producto GetProducto(long ProductoId)
         {
@@ -173,7 +186,7 @@ namespace Negoc.Services
                 .Select(x => ToProdList(x))
                 .ToList();
         }
-        private IQueryable<Producto> ArmarQry(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        private IQueryable<Producto> ArmarQry(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var entidad = _context.Producto;
             var item = Expression.Parameter(typeof(Producto), "item");
@@ -213,6 +226,14 @@ namespace Negoc.Services
                     exprWhere = Expression.And(exprWhere,
                         Expression.Equal(Expression.Property(item, "ColorId"), Expression.Constant(ColorId)));
             }
+            if (DeporteId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "DeporteId"), Expression.Constant(DeporteId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "DeporteId"), Expression.Constant(DeporteId)));
+            }
             if (PrecioD != 0 && PrecioH != 0)
             {
                 if (exprWhere == null)
@@ -247,6 +268,7 @@ namespace Negoc.Services
                     .Include(x => x.Marca)    
                     .Include(x => x.Color)
                     .Include(x => x.Genero)
+                    .Include(x=>x.Deporte)
                     .Where(lambda);
 
             if (TipoOrden == 1)
@@ -273,13 +295,13 @@ namespace Negoc.Services
             return result;
 
         }
-        public List<ProductoList> GetProductos(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        public List<ProductoList> GetProductos(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
         {
 
             if (pageNumber==0 || pageSize==0)
                 return new List<ProductoList>();
 
-            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             
             result = result
                 .Skip((pageNumber-1) * pageSize)
@@ -295,17 +317,17 @@ namespace Negoc.Services
                 return res;
         }
 
-        public long GetProductosCantPag(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        public long GetProductosCantPag(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
         {            
-            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             var res = Math.Ceiling( Convert.ToDouble(result.ToList().Count()) / Convert.ToDouble(pageSize) );
                 
             return (long)res;
         }
 
-        public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
-            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             var r = result                
                 .GroupBy(x => x.MarcaId)
                 .Select(y => new Marca
@@ -318,15 +340,29 @@ namespace Negoc.Services
             return r;
         }
  
-        public List<Color> GetColores(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        public List<Color> GetColores(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
-            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
             var r = result                
                 .GroupBy(x => x.ColorId)
                 .Select(y => new Color
                 {
                     ColorId = y.Key,
                     Nombre = y.Min(x => x.Color.Nombre)
+                })
+                .ToList();
+
+            return r;
+        }
+        public List<Deporte> GetDeportes(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var r = result
+                .GroupBy(x => x.DeporteId)
+                .Select(y => new Deporte
+                {
+                    DeporteId = y.Key,
+                    Nombre = y.Min(x => x.Deporte.Nombre)
                 })
                 .ToList();
 

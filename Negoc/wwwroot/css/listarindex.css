@@ -1,0 +1,167 @@
+﻿.contenedor-listar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: whitesmoke;
+    /*justify-content:   space-around;*/
+}
+
+.menu-filtrar-marco {
+    padding: 8px;
+    display: inline-flex;
+    width: 100%;
+}
+.menu-filtrar-izq {
+    border-radius: 4px;
+    background-color: #cce5ff;
+    flex: 5;
+}
+.menu-filtrar-alink {
+    line-height: 2.0rem;
+    margin: 1rem;
+    text-decoration: underline;
+    color: #004085;
+    font-size: 1.2rem;
+}
+.menu-filtrar-der {
+    border-radius: 4px;
+    background-color: #cce5ff;
+    flex: 1;
+    display: inline-flex
+}
+.menu-filtrar-texto {
+    margin-right: 4px;
+    padding-top: 6px;
+    color: black
+}
+/*marco filtros*/
+.marco-filtros {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.marco-filtros-li {
+    border-bottom: 1px solid gray;
+    border-radius: 4px;
+}
+/*marco ordenar*/
+.marco-ordenar {
+    display: inline-flex;
+    padding: 0px;
+}
+.marco-ordenar-texto {
+    padding-top:8px;
+    color:white;
+}
+.marco-ordenar-select {
+    margin: 4px;
+    max-width: 160px;
+}
+/*lista de filtros*/
+.lista-filtros {
+    border: 1px solid silver;
+    border-radius: 8px;
+    padding: 4px;
+    margin: 8px
+}
+/*producto*/
+.producto-item {
+    flex-grow: 0; /*0 no crece*/
+    flex-shrink: 0;
+    flex-basis: 170px;
+    max-width: 170px;
+    min-width: 170px;
+    border-radius: 4px;
+    height: 350px;
+    padding: 6px;
+    padding-bottom: 0;
+    margin: 4px;
+    overflow: hidden;
+    border: .7px solid silver;
+    background-color: white;
+    position: relative;
+}
+
+.producto-imagen {
+    width: 146px;
+    height: 146px;
+    margin: auto;
+    display: block;
+}
+
+.producto-precio {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.producto-off {
+    padding-left: .25rem;
+    color: green;
+    line-height: 2.0rem;
+    font-size: .8rem;
+}
+
+.producto-marca {
+    font-size: 1rem;
+    color: gray;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+
+.producto-descr {
+    font-size: .8rem;
+}
+
+.producto-envio {
+    background-color: coral;
+    color: white;
+    border-radius: 4px;
+    padding: .4rem;
+    position: absolute;
+    height: 28px;
+    bottom: 0px;
+    left: 4px;
+    width: 50%;
+    font-size: .8rem;
+    text-align: center;
+}
+
+.producto-oferta {
+    background-color: coral;
+    color: white;
+    border-radius: 12px;
+    padding: .4rem;
+    position: absolute;
+    top: 0rem;
+    margin: 1rem;
+    font-size: .8rem;
+}
+
+/* Categoria vista de arbol */
+.categoria-icono {
+    font-family: 'Lucida Console', 'Lucida Sans Regular',  sans-serif;
+    color: silver;
+    border-radius: 2px;
+}
+
+#categorias {
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+#categorias div {
+    padding-left: 8px;
+}
+
+    #categorias div span {
+        cursor: default;
+    }
+
+    #categorias div span:nth-child(2) {
+        cursor: pointer;
+    }
+
+    #categorias > div > span:nth-child(2) {
+        text-decoration: underline;
+    }
+

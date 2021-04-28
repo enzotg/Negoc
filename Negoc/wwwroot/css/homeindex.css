@@ -1,0 +1,48 @@
+﻿body, html {
+    font-family: Arial,'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Menu */
+.nav-item:hover {
+    background-color: gray;
+    color: black;
+}
+.dropdown-item {
+    line-height: 1.2rem;
+}
+/*carousel 1 en 1 */
+.carousel-inner {
+    max-height: 400px !important;
+}
+
+/*carousel 4 en 1 */
+.carousel-control-prev {
+    width: 5%;
+}
+
+.carousel-control-prev-icon {
+    color: black;
+}
+
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-next-icon {
+    color: black;
+}
+
+.carousel-indicators {
+    left: 0;
+    top: auto;
+    bottom: -40px;
+    opacity: 1;
+}
+
+.carouselcuatr-fila {
+    display: flex;
+    justify-content: space-around;
+}
+
+

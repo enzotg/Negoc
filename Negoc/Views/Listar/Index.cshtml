@@ -4,46 +4,69 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Scripts    {
+    <script src="~/js/listarindex.js"></script>    
+}
 
-<div style="padding:8px">
-    <div style="border-radius:4px;background-color: #cce5ff">
-        <a href="#" style="line-height:2.0rem; margin:1rem; text-decoration:underline;color: #004085;font-size:1.2rem" data-toggle="collapse" data-target="#demo">Filtrar</a>
+<div class="menu-filtrar-marco">
+    <div class="menu-filtrar-izq">
+        <a href="#" class="menu-filtrar-alink" data-toggle="collapse" data-target="#marcoFiltros">
+            Filtrar
+        </a>
+    </div>
+
+    <div class="menu-filtrar-der">
+        <div>
+            <div class="menu-filtrar-texto">
+                <span>Mostrar:</span>
+            </div>
+        </div>
+        <select class="btn btn-secondary dropdown-toggle" onchange="moverPag(0)" id="selectPageSize">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
     </div>
 </div>
 
 
-<div id="demo" class="collapse" style="padding-left:8px;padding-right:8px;">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark  " style="border-radius:8px;">
+<div id="marcoFiltros" class="collapse marco-filtros">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark  ">
         <div class=" navbar-collapse show " id="navbarNavB">
             <ul class="navbar-nav">
-                <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
+                <li class="nav-item dropdown active marco-filtros-li">
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Categoria
                     </a>
                     <div id="selectCategorias" class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <div id="categorias">
-
                         </div>
                     </div>
                 </li>
-                
-                <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
-                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Marca
                     </a>
-                    <div id="selectMarcas" class="dropdown-menu" aria-labelledby="navbarDropdown1">
-
+                    <div id="selectMarcas" class="dropdown-menu" aria-labelledby="navbarDropdown2">
                     </div>
                 </li>
-                <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
-                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Color
                     </a>
-                    <div id="selectColores" class="dropdown-menu" aria-labelledby="navbarDropdown1">
-
+                    <div id="selectColores" class="dropdown-menu" aria-labelledby="navbarDropdown3">
                     </div>
                 </li>
-                <li class="nav-item dropdown active " style="border-bottom:1px solid gray;border-radius:4px;">
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Deporte
+                    </a>
+                    <div id="selectDeportes" class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                    </div>
+                </li>
+                <li class="nav-item dropdown active marco-filtros-li">
                     <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Precio
                     </a>
@@ -52,7 +75,6 @@
                             <input type="number" id="precioD" value="0.00" placeholder="Mínimo" step=".1" />
                             <input type="number" id="precioH" value="0.00" placeholder="Máximo" step=".1" />
                             <hr />
-
                             <input type="button" name="name" value="Aplicar" class="btn btn-outline-primary" onclick="FiltrarPrecio();" />
                         </div>
                     </div>
@@ -62,11 +84,11 @@
         </div>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <div style="display:inline-flex; padding:0px;">
-                    <div style="padding-top:8px;color:white">
+                <div class="marco-ordenar">
+                    <div class="marco-ordenar-texto">
                         <span>Orden:</span>
                     </div>
-                    <div style="margin:4px;max-width:160px;">
+                    <div class="marco-ordenar-select">
                         <select class="btn btn-secondary dropdown-toggle" onchange="moverPag(0)" id="selectId">
                             <option value="1">Menor precio</option>
                             <option value="2">Mayor precio</option>
@@ -80,47 +102,47 @@
     </nav>
 
 
-</div> 
-<div id="listaFiltros" style="border:1px solid silver; border-radius:8px;padding:4px;margin:8px  ">
+</div>
+<div id="listaFiltros" class="lista-filtros">
 
 </div>
 <hr />
 
-<div id="ContenedorProd" class="contenedor">
+<div id="ContenedorProd" class="contenedor-listar">
 
     @foreach (var item in Model)
     {
-    <div class="item producto">
-        <a href="/Listar/GetProductoList?ProductoId=@item.ProductoId">            
-            <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
-        </a>
-        @if (item.DescuentoPorc > 0)
-        {
-            <span class="producto-oferta">Oferta</span>
-        }
-        <span class="producto-precio">@item.Precio.ToString("C0")</span>
-        @if (item.DescuentoPorc > 0)
-        {
-            <span class="producto-off">-@item.DescuentoPorc%</span>
-        }
+        <div class="producto-item">
+            <a href="/Listar/GetProductoList?ProductoId=@item.ProductoId">
+                <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+            </a>
+            @if (item.DescuentoPorc > 0)
+            {
+                <span class="producto-oferta">Oferta</span>
+            }
+            <span class="producto-precio">@item.Precio.ToString("C0")</span>
+            @if (item.DescuentoPorc > 0)
+            {
+                <span class="producto-off">-@item.DescuentoPorc%</span>
+            }
 
-        <div>
-            <span class="producto-marca">@item.Marca</span>
-        </div>
-        <hr />
-        <div>
-            <p class="producto-descr">@item.Descripcion</p>
-        </div>
-        @if (item.EnvioGratis)
-        {
             <div>
-                <p class="producto-envio">Envio gratis</p>
+                <span class="producto-marca">@item.Marca</span>
             </div>
-        }        
-    </div>
+            <hr />
+            <div>
+                <p class="producto-descr">@item.Descripcion</p>
+            </div>
+            @if (item.EnvioGratis)
+            {
+                <div>
+                    <p class="producto-envio">Envio gratis</p>
+                </div>
+            }
+        </div>
 
     }
-    
+
 </div>
 
 <div class="alert alert-primary">
@@ -140,300 +162,11 @@
         </li>
     </ul>
 </div>
-<input type="text" class="page-link" value="3" id="txtPageSize" readonly style="width:36px;" />
-<input type="text" class="page-link"   id="txtPageCant" readonly style="width:36px;" />
+
+<input type="text" class="page-link" id="txtPageCant" readonly style="width:36px;display:none" />
 
 
 <script>
-
-    window.addEventListener("load", window_onload);
-
-
-
-    function FiltrarPrecio() {
-        AgregarFiltro("Precio", 1);
-        moverPag(0);
-    }
-    function AgregarFiltro(Nombre, valor) {
-
-        if (valor == 0 || valor == null) return;
-
-        var cont = document.getElementById("listaFiltros");
-        var btn = document.createElement("button");
-        var spA = document.createElement("span");
-        var spB = document.createElement("span");
-
-        var b = document.getElementById("filtro" + Nombre);
-        if(b) b.remove();
-
-        btn.type = "button";
-        btn.classList = "btn btn-light";
-        btn.name = valor;
-        btn.id = "filtro" + Nombre;
-        spA.innerText = Nombre;
-        spB.innerText = "X";
-        spB.classList = "badge badge-light";
-        spB.style = "border:1px solid silver;border-radius:6px;margin:4px";
-        btn.onclick = function (e) { Cerrar(e); }
-
-        btn.appendChild(spA);
-        btn.appendChild(spB);
-        cont.appendChild(btn);
-
-    }
-    function Cerrar(e) {
-        e.currentTarget.remove();
-        moverPag(0);
-    }
-    function getFromQry(e) {
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        return urlParams.get(e) == undefined ? 0 : urlParams.get(e);
-    }
-
-    function getQryVal() {
-        //Leer todos los param y cargarlos en filtros
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-
-        var catId = urlParams.get('CategoriaId');
-        var genId = urlParams.get('GeneroId');
-        var marcaId = urlParams.get('MarcaId');
-        var colorId = urlParams.get('ColorId');
-        var precioD = urlParams.get('PrecioD');
-        var precioH = urlParams.get('PrecioH');
-        var descripcion = urlParams.get('Descripcion');
-        var pagNum = urlParams.get('PagNumero');
-        var pagSiz = urlParams.get('PagCantidad');
-        var tipoOrden = urlParams.get('TipoOrden');
-
-        document.getElementById("precioD").value = precioD;
-        document.getElementById("precioH").value = precioH;
-        document.getElementById("txtPageNumber").value = pagNum;
-        document.getElementById("txtPageSize").value = pagSiz;
-        document.getElementById("selectId").value = tipoOrden;
-
-        AgregarFiltro("Categoria", catId);
-        AgregarFiltro("Genero", genId);
-        AgregarFiltro("Marca", marcaId);
-        AgregarFiltro("Color", colorId);
-        AgregarFiltro("Precio", precioD);
-        AgregarFiltro("Descripcion", descripcion);
-
-    }
-    function moverPag(n) {
-
-        var pagNum = document.getElementById("txtPageNumber").value;
-        pagNum = parseInt(pagNum) + n;
-
-        if (pagNum <= 0) return;
-
-        document.getElementById("txtPageNumber").value = pagNum;
-
-        var urlProd = "/Listar/GetProductos" + getQryNue(1);
-        var cant = @Model.Count();
-
-        window.location.href = urlProd;
-
-
-    }
-    //CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden
-    function getQryNue(e) {
-        // 1  es todos
-        //get query con todos los param
-        //get query sin pag numero pag cant
-
-        var catId = document.getElementById("filtroCategoria") != null ? document.getElementById("filtroCategoria").name : 0;
-        var genId = document.getElementById("filtroGenero") != null ? document.getElementById("filtroGenero").name : 0;
-        var marcaId = document.getElementById("filtroMarca") != null ? document.getElementById("filtroMarca").name : 0;
-        var colorId = document.getElementById("filtroColor") != null ? document.getElementById("filtroColor").name : 0;
-        var descripcion = document.getElementById("filtroDescripcion") != null ? document.getElementById("filtroDescripcion").name : '';
-        var precioD = 0;
-        var precioH = 0;
-
-        if (document.getElementById("filtroPrecio")) {
-            precioD = document.getElementById("precioD").value;
-            precioH = document.getElementById("precioH").value;
-        }
-
-        var tipoOrden = document.getElementById("selectId").value;
-        var pagNum = document.getElementById("txtPageNumber").value;
-        var pagSiz = document.getElementById("txtPageSize").value ;
-        var queryStringNue = '';
-
-        if(e == 1)
-            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&Descripcion=" + descripcion + "&PagNumero=" + pagNum + "&PagCantidad=" + pagSiz + "&TipoOrden=" + tipoOrden;
-        else
-            queryStringNue = "?CategoriaId=" + catId + "&GeneroId=" + genId + "&MarcaId=" + marcaId + "&ColorId=" + colorId + "&PrecioD=" + precioD + "&PrecioH=" + precioH + "&Descripcion=" + descripcion + "&TipoOrden=" + tipoOrden;
-
-        return queryStringNue;
-    }
-    function reempQry(qry, reem) {
-
-        var str = qry.toString();
-        var ini = str.indexOf(reem);
-        var fin = str.indexOf("&", ini);
-        return str.substring(0, ini) + reem + "0" + str.substring(fin);
-    }
-    function getMarcas() {
-
-        var res = reempQry(getQryNue(), "MarcaId=");
-        var urlg = "/Listar/GetMarcas" + res;
-
-        $.ajax({
-            url: urlg,
-            type: 'Get',
-            dataType:'json'
-        }).then(function (data){
-            var arr = JSON.parse(data);
-            var select = document.getElementById("selectMarcas");
-
-            arr.forEach(
-                (elem, index, array) => {
-                    var op = document.createElement("a");
-                    op.href = "javascript:void(0)";
-                    op.className = "dropdown-item";
-                    op.innerText = elem.Nombre;
-                    op.onclick = () => { AgregarFiltro("Marca", elem.MarcaId); moverPag(0); }
-                    select.appendChild(op);
-                });
-
-        });
-    }
-
-    function getColores() {
-
-        var res = reempQry(getQryNue(), "ColorId=");
-        var urlg = "/Listar/GetColores" + res;
-
-        $.ajax({
-            url: urlg,
-            type: 'Get',
-            dataType: 'json'
-        }).then(function (data) {
-            var arr = JSON.parse(data);
-            var select = document.getElementById("selectColores");
-
-            arr.forEach(
-                (elem, index, array) => {
-                    var op = document.createElement("a");
-                    op.href = "javascript:void(0)";
-                    op.className = "dropdown-item";
-                    op.innerText = elem.Nombre;
-                    op.onclick = () => { AgregarFiltro("Color", elem.ColorId); moverPag(0); }
-                    select.appendChild(op);
-                });
-
-        });
-    }
-
-    function window_onload() {
-
-        getQryVal();
-        getMarcas();
-        getColores();
-        getCats();
-
-
-        //-----
-        $.ajax({
-            url: "/Listar/GetProductosCantPag" + getQryNue(1),
-            type: 'Post',
-            dataType: 'json'
-        }).then(function (data) {
-
-            document.getElementById("txtPageCant").value = data;
-
-            if (parseInt(document.getElementById("txtPageNumber").value) == 
-                parseInt(document.getElementById("txtPageCant").value))
-
-                document.getElementById("pagSiguiente").style.visibility = 'hidden';
-
-        });
-    }
-
-    function getCats() {
-        $.ajax(
-            {
-                url: "/Listar/GetCategorias?CategoriaId=0&NivelId=5",
-                method: "GET",
-                dataType: 'json'
-            }
-        ).then(function (data) {
-            var res = JSON.parse(data);
-            var contain = document.getElementById("categorias");
-            res.forEach((elem, index, array) => {
-                if (elem.NivelId == 1) {
-                    var divR = document.createElement("div");
-                    divR.id = elem.CategoriaId;
-
-                    var spText = document.createElement("span");
-                    spText.innerText = elem.Nombre;
-                    spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
-                    var spIco = document.createElement("span");
-                    spIco.innerHTML = "|+|";
-                    spIco.className = "categoria-icono";
-                    spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
-
-                    divR.appendChild(spIco);
-                    divR.appendChild(spText);
-
-                    contain.appendChild(divR);
-                }
-                else {
-                    var nodo = document.getElementById(elem.ParentId);
-                    if (nodo == null) { //no existe
-                    }
-                    else {
-                        var divR = document.createElement("div");
-                        divR.style.display = "none";
-                        divR.id = elem.CategoriaId;
-                        nodo.appendChild(divR);
-
-                        var spText = document.createElement("span");
-                        spText.innerText = elem.Nombre;
-                        spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
-                        var spIco = document.createElement("span");
-                        spIco.innerHTML = "|+|";
-                        spIco.className = "categoria-icono";
-                        spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
-
-                        divR.appendChild(spIco);
-                        divR.appendChild(spText);
-
-                    }
-                }
-            });
-        });
-    }
-
-    function disp(e) {
-
-        if (e.target.innerHTML.indexOf("+") < 0)
-            e.target.innerHTML = e.target.innerHTML.replace("-", "+");
-        else
-            e.target.innerHTML = e.target.innerHTML.replace("+", "-");
-
-        e.target.parentElement.childNodes.forEach((elem, index, array) => {
-            if (elem.tagName == "DIV") {
-                if (elem.style.display != "none")
-                    elem.style.display = "none";
-                else
-                    elem.style.display = "block";
-            }
-        });
-    }
-
-    function CategoriaClick(e) {
-
-        var catId = e.target.parentElement.id;
-        AgregarFiltro("Categoria", catId);
-        moverPag(0);
-    }
-
-
-
 
 
 </script>
