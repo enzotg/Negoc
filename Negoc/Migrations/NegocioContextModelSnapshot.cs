@@ -25,7 +25,15 @@ namespace Negoc.Migrations
 
                     b.Property<int>("NivelId");
 
+<<<<<<< HEAD
                     b.Property<string>("Nombre");
+=======
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NombreSing")
+                        .HasMaxLength(50);
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
 
                     b.Property<long?>("ParentId");
 
@@ -34,6 +42,49 @@ namespace Negoc.Migrations
                     b.ToTable("Categoria");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("Negoc.Models.Color", b =>
+                {
+                    b.Property<long>("ColorId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HexCode")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(30);
+
+                    b.HasKey("ColorId");
+
+                    b.ToTable("Color");
+                });
+
+            modelBuilder.Entity("Negoc.Models.Deporte", b =>
+                {
+                    b.Property<long>("DeporteId");
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(50);
+
+                    b.HasKey("DeporteId");
+
+                    b.ToTable("Deporte");
+                });
+
+            modelBuilder.Entity("Negoc.Models.Genero", b =>
+                {
+                    b.Property<byte>("GeneroId");
+
+                    b.Property<string>("Nombre");
+
+                    b.HasKey("GeneroId");
+
+                    b.ToTable("Genero");
+                });
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
             modelBuilder.Entity("Negoc.Models.Marca", b =>
                 {
                     b.Property<long>("MarcaId")
@@ -48,6 +99,40 @@ namespace Negoc.Migrations
                     b.ToTable("Marca");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("Negoc.Models.Oferta", b =>
+                {
+                    b.Property<long>("OfertaId");
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(50);
+
+                    b.HasKey("OfertaId");
+
+                    b.ToTable("Oferta");
+                });
+
+            modelBuilder.Entity("Negoc.Models.OfertaProducto", b =>
+                {
+                    b.Property<long>("OfertaProductoId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("OfertaId");
+
+                    b.Property<long>("ProductoId");
+
+                    b.HasKey("OfertaProductoId");
+
+                    b.HasIndex("OfertaId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("OfertaProducto");
+                });
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
             modelBuilder.Entity("Negoc.Models.ProdImagen", b =>
                 {
                     b.Property<long>("ProdImagenId")
@@ -69,6 +154,7 @@ namespace Negoc.Migrations
 
             modelBuilder.Entity("Negoc.Models.Producto", b =>
                 {
+<<<<<<< HEAD
                     b.Property<long>("ProductoId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -76,6 +162,23 @@ namespace Negoc.Migrations
                     b.Property<long>("CategoriaId");
 
                     b.Property<byte>("ColorId");
+=======
+                    b.Property<long>("ProductoId");
+
+                    b.Property<long>("CategoriaId");
+
+                    b.Property<long>("ColorId");
+
+                    b.Property<long>("DeporteId");
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(100);
+
+                    b.Property<float>("DescuentoPorc");
+
+                    b.Property<string>("Detalle")
+                        .HasMaxLength(2000);
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
 
                     b.Property<byte>("GeneroId");
 
@@ -97,11 +200,35 @@ namespace Negoc.Migrations
 
                     b.HasIndex("CategoriaId");
 
+<<<<<<< HEAD
+=======
+                    b.HasIndex("ColorId");
+
+                    b.HasIndex("DeporteId");
+
+                    b.HasIndex("GeneroId");
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                     b.HasIndex("MarcaId");
 
                     b.ToTable("Producto");
                 });
 
+<<<<<<< HEAD
+=======
+            modelBuilder.Entity("Negoc.Models.OfertaProducto", b =>
+                {
+                    b.HasOne("Negoc.Models.Oferta", "Oferta")
+                        .WithMany("Productos")
+                        .HasForeignKey("OfertaId");
+
+                    b.HasOne("Negoc.Models.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
             modelBuilder.Entity("Negoc.Models.ProdImagen", b =>
                 {
                     b.HasOne("Negoc.Models.Producto")
@@ -117,6 +244,24 @@ namespace Negoc.Migrations
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+<<<<<<< HEAD
+=======
+                    b.HasOne("Negoc.Models.Color", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Negoc.Models.Deporte", "Deporte")
+                        .WithMany()
+                        .HasForeignKey("DeporteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Negoc.Models.Genero", "Genero")
+                        .WithMany()
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                     b.HasOne("Negoc.Models.Marca", "Marca")
                         .WithMany()
                         .HasForeignKey("MarcaId")

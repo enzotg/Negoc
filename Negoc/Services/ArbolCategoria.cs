@@ -33,7 +33,11 @@ namespace Negoc.Services
         {
             var categ = _categorias.FirstOrDefault(x => x.CategoriaId == catId);
 
+<<<<<<< HEAD
             if (!categ.ParentId.HasValue)
+=======
+            if (!categ.ParentId.HasValue || categ.ParentId==0)
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                 return;
             else
             {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./productoun.css">
+    <script type="text/javascript" src="./productoun.js"></script>
+    <title>Producto un</title>
+</head>
+<body>
+    <div class="container-produn" >            
+        <div class="produn-col1">                
+            <div class="produn-princ">
+                <div class="thumb">
+                    <ul class="thumb-ul">
+                        <li>
+                            <div class="thumb-img-cont"><img  class="thumb-img" src="./prod1.jpg" onclick="VerImgPrinc(this);"  alt="..."></div>
+                        </li>
+                        <li>
+                            <div class="thumb-img-cont"><img  class="thumb-img" src="./prod2.jpg" onclick="VerImgPrinc(this);"   alt="..."></div>
+                        </li>
+                        <li>
+                            <div class="thumb-img-cont"><img  class="thumb-img" src="./prod3.jpg" onclick="VerImgPrinc(this);"  alt="..."></div>
+                        </li>
+                        <li>
+                            <div class="thumb-img-cont"><img  class="thumb-img" src="./prod4.jpg" onclick="VerImgPrinc(this);"  alt="..."></div>
+                        </li>                        
+                    </ul>                                       
+                </div>
+                <div class="produn-princ-img" >
+                    <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
+                    <a class="nextimg" onclick="moverImg(1)">&#10095;</a>   
+                    <img src="./prod1.jpg"  onclick="mostrarGal();" alt="..." id="produnImagen">
+                </div>
+            </div>            
+        </div>
+        <div class="produn-col1">
+            <h1>Cam</h1>
+            <h3>Camisa</h3>
+            <h3>Precio</h3>
+        </div>        
+    </div>
+
+    <div class="container-produn" >
+        <div class="produn-col1">
+            <h4>Descripcion </h4>
+            <p>
+                -La tecnología Dri-FIT elimina el sudor de la piel para una rápida evaporación, ayudándote a mantenerte seco, cómodo y concentrado.
+                -La tela de malla proporciona transpirabilidad, por lo que te mantiene fresco cuando tu entrenamiento se calienta.
+            </p>
+        </div>
+        <div class="produn-col1">
+            <h3>Envio</h3>
+        </div>
+    </div>   
+
+ 
+    <div class="container-slide-back ">
+        <a class="prev-slide" onclick="mover(-1)">&#10094;</a>
+        <a class="next-slide" onclick="mover(1)">&#10095;</a>   
+        <button type="button" class="cerrar-container-slide close" data-dismiss="modal" aria-label="Close" onclick="cerrarContainer()">
+            <span aria-hidden="true">&times;</span>
+        </button>             
+
+        <div class="container-img">            
+            <div class="slide  inactivo " >
+                <img src="./prod1.jpg" class="" alt="...">                 
+            </div>            
+            <div class="slide inactivo "  >
+                <img src="./prod2.jpg" class="" alt="...">  
+            </div>            
+            <div class="slide inactivo "  >
+                <img src="./prod3.jpg" class="" alt="...">  
+            </div>            
+            <div class="slide inactivo "  >
+                <img src="./prod4.jpg" class="" alt="...">  
+            </div>            
+        </div>
+        <div class="dot-div">
+            <span class="dot" onclick="IrA(0)"></span>
+            <span class="dot" onclick="IrA(1)"></span>
+            <span class="dot" onclick="IrA(2)"></span>
+            <span class="dot" onclick="IrA(3)"></span>
+        </div>
+    </div>
+</body>
+</html>

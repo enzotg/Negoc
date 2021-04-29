@@ -27,8 +27,13 @@
             <div class="col-sm-4 col-md-2">
                 <label asp-for="CategoriaId" class="control-label"></label>
             </div>
+<<<<<<< HEAD
             <div class="col-sm-8 col-md-10">
                 <input asp-for="CategoriaId" class="form-control" />
+=======
+            <div class="col-sm-8 col-md-8">
+                @Html.DropDownListFor(x => x.CategoriaId, (IEnumerable<SelectListItem>)ViewBag.cat, htmlAttributes: new { @class = "form-control" })
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
         </div>
@@ -36,8 +41,14 @@
             <div class="col-sm-4 col-md-2">
                 <label asp-for="MarcaId" class="control-label"></label>
             </div>
+<<<<<<< HEAD
             <div class="col-sm-8 col-md-10">
                 <input asp-for="MarcaId" class="form-control" />
+=======
+            <div class="col-sm-8 col-md-8">
+                @Html.DropDownListFor(x => x.MarcaId, (IEnumerable<SelectListItem>)ViewBag.mar, htmlAttributes: new { @class = "form-control" })
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                 <span asp-validation-for="MarcaId" class="text-danger"></span>
             </div>
         </div>
@@ -46,8 +57,28 @@
                 <label asp-for="GeneroId" class="control-label"></label>
             </div>
             <div class="col-sm-4 col-md-2">
+<<<<<<< HEAD
                 <input asp-for="GeneroId" class="form-control" />
+=======
+
+                @Html.DropDownListFor(x => x.GeneroId, (IEnumerable<SelectListItem>)ViewBag.gen, htmlAttributes: new { @class = "form-control" })
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                 <span asp-validation-for="GeneroId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+<<<<<<< HEAD
+                <label asp-for="ColorId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="ColorId" class="form-control" />
+=======
+                <label asp-for="DeporteId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                @Html.DropDownListFor(x => x.DeporteId, (IEnumerable<SelectListItem>)ViewBag.dep, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="DeporteId" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -55,7 +86,8 @@
                 <label asp-for="ColorId" class="control-label"></label>
             </div>
             <div class="col-sm-4 col-md-2">
-                <input asp-for="ColorId" class="form-control" />
+                @Html.DropDownListFor(x => x.ColorId, (IEnumerable<SelectListItem>)ViewBag.col, htmlAttributes: new { @class = "form-control" })
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                 <span asp-validation-for="ColorId" class="text-danger"></span>
             </div>
         </div>
@@ -96,6 +128,37 @@
                 <span asp-validation-for="PrecioStr" class="text-danger"></span>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="DescuentoPorc" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                <input asp-for="DescuentoPorc" class="form-control" />
+                <span asp-validation-for="DescuentoPorc" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Descripcion" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="Detalle" class="control-label"></label>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <textarea asp-for="Detalle" class="form-control" rows="6">
+                </textarea>
+                <span asp-validation-for="Detalle" class="text-danger"></span>
+            </div>
+        </div>
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
         <hr />
         <div class="row">
             <div class="col-sm-4 col-md-2">

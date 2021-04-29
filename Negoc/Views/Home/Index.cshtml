@@ -47,22 +47,38 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-basquet.png" />
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="#">
-                                    <img src="~/images/deporte-menu-ciclismo.png" />
-                                </a>
-                            </div>
-                            <div class="col-md-3">
-                                <a href="#">
+=======
                                     <img src="~/images/deporte-menu-futbol.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
+                                    <img src="~/images/deporte-menu-ciclismo.png" />
+=======
+                                    <img src="~/images/deporte-menu-basquet.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+<<<<<<< HEAD
+                                    <img src="~/images/deporte-menu-futbol.png" />
+=======
+                                    <img src="~/images/deporte-menu-rugby.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-natacion.png" />
+=======
+                                    <img src="~/images/deporte-menu-ciclismo.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                         </div>
@@ -73,22 +89,38 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-basquet.png" />
+=======
+                                    <img src="~/images/deporte-menu-running.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-basquet.png" />
+=======
+                                    <img src="~/images/deporte-menu-tenis.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-futbol.png" />
+=======
+                                    <img src="~/images/deporte-menu-training.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a href="#">
+<<<<<<< HEAD
                                     <img src="~/images/deporte-menu-rugby.png" />
+=======
+                                    <img src="~/images/deporte-menu-voley.png" />
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
                                 </a>
                             </div>
                         </div>
@@ -118,6 +150,7 @@
     </span>
 
     <div id="contcards" class="contcards">
+<<<<<<< HEAD
         <div class="contcards-item">
             <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=1"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
         </div>
@@ -136,6 +169,9 @@
         <div class="contcards-item">
             <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=3"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un   </span></div>
         </div>
+=======
+
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
 
     </div>
 </div>
@@ -161,3 +197,83 @@
 </div>
 
 
+<<<<<<< HEAD
+=======
+<script>
+    window.addEventListener("load", window_onload);
+
+    function window_onload() {
+
+        getOfertas();
+        
+    }
+    function getOfertas() {
+        
+        var urlg = "/Listar/GetProductosEnOferta?OfertaId=1";
+
+        $.ajax({
+            url: urlg,
+            type: 'get',
+            dataType: 'json'
+        }).then(function (data) {
+            var arr = JSON.parse(data);
+            var cont = document.getElementById("contcards");
+
+            arr.forEach(
+                (elem, index, array) => {
+                    console.log(elem);
+                    var contcard = document.createElement("div");
+                    contcard.classList = "contcards-item";
+
+                    var item = document.createElement("div");
+                    item.classList = "item producto";
+
+                    var a = document.createElement("a");
+                    a.href = "/Listar/GetProductoList?ProductoId=" + elem.ProductoId;
+
+                    var img = document.createElement("img");
+                    img.classList = "producto-imagen";
+                    img.src = "/Listar/GetImagePr/" + elem.ProductoId;
+                    img.alt = "";
+                    a.appendChild(img);
+
+                    var spanPr = document.createElement("span");
+                    spanPr.classList = "producto-precio";
+                    spanPr.innerText = "$ " + elem.Precio;
+
+                    var spanMar = document.createElement("span");
+                    spanMar.classList = "producto-marca";
+                    spanMar.innerText = elem.Marca;
+                    var divMar = document.createElement("div");
+                    divMar.appendChild(spanMar);
+
+                    var descr = document.createElement("p");
+                    descr.classList = "producto-descr";
+                    descr.innerText = elem.Descripcion;
+
+                    cont.appendChild(contcard);
+                    contcard.appendChild(item);
+
+                    item.appendChild(a);
+                    item.appendChild(spanPr);
+                    item.appendChild(divMar);
+                    item.appendChild(document.createElement("hr"));
+                    item.appendChild(descr);
+
+                    if (elem.EnvioGratis) {
+                        var envio = document.createElement("div");
+                        var enviot = document.createElement("p");
+                        enviot.classList = "producto-envio";
+                        enviot.innerText = "Envio gratis";
+                        envio.appendChild(enviot);
+                        item.appendChild(envio);
+                    }                    
+                    
+                });
+            cardInit();
+        });
+    }
+
+
+</script>
+>>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
