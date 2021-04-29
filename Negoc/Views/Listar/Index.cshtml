@@ -1,13 +1,19 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿@model IEnumerable<Negoc.Models.Producto>
 =======
 ﻿@using Newtonsoft.Json;
 @model IEnumerable<Negoc.ViewModels.ProductoList>
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+﻿@using Newtonsoft.Json;
+@model IEnumerable<Negoc.ViewModels.ProductoList>
+>>>>>>> carro
 
 @{
     ViewData["Title"] = "Index";
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <div class="alert  alert-primary">
     <a href="#" onclick="mostrarBarra();" class="btn btn-outline-primary">
@@ -48,6 +54,22 @@
     <div style="border-radius:4px;background-color: #cce5ff;flex:1;display:inline-flex">
         <div >
             <div style="margin-right:4px; padding-top:6px;color:black">
+=======
+@section Scripts    {
+    <script src="~/js/listarindex.js"></script>    
+}
+
+<div class="menu-filtrar-marco">
+    <div class="menu-filtrar-izq">
+        <a href="#" class="menu-filtrar-alink" data-toggle="collapse" data-target="#marcoFiltros">
+            Filtrar
+        </a>
+    </div>
+
+    <div class="menu-filtrar-der">
+        <div>
+            <div class="menu-filtrar-texto">
+>>>>>>> carro
                 <span>Mostrar:</span>
             </div>
         </div>
@@ -57,22 +79,97 @@
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
     </div>
 </div>
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div id="subCategorias" class="subcategorias">
+=======
+<div id="marcoFiltros" class="collapse marco-filtros">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark  ">
+        <div class=" navbar-collapse show " id="navbarNavB">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categoria
+                    </a>
+                    <div id="selectCategorias" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <div id="categorias">
+                        </div>
+                    </div>
+                </li>
 
-    <div id="categorias">
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Marca
+                    </a>
+                    <div id="selectMarcas" class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    </div>
+                </li>
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Color
+                    </a>
+                    <div id="selectColores" class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    </div>
+                </li>
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Deporte
+                    </a>
+                    <div id="selectDeportes" class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                    </div>
+                </li>
+                <li class="nav-item dropdown active marco-filtros-li">
+                    <a class="nav-link dropdown-toggle" href="/Listar/" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Precio
+                    </a>
+                    <div id="selectPrecio" class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <div class="container-fluid text-center">
+                            <input type="number" id="precioD" value="0.00" placeholder="Mínimo" step=".1" />
+                            <input type="number" id="precioH" value="0.00" placeholder="Máximo" step=".1" />
+                            <hr />
+                            <input type="button" name="name" value="Aplicar" class="btn btn-outline-primary" onclick="FiltrarPrecio();" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
 
-    </div>
+        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <div class="marco-ordenar">
+                    <div class="marco-ordenar-texto">
+                        <span>Orden:</span>
+                    </div>
+                    <div class="marco-ordenar-select">
+                        <select class="btn btn-secondary dropdown-toggle" onchange="moverPag(0)" id="selectId">
+                            <option value="1">Menor precio</option>
+                            <option value="2">Mayor precio</option>
+                            <option value="3">A-Z</option>
+                            <option value="4">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+>>>>>>> carro
+
+
 </div>
-<div id="ContenedorProd" class="contenedor">
+<div id="listaFiltros" class="lista-filtros">
 
 </div>
+<hr />
 
+<<<<<<< HEAD
 =======
 <div id="demo" class="collapse" style="padding-left:8px;padding-right:8px;">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark  " style="border-radius:8px;">
@@ -518,131 +615,74 @@
     function getCats() {
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
         $.ajax(
+=======
+<div id="ContenedorProd" class="contenedor-listar">
+
+    @foreach (var item in Model)
+    {
+        <div class="producto-item">
+            <a href="/Listar/GetProductoList?ProductoId=@item.ProductoId">
+                <img class="producto-imagen" src="/Listar/GetImagePr/@item.ProductoId" alt="@item.Nombre" />
+            </a>
+            @if (item.DescuentoPorc > 0)
             {
-                url: "/Listar/GetCategorias?CategoriaId=0&NivelId=5",
-                method: "GET",
-                dataType: 'json'
+                <span class="producto-oferta">Oferta</span>
             }
-        ).then(function (data) {
-            var res = JSON.parse(data);
-            var contain = document.getElementById("categorias");
-            res.forEach((elem, index, array) => {
-                if (elem.NivelId == 1) {
-                    var divR = document.createElement("div");
-                    divR.id = elem.CategoriaId;
-
-                    var spText = document.createElement("span");
-                    spText.innerText = elem.Nombre;
-                    spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
-                    var spIco = document.createElement("span");
-                    spIco.innerHTML = "|+|";
-                    spIco.className = "categoria-icono";
-                    spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
-
-                    divR.appendChild(spIco);
-                    divR.appendChild(spText);
-
-                    contain.appendChild(divR);
-                }
-                else {
-                    var nodo = document.getElementById(elem.ParentId);
-                    if (nodo == null) { //no existe
-                    }
-                    else {
-                        var divR = document.createElement("div");
-                        divR.style.display = "none";
-                        divR.id = elem.CategoriaId;
-                        nodo.appendChild(divR);
-
-                        var spText = document.createElement("span");
-                        spText.innerText = elem.Nombre;
-                        spText.addEventListener('click', function (e) { e.cancelBubble = true; CategoriaClick(e); });
-                        var spIco = document.createElement("span");
-                        spIco.innerHTML = "|+|";
-                        spIco.className = "categoria-icono";
-                        spIco.addEventListener('click', function (e) { e.cancelBubble = true; disp(e); });
-
-                        divR.appendChild(spIco);
-                        divR.appendChild(spText);
-
-                    }
-                }
-            });
-        });
-    }
-
-    function disp(e) {
-
-        if (e.target.innerHTML.indexOf("+") < 0)
-            e.target.innerHTML = e.target.innerHTML.replace("-", "+");
-        else
-            e.target.innerHTML = e.target.innerHTML.replace("+", "-");
-
-        e.target.parentElement.childNodes.forEach((elem, index, array) => {
-            if (elem.tagName == "DIV") {
-                if (elem.style.display != "none")
-                    elem.style.display = "none";
-                else
-                    elem.style.display = "block";
+            <span class="producto-precio">@item.Precio.ToString("C0")</span>
+            @if (item.DescuentoPorc > 0)
+>>>>>>> carro
+            {
+                <span class="producto-off">-@item.DescuentoPorc%</span>
             }
+
+            <div>
+                <span class="producto-marca">@item.Marca</span>
+            </div>
+            <hr />
+            <div>
+                <p class="producto-descr">@item.Descripcion</p>
+            </div>
+            @if (item.EnvioGratis)
+            {
+                <div>
+                    <p class="producto-envio">Envio gratis</p>
+                </div>
+            }
+<<<<<<< HEAD
         });
     }
 <<<<<<< HEAD
     function CategoriaClick(e) {
+=======
+        </div>
+>>>>>>> carro
 
-        $.ajax({
-            url: "/Listar/GetProductosCat?CategoriaId=" + e.target.parentElement.id,
-            method: "GET",
-            dataType: 'json'
-        }).then(function (data) {
-            mostrarBarra();
-            var productos = JSON.parse(data);
-            CargarProd(productos);
-        });
     }
-    function LimpiarProd() {
-        var contain = document.getElementById("ContenedorProd");
-        while (contain.firstElementChild)
-            contain.removeChild(contain.firstElementChild);
-    }
-    function CargarProd(lista) {
 
-        var contain = document.getElementById("ContenedorProd");
-        lista.forEach((elem, index, array) => {
+</div>
 
-            var divProd = document.createElement("div");
-            divProd.classList = "item producto";
-            var imagen = document.createElement("img");
-            var oferta = document.createElement("span");
-            var precio = document.createElement("span");
-            var off = document.createElement("span");
-            var envio = document.createElement("span");
-            var descr = document.createElement("span");
+<div class="alert alert-primary">
+    <ul class="pagination justify-content-md-center">
+        <li class="page-item">
+            <a class="page-link" href="javascript:moverPag(-1);" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <input type="text" class="page-link" value="1" id="txtPageNumber" readonly style="width:36px;" />
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="javascript:moverPag(1);" id="pagSiguiente" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
 
-            imagen.className = "producto-imagen";
-            imagen.src = "/Listar/GetImagePr/" + elem.ProductoId;
-            oferta.className = "producto-oferta";
-            oferta.innerText = "Oferta";
-            precio.className = "producto-precio";
-            precio.innerText = elem.PrecioStr;
-            off.className = "producto-off";
-            off.innerText = "20%";
-            envio.className = "producto-off";
-            envio.innerText = "Envio gratis";
-            descr.className = "producto-descr";
-            descr.innerText = elem.Nombre;
+<input type="text" class="page-link" id="txtPageCant" readonly style="width:36px;display:none" />
 
-            divProd.appendChild(imagen);
-            divProd.appendChild(oferta);
-            divProd.appendChild(precio);
-            divProd.appendChild(off);
-            divProd.appendChild(document.createElement("br"));
-            divProd.appendChild(envio);
-            divProd.appendChild(document.createElement("br"));
-            divProd.appendChild(descr);
 
-            contain.appendChild(divProd);
-
+<<<<<<< HEAD
         });
     }
 =======
@@ -657,6 +697,9 @@
 
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+<script>
+>>>>>>> carro
 
 
 </script>

@@ -1,11 +1,16 @@
 ﻿@model Negoc.ViewModels.ProductoList
 @section Scripts    {
     <script src="~/lib/productoun/productoun.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="~/js/listarproducto.js"></script>
+>>>>>>> carro
 }
 @{
     ViewData["Title"] = "Producto";
 }
 
+<<<<<<< HEAD
 <div style="background-color: whitesmoke;padding:8px;">
 
     <div id="CategoriasP">        
@@ -53,6 +58,58 @@
                 <p>
                     @Model.Detalle
 
+=======
+<input id="productoId" type="text" value="@Model.ProductoId" style="display:none" />
+
+<div class="produn-marco">
+
+    <div id="CategoriasP">
+
+    </div>
+    <div class="container-produn">
+        <div class="produn-col1">
+            <div class="produn-princ">
+                <div class="thumb">
+                    <ul class="thumb-ul">
+                        @foreach (var item in Model.Imagenes)
+                        {
+                            <li>
+                                <div class="thumb-img-cont">
+                                    <img class="thumb-img" src="/Listar/GetImage/@item.ProdImagenId" onclick="VerImgPrinc(this);" alt="@item.Nombre">
+                                </div>
+                            </li>
+
+                        }
+                    </ul>
+                </div>
+                <div class="produn-princ-img">
+                    <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
+                    <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
+                    <img src="/Listar/GetImage/@Model.Imagenes.FirstOrDefault().ProdImagenId" onclick="mostrarGal();" alt="..." id="produnImagen">
+                </div>
+            </div>
+        </div>
+        <div class="produn-col1">
+            <h6> @Html.DisplayFor(model => model.Marca)</h6>
+            <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
+
+            <h4>$ @Html.DisplayFor(model => model.Precio)</h4>
+
+            <div>
+                <button class="btn btn-primary" style="width:100%;" onclick="AgregarCarr(this, @Model.ProductoId)">
+                    Agregar
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="container-produn">
+        <div class="produn-col1">
+            <h4>Descripcion </h4>
+            <hr />
+            <p>
+                @Model.Detalle
+>>>>>>> carro
             </p>
         </div>
         <div class="produn-col1">
@@ -85,6 +142,7 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <hr />
 <style>
     .mens-ini {
@@ -192,6 +250,28 @@
         setTimeout(function() { div.remove(); }, 1100);
         
     }
+=======
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <span>Agregado al carro de compras</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <a href="/Carro" class="btn btn-primary">Ir al carro</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<script>
+
+>>>>>>> carro
 
 </script>
 

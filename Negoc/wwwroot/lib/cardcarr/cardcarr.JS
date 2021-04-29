@@ -8,10 +8,14 @@ var cssTransB;
 
 window.addEventListener("load", function (event) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     cardInit();    
 =======
     //cardInit();    
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+    //cardInit();    
+>>>>>>> carro
 }, false);
 
 window.addEventListener("resize", function (event) {

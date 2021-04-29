@@ -16,33 +16,29 @@
     flex: 0 0 auto;    
     background-color: white;    
 }
-.contprinc-control-ant{
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-    text-shadow: silver 2px 2px 2px;            
-    font-size: x-large ;
-     
-    position: absolute;            
-    width: 30px;                   
-    z-index: 1000;
-    color: black;
-    opacity: .7;
-    cursor:pointer;
-}
-.contprinc-control-sig {
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-    text-shadow: silver 2px 2px 2px;
-    font-size: x-large;
+.contprinc-control-ant {
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    text-shadow: gray 6px 0px 4px;
+    font-size: xx-large;
     width: 30px;
     z-index: 1000;
     color: black;
-    opacity: .7;
     cursor: pointer;
-
+}
+.contprinc-control-sig {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    text-shadow: gray -6px 0px 4px;
+    font-size: xx-large;
+    width: 30px;
+    z-index: 1000;
+    color: black;
     right: 0;
     text-align: right;
+    cursor: pointer;
 }

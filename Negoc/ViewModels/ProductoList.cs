@@ -19,10 +19,15 @@ namespace Negoc.ViewModels
         public string Marca { get; set; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         public string Genero { get; set; }
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+        public string Genero { get; set; }
+
+>>>>>>> carro
         public byte GeneroId { get; set; }
 
         public double Precio { get; set; }
@@ -31,9 +36,12 @@ namespace Negoc.ViewModels
 
         public double PrecioLista { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         
         //public string[] Imagenes { get; set; }
 =======
+=======
+>>>>>>> carro
 
         public string Descripcion { get; set; }
 
@@ -44,7 +52,10 @@ namespace Negoc.ViewModels
         public bool EnvioGratis { get; set; }
                 
         public IEnumerable<ProdImagenList> Imagenes { get; set; }
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
 
     }
 }

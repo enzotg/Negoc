@@ -17,10 +17,15 @@ namespace Negoc.Services
     {
         NegocioContext _context;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         static double Monto_Envio_Gratis = 5000;
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+        static double Monto_Envio_Gratis = 5000;
+
+>>>>>>> carro
 
         public ProductoServicio(NegocioContext Context)
         {
@@ -30,11 +35,17 @@ namespace Negoc.Services
         public void Agregar(Producto producto, Microsoft.AspNetCore.Http.IFormFileCollection files, string WebRootPath)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
             producto.Descripcion = CalcDescr(producto);
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+
+            producto.Descripcion = CalcDescr(producto);
+
+>>>>>>> carro
             _context.Producto.Add(producto);
             _context.SaveChanges();
             long productoId = producto.ProductoId;
@@ -50,12 +61,17 @@ namespace Negoc.Services
                 {
                     var folder = Path.Combine(WebRootPath, "images\\producto");
 <<<<<<< HEAD
+<<<<<<< HEAD
                     var fileName = Path.Combine(folder,
                         Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName));
 =======
                     //var fileName = Path.Combine(folder, Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName));
                     var fileName = Path.Combine(folder, (file.FileName));
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                    //var fileName = Path.Combine(folder, Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName));
+                    var fileName = Path.Combine(folder, (file.FileName));
+>>>>>>> carro
 
                     using (var stream = System.IO.File.Create(fileName))
                     {
@@ -81,6 +97,7 @@ namespace Negoc.Services
             {
                 p.CategoriaId = producto.CategoriaId;
                 p.ColorId = producto.ColorId;
+                p.DeporteId = producto.DeporteId;
                 p.GeneroId = producto.GeneroId;
                 p.MarcaId = producto.MarcaId;
                 p.Nombre = producto.Nombre;
@@ -89,6 +106,7 @@ namespace Negoc.Services
                 p.PrecioStr = producto.PrecioStr;
                 p.TalleId = producto.TalleId;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 _context.SaveChanges();
             }
         }
@@ -96,6 +114,12 @@ namespace Negoc.Services
                 p.Descripcion = CalcDescr(producto);
                 p.DescuentoPorc = producto.DescuentoPorc;
                 p.Detalle = producto.Detalle;
+=======
+                p.Descripcion = CalcDescr(producto);
+                p.DescuentoPorc = producto.DescuentoPorc;
+                p.Detalle = producto.Detalle;
+
+>>>>>>> carro
                 _context.SaveChanges();
             }
         }
@@ -119,18 +143,23 @@ namespace Negoc.Services
                 sgen;
 
         }
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
 
         public List<Categoria> GetCategorias(long CategoriaId)
         {
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());            
             return arbol.GetTodosChilds(CategoriaId);
         }
+
         public List<Categoria> GetCategorias(long CategoriaId, long NivelId)
         {
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
             return arbol.GetTodosChilds(CategoriaId).Where(x=>x.NivelId <= NivelId).ToList();
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         /*public async Task<List<Categoria>> GetCategoriasAsync(long CategoriaId, long NivelId)
         {
@@ -142,6 +171,11 @@ namespace Negoc.Services
         public List<Categoria> GetParents(long ProductoId)
         {
             ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
+=======
+        public List<Categoria> GetParents(long ProductoId)
+        {
+            ArbolCategoria arbol = new ArbolCategoria(_context.Categoria.ToList());
+>>>>>>> carro
             long cat = _context.Producto.FirstOrDefault(x => x.ProductoId == ProductoId).CategoriaId;
 
             var res = arbol.GetTodosParents(cat);
@@ -149,7 +183,10 @@ namespace Negoc.Services
 
             return res;
         }
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
         public Producto GetProducto(long ProductoId)
         {
             return _context.Producto
@@ -172,9 +209,13 @@ namespace Negoc.Services
                 .Include(x=>x.Categoria)
                 .Include(x=> x.Marca)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 .Include(x => x.Genero)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                .Include(x => x.Genero)
+>>>>>>> carro
                 .Where(x => x.CategoriaId == CategoriaId));
 
             foreach (var c in arbol.GetTodosChilds(CategoriaId))
@@ -182,9 +223,13 @@ namespace Negoc.Services
                     .Include(x => x.Categoria)
                     .Include(x => x.Marca)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     .Include(x => x.Genero)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                    .Include(x => x.Genero)
+>>>>>>> carro
                     .Where(x => x.CategoriaId == c.CategoriaId));
 
             return res
@@ -202,9 +247,13 @@ namespace Negoc.Services
                 .Include(x => x.Categoria)
                 .Include(x => x.Marca)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 .Include(x => x.Genero)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                .Include(x => x.Genero)
+>>>>>>> carro
                 .Where(x => x.CategoriaId == CategoriaId && x.GeneroId == GeneroId));
 
             foreach (var c in arbol.GetTodosChilds(CategoriaId))
@@ -212,9 +261,13 @@ namespace Negoc.Services
                     .Include(x => x.Categoria)
                     .Include(x => x.Marca)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                     .Include(x => x.Genero)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                    .Include(x => x.Genero)
+>>>>>>> carro
                     .Where(x => x.CategoriaId == c.CategoriaId));
 
             return res
@@ -222,22 +275,37 @@ namespace Negoc.Services
                 .ToList();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public List<ProductoList> GetProductos(long categoriaId, byte generoId, int pageNumber, int pageSize, int TipoOrden)
 =======
         private IQueryable<Producto> ArmarQry(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+        private IQueryable<Producto> ArmarQry(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+>>>>>>> carro
         {
             var entidad = _context.Producto;
             var item = Expression.Parameter(typeof(Producto), "item");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             Expression exprWhere=null;
+=======
+            Expression exprWhere = null;
+>>>>>>> carro
             if (categoriaId != 0)
             {
                 exprWhere = Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId));
+
+                foreach (var cat in this.GetCategorias(categoriaId))
+                {
+                    exprWhere = Expression.Or(exprWhere,
+                        Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(Convert.ToInt64(cat.CategoriaId))));
+                }
             }
             if (generoId != 0)
             {
+<<<<<<< HEAD
                 if(exprWhere==null)
 =======
             Expression exprWhere = null;
@@ -255,28 +323,80 @@ namespace Negoc.Services
             {
                 if (exprWhere == null)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                if (exprWhere == null)
+>>>>>>> carro
                     exprWhere = Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId));
                 else
                     exprWhere = Expression.And(exprWhere,
                         Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId)));
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            if (MarcaId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "MarcaId"), Expression.Constant(MarcaId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "MarcaId"), Expression.Constant(MarcaId)));
+            }
+            if (ColorId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "ColorId"), Expression.Constant(ColorId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "ColorId"), Expression.Constant(ColorId)));
+            }
+            if (DeporteId != 0)
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Equal(Expression.Property(item, "DeporteId"), Expression.Constant(DeporteId));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Equal(Expression.Property(item, "DeporteId"), Expression.Constant(DeporteId)));
+            }
+            if (PrecioD != 0 && PrecioH != 0)
+            {
+                if (exprWhere == null)
+                {
+                    exprWhere = Expression.AndAlso(
+                        Expression.GreaterThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioD)),
+                        Expression.LessThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioH)));
+                }
+                    
+                else
+                    exprWhere = Expression.And(exprWhere, Expression.AndAlso(
+                        Expression.GreaterThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioD)),
+                        Expression.LessThanOrEqual(Expression.Property(item, "Precio"), Expression.Constant(PrecioH))));
+            }
+            if(Descripcion != ""&&Descripcion!=null&&Descripcion!="null")
+            {
+                if (exprWhere == null)
+                    exprWhere = Expression.Call(Expression.Property(item, "Descripcion"), typeof(string).GetMethod("Contains", new[] { typeof(string) }),Expression.Constant(Descripcion));
+                else
+                    exprWhere = Expression.And(exprWhere,
+                        Expression.Call(Expression.Property(item, "Descripcion"), typeof(string).GetMethod("Contains", new[] { typeof(string) }), Expression.Constant(Descripcion)));
+            }
+>>>>>>> carro
 
-
-            /*Expression wh = Expression.AndAlso(
-                Expression.Equal(Expression.Property(item, "CategoriaId"), Expression.Constant(categoriaId)),
-                Expression.Equal(Expression.Property(item, "GeneroId"), Expression.Constant(generoId)));
-                */            
+            //--------
+            if (exprWhere == null)
+                exprWhere = Expression.GreaterThan(Expression.Property(item, "ProductoId"), Expression.Constant(Convert.ToInt64(0)));
 
             var param = Expression.Parameter(typeof(Producto), "producto");
-            
             var lambda = Expression.Lambda<Func<Producto, bool>>(exprWhere, item);
-
             var result = entidad
                     .Include(x => x.Categoria)
-                    .Include(x => x.Marca)                    
+                    .Include(x => x.Marca)    
+                    .Include(x => x.Color)
+                    .Include(x => x.Genero)
+                    .Include(x=>x.Deporte)
                     .Where(lambda);
 
+<<<<<<< HEAD
             if (TipoOrden == 1 )
 =======
             if (MarcaId != 0)
@@ -333,6 +453,9 @@ namespace Negoc.Services
 
             if (TipoOrden == 1)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+            if (TipoOrden == 1)
+>>>>>>> carro
             {
                 Expression<Func<Producto, Double>> or = Expression.Lambda<Func<Producto, Double>>(Expression.Property(param, "Precio"), param);
                 result = result.OrderBy(or);
@@ -353,6 +476,7 @@ namespace Negoc.Services
                 result = result.OrderByDescending(or);
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (pageNumber==0 || pageSize==0)
                 return new List<ProductoList>();
 
@@ -371,10 +495,25 @@ namespace Negoc.Services
             var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
             
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+
+            return result;
+
+        }
+        public List<ProductoList> GetProductos(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        {
+
+            if (pageNumber==0 || pageSize==0)
+                return new List<ProductoList>();
+
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            
+>>>>>>> carro
             result = result
                 .Skip((pageNumber-1) * pageSize)
                 .Take(pageSize);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             var res = 
                 result
@@ -386,6 +525,12 @@ namespace Negoc.Services
                 .ToList();
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+            var res = result
+                 .Select(x => ToProdList(x))                 
+                .ToList();
+
+>>>>>>> carro
             if (res == null)
                 return new List<ProductoList>();
             else
@@ -393,18 +538,30 @@ namespace Negoc.Services
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         public long GetProductosCantPag(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
         {            
             var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+=======
+        public long GetProductosCantPag(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int pageNumber, int pageSize, int TipoOrden)
+        {            
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+>>>>>>> carro
             var res = Math.Ceiling( Convert.ToDouble(result.ToList().Count()) / Convert.ToDouble(pageSize) );
                 
             return (long)res;
         }
 
+<<<<<<< HEAD
         public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+=======
+        public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+>>>>>>> carro
             var r = result                
                 .GroupBy(x => x.MarcaId)
                 .Select(y => new Marca
@@ -417,9 +574,15 @@ namespace Negoc.Services
             return r;
         }
  
+<<<<<<< HEAD
         public List<Color> GetColores(long categoriaId, byte generoId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
+=======
+        public List<Color> GetColores(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+>>>>>>> carro
             var r = result                
                 .GroupBy(x => x.ColorId)
                 .Select(y => new Color
@@ -431,36 +594,67 @@ namespace Negoc.Services
 
             return r;
         }
+<<<<<<< HEAD
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+        public List<Deporte> GetDeportes(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var r = result
+                .GroupBy(x => x.DeporteId)
+                .Select(y => new Deporte
+                {
+                    DeporteId = y.Key,
+                    Nombre = y.Min(x => x.Deporte.Nombre)
+                })
+                .ToList();
+
+            return r;
+        }
+
+>>>>>>> carro
         public List<Producto> GetProductos(int Cant = 20)
         {
             return _context.Producto.Take(Cant).ToList();
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> carro
         public List<Marca> GetMarcas()
         {
             return _context.Marca.ToList();
         }
 
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
         public List<ProductoList> GetProductosList(int Cant = 20)
         {
             return _context.Producto
                 .Include(x => x.Categoria)
                 .Include(x => x.Marca)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                 .Include(x=>x.Genero)
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+                .Include(x=>x.Genero)
+>>>>>>> carro
                 .Take(Cant)
                 .Select(x=> ToProdList(x))
                 .ToList();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> carro
         public IEnumerable<ProductoList> GetProductosEnOferta(long OfertaId)
         {
             var res = _context
@@ -490,7 +684,10 @@ namespace Negoc.Services
                 .Select(x => ToProdList(x))
                 .FirstOrDefault();
         }
+<<<<<<< HEAD
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+>>>>>>> carro
         public static ProductoList ToProdList(Producto producto)
         {
             var res = new ProductoList();
@@ -502,6 +699,7 @@ namespace Negoc.Services
             res.Precio = producto.Precio;
             res.PrecioStr =  producto.Precio.ToString("C2", CultureInfo.CurrentCulture);
             res.PrecioLista = producto.PrecioLista;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             return res;
@@ -536,6 +734,25 @@ namespace Negoc.Services
             
             return res;            
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+            res.Descripcion = producto.Descripcion;
+            res.Detalle = producto.Detalle;
+            res.Genero = producto.Genero.Nombre;
+            res.DescuentoPorc = producto.DescuentoPorc;           
+            res.EnvioGratis = producto.Precio >= Monto_Envio_Gratis;
+            if(producto.Imagenes != null)
+                res.Imagenes = producto.Imagenes.Select(
+                    x => new ProdImagenList
+                    {
+                        ImageMimeType = x.ImageMimeType,
+                        Nombre = x.Nombre,
+                        ProdImagenId = x.ProdImagenId,
+                        ProductoId = x.ProductoId
+                    }
+                    );
+            
+            return res;            
+>>>>>>> carro
         }
         //------------        
 

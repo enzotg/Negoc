@@ -1,13 +1,13 @@
 ﻿
-
 @section Scripts    {
     <script src="~/lib/cardcarr/cardcarr.JS"></script>
+    <script src="~/js/homeindex.js"></script>
 }
 @{
     ViewData["Title"] = "Index";
 }
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner" style=" width:100%; max-height: 400px !important;border:2px solid black">
+<div id="carouselBootA" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" >
         <div class="carousel-item active">
             <img src="~/images/b1.jpg" class="d-block w-100" alt="...">
         </div>
@@ -16,17 +16,18 @@
         </div>
     </div>
 
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#carouselBootA" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#carouselBootA" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 </div>
 
 <hr />
+<<<<<<< HEAD
 
 <div class="container-fluid">
     <div class="row">
@@ -125,31 +126,93 @@
                             </div>
                         </div>
                         <!--.row-->
+=======
+<!--carousel 4 de a 1-->
+<div>
+    <div id="carouselcuatrId" class="carousel slide" data-ride="carousel">
+        <a class="carousel-control-prev" href="#carouselcuatrId" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true">❮</span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselcuatrId" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true">❯</span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="carouselcuatr-fila">
+                    <div>
+                        <a href="/Listar/GetProductos?DeporteId=1&PagNumero=1&PagCantidad=10&TipoOrden=1">
+                            <img src="./images/deporte-menu-futbol.png" />
+                        </a>
                     </div>
-                    <!--.item-->
+                    <div>
+                        <a href="/Listar/GetProductos?DeporteId=2&PagNumero=1&PagCantidad=10&TipoOrden=1">
+                            <img src="./images/deporte-menu-basquet.png" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/Listar/GetProductos?DeporteId=1&PagNumero=1&PagCantidad=10&TipoOrden=1">
+                            <img src="./images/deporte-menu-rugby.png" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/Listar/GetProductos?DeporteId=1&PagNumero=1&PagCantidad=10&TipoOrden=1">
+                            <img src="./images/deporte-menu-ciclismo.png" />
+                        </a>
+>>>>>>> carro
+                    </div>
                 </div>
-                <!--.carousel-inner-->
+                <!--.row-->
             </div>
-            <!--.Carousel-->
+            <!--.item-->
+            <div class="carousel-item">
+                <div class="carouselcuatr-fila">
+                    <div>
+                        <a href="#">
+                            <img src="./images/deporte-menu-running.png" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="./images/deporte-menu-tenis.png" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="./images/deporte-menu-training.png" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img src="./images/deporte-menu-voley.png" />
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!--.item-->
         </div>
+        <!--.carousel-inner-->
     </div>
 </div>
-
 <hr />
-<div class="alert alert-primary text-center" >
-    <span   >Productos</span>
-    
+<div class="alert alert-primary text-center">
+    <span>Productos</span>
+
 </div>
 <hr />
 <div id="contprinc" class="contprinc">
     <span class="contprinc-control-ant" id="contprinc-Ant">
-        <span>⏪</span>
+        <span>&#10094;</span>
     </span>
     <span class="contprinc-control-sig" id="contprinc-Sig">
-        <span>⏩</span>
+        <span>&#10095;</span>
     </span>
 
     <div id="contcards" class="contcards">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <div class="contcards-item">
             <div class="item producto"><img class="producto-imagen" src="/Listar/GetImage?Id=1"><span class="producto-oferta">Oferta</span><span class="producto-precio">$ 1.399</span><span class="producto-off">20%</span><br><span class="producto-off">Envio gratis</span><br><span class="producto-descr">El Lamborghini Aventador es un automóvil superdeportivo </span></div>
@@ -172,31 +235,39 @@
 =======
 
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+
+>>>>>>> carro
 
     </div>
 </div>
+
+<hr />
+
+
 
 <hr />
 <div class="contcards">
     <span class="alert alert-primary">
         Pagá con tarjeta o en efectivo
 
-        Con Mercado Pago, tenés cuotas sin interés con tarjeta o efectivo en puntos de pago. ¡Y siempre es seguro!
+        Tenés cuotas sin interés con tarjeta o efectivo en puntos de pago. ¡Y siempre es seguro!
     </span>
     <span class="alert alert-info">
         Envío gratis desde $ 2.500
 
-        Solo por estar registrado en Mercado Libre tenés envíos gratis en miles de productos. Es un beneficio de Mercado Puntos.
+        Solo por estar registrado tenés envíos gratis en miles de productos.
     </span>
     <span class="alert alert-secondary">
         Seguridad, de principio a fin
 
-        ¿No te gusta? ¡Devolvelo! En Mercado Libre, no hay nada que no puedas hacer, porque estás siempre protegido.
+        ¿No te gusta? ¡Devolvelo!
     </span>
 
 </div>
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <script>
@@ -277,3 +348,9 @@
 
 </script>
 >>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
+=======
+<script>
+
+
+</script>
+>>>>>>> carro
