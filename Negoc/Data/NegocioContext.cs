@@ -20,21 +20,10 @@ namespace Negoc.Data
         public DbSet<ProdImagen> ProdImagen { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Marca> Marca { get; set; }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        
-=======
-=======
->>>>>>> carro
         public DbSet<Color> Color { get; set; }
         public DbSet<Genero> Genero { get; set; }
         public DbSet<Deporte> Deporte { get; set; }
         public DbSet<Oferta> Oferta { get; set; }
         public DbSet<OfertaProducto> OfertaProducto { get; set; }
-<<<<<<< HEAD
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
->>>>>>> carro
     }
 }

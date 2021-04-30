@@ -24,27 +24,6 @@ namespace Negoc.Contollers
         {
             return View();
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public IActionResult GetProductos(long CategoriaId, byte GeneroId, int PageNumber,int PageSize,int TipoOrden)
-        {
-            var res = servicioProd.GetProductos(CategoriaId, GeneroId, PageNumber, PageSize,TipoOrden);
-
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
-=======
-        public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
-        {
-            var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId,  ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
-            return View("Index", res);
-            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
-        }
-        public IActionResult GetProductosCantPag(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
-        {
-            var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
-            return Json( res);
-            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
         public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int PagNumero=1, int PagCantidad=10, int TipoOrden=1)
         {
             var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
@@ -56,7 +35,6 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
             return Json( res);
             //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
->>>>>>> carro
         }
 
         public IActionResult GetProductosCat(long CategoriaId)
@@ -69,42 +47,16 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductos(CategoriaId, GeneroId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> carro
         public IActionResult GetCategoriasParents(long ProductoId)
         {
             var res = servicioProd.GetParents(ProductoId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-<<<<<<< HEAD
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
->>>>>>> carro
         public IActionResult GetCategorias(long CategoriaId, long NivelId)
         {
             var res = servicioProd.GetCategorias(CategoriaId , NivelId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-
-
-=======
-        public IActionResult GetMarcas(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
-        {
-            var res = servicioProd.GetMarcas(CategoriaId, GeneroId,MarcaId, ColorId,PrecioD, PrecioH, Descripcion, TipoOrden);
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
-        }
-        public IActionResult GetColores(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
-        {
-            var res = servicioProd.GetColores(CategoriaId, GeneroId, MarcaId, ColorId, PrecioD, PrecioH, Descripcion, TipoOrden);
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
-        }
-=======
         public IActionResult GetMarcas(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
             var res = servicioProd.GetMarcas(CategoriaId, GeneroId,MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
@@ -121,7 +73,6 @@ namespace Negoc.Contollers
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
 
->>>>>>> carro
         public IActionResult GetProductoList(long ProductoId)
         {
             var res = servicioProd.GetProductoList(ProductoId);
@@ -132,50 +83,11 @@ namespace Negoc.Contollers
             var res = servicioProd.GetProductosEnOferta(OfertaId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-<<<<<<< HEAD
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
->>>>>>> carro
         //----------------
         public IActionResult GetImagePr(long id)
         {
             
             string ImageMimeType = "image/jpeg";
-<<<<<<< HEAD
-<<<<<<< HEAD
-            var requested = servicioProd.GetProducto(id);                
-=======
-            var requested = servicioProd.GetProducto(id);
-            if (requested.Imagenes.FirstOrDefault() != null)
->>>>>>> carro
-
-                if (requested != null && requested.Imagenes.FirstOrDefault() != null)
-                {
-                    string fullPath = requested.Imagenes.FirstOrDefault().Nombre;
-                    if (System.IO.File.Exists(fullPath))
-                    {
-                        FileStream fileOnDisk = new FileStream(fullPath, FileMode.Open);
-                        byte[] fileBytes;
-                        using (BinaryReader br = new BinaryReader(fileOnDisk))
-                        {
-                            fileBytes = br.ReadBytes((int)fileOnDisk.Length);
-                        }
-                        return File(fileBytes, ImageMimeType);
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
-                }
-                else
-                {
-                    return NotFound();
-                }
-            else
-                return NotFound();
-<<<<<<< HEAD
-            }            
-=======
             var requested = servicioProd.GetProducto(id);
             if (requested.Imagenes.FirstOrDefault() != null)
 
@@ -204,10 +116,6 @@ namespace Negoc.Contollers
             else
                 return NotFound();
 
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-
->>>>>>> carro
         }
         public IActionResult GetImage(long id)
         {

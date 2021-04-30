@@ -24,7 +24,7 @@ function getOfertas() {
 function AgregarOfertas(data) {
 
     let arr = JSON.parse(data);
-    let cont = document.getElementById("contcards");
+    let cont = document.getElementById("carouselb-inner");
 
     arr.forEach(function (value, index, array) {
         let contcard = ArmarProductoItem(value);
@@ -35,7 +35,9 @@ function AgregarOfertas(data) {
 function ArmarProductoItem(elem) {
 
     let contcard = document.createElement("div");
-    contcard.classList = "contcards-item";
+    //contcard.classList = "contcards-item";
+    contcard.classList = "carouselb-item";
+    contcard.setAttribute("data-id", elem.ProductoId);
 
     let item = document.createElement("div");
     item.classList = "producto-item";

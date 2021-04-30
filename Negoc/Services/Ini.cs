@@ -1,12 +1,5 @@
 ﻿using Negoc.Data;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 using Negoc.Models;
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-using Negoc.Models;
->>>>>>> carro
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +17,6 @@ namespace Negoc.Services
         }
         public void Datos()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            _context.Marca.Add(new Models.Marca { Nombre = "Adid" });
-            _context.Marca.Add(new Models.Marca { Nombre = "Nik" });
-            _context.Marca.Add(new Models.Marca { Nombre = "Pum" });
-            _context.Marca.Add(new Models.Marca { Nombre = "UA" });
-
-            _context.Categoria.Add(new Models.Categoria { CategoriaId = 1,Nombre = "Indumentaria", NivelId = 0, ParentId = 0 });
-            _context.Categoria.Add(new Models.Categoria { CategoriaId = 2, Nombre = "Calzado", NivelId = 0, ParentId = 0 });
-            _context.Categoria.Add(new Models.Categoria { CategoriaId = 3, Nombre = "Accesorios", NivelId = 0, ParentId = 0 });
-            _context.Categoria.Add(new Models.Categoria { CategoriaId = 11, Nombre = "Remeras", NivelId = 1, ParentId = 1 });
-            _context.Categoria.Add(new Models.Categoria { CategoriaId = 12, Nombre = "Zapatillas", NivelId = 1, ParentId = 2 });
-=======
-=======
->>>>>>> carro
             _context.Marca.Add(new Models.Marca { MarcaId = 1, Nombre = "Adidas" });
             _context.Marca.Add(new Models.Marca { MarcaId = 2, Nombre = "Nike" });
             _context.Marca.Add(new Models.Marca { MarcaId = 3, Nombre = "Puma" });
@@ -69,10 +47,6 @@ namespace Negoc.Services
 
             _context.Add(new Producto { ProductoId = 1, Nombre = "Manchester City 20/21", CategoriaId = 11, MarcaId = 3, GeneroId = 1, ColorId = 1, TalleId = 1, Descripcion = "", Precio = 5999, PrecioLista = 5999, PrecioStr = "5999", DescuentoPorc = 0, Detalle = "" });
 
-<<<<<<< HEAD
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
->>>>>>> carro
 
 
 

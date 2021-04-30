@@ -7,14 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 using Microsoft.AspNetCore.Mvc.Rendering;
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-using Microsoft.AspNetCore.Mvc.Rendering;
->>>>>>> carro
 using Negoc.Data;
 using Negoc.Models;
 using Negoc.Services;
@@ -52,14 +45,7 @@ namespace Negoc.Controllers
         // GET: Producto/Create
         public ActionResult Create()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             CargarLists();
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-            CargarLists();
->>>>>>> carro
             return View();
         }
 
@@ -68,14 +54,7 @@ namespace Negoc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Producto producto)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             CargarLists();
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-            CargarLists();
->>>>>>> carro
             try
             {                
                 servicioProd.Agregar(producto, Request.Form.Files, _appEnvironment.WebRootPath);
@@ -104,16 +83,8 @@ namespace Negoc.Controllers
         // GET: Producto/Edit/5
         public ActionResult Edit(int id)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             CargarLists();
             //servicioProd.GetCategorias(0).Select(x => new sele)
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-            CargarLists();
-            //servicioProd.GetCategorias(0).Select(x => new sele)
->>>>>>> carro
             return View(servicioProd.GetProducto(id));
         }
 
@@ -129,17 +100,8 @@ namespace Negoc.Controllers
                 servicioProd.Modificar(producto);
                 servicioProd.AgregarImg(producto.ProductoId, Request.Form.Files, _appEnvironment.WebRootPath);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                return View(servicioProd.GetProducto(producto.ProductoId));
-=======
                 //return View(servicioProd.GetProducto(producto.ProductoId));
                 return RedirectToAction("Index","Producto");
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-                //return View(servicioProd.GetProducto(producto.ProductoId));
-                return RedirectToAction("Index","Producto");
->>>>>>> carro
             }
             catch
             {
@@ -169,11 +131,6 @@ namespace Negoc.Controllers
                 return View();
             }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> carro
 
         private void CargarLists()
         {
@@ -224,9 +181,5 @@ namespace Negoc.Controllers
             ViewBag.dep = lDep;
 
         }
-<<<<<<< HEAD
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
->>>>>>> carro
     }
 }

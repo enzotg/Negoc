@@ -3,15 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-<<<<<<< HEAD
-<<<<<<< HEAD
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negoc", "Negoc\Negoc.csproj", "{AB1AA6B0-A559-4D99-A188-8B358D38AF2C}"
-=======
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Negoc", "Negoc\Negoc.csproj", "{AB1AA6B0-A559-4D99-A188-8B358D38AF2C}"
->>>>>>> 732283587911371be4fc8312a3aa766a48e3ce57
-=======
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Negoc", "Negoc\Negoc.csproj", "{AB1AA6B0-A559-4D99-A188-8B358D38AF2C}"
->>>>>>> carro
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

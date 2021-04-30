@@ -1,64 +1,12 @@
 ﻿@model Negoc.ViewModels.ProductoList
 @section Scripts    {
     <script src="~/lib/productoun/productoun.js"></script>
-<<<<<<< HEAD
-=======
     <script src="~/js/listarproducto.js"></script>
->>>>>>> carro
 }
 @{
     ViewData["Title"] = "Producto";
 }
 
-<<<<<<< HEAD
-<div style="background-color: whitesmoke;padding:8px;">
-
-    <div id="CategoriasP">        
-                    
-    </div>
-        <div class="container-produn">
-            <div class="produn-col1">
-                <div class="produn-princ">
-                    <div class="thumb">
-                        <ul class="thumb-ul">
-                            @foreach (var item in Model.Imagenes)
-                            {
-                                <li>
-                                    <div class="thumb-img-cont">
-                                        <img class="thumb-img" src="/Listar/GetImage/@item.ProdImagenId" onclick="VerImgPrinc(this);" alt="@item.Nombre">
-                                    </div>
-                                </li>
-
-                            }
-                        </ul>
-                    </div>
-                    <div class="produn-princ-img">
-                        <a class="previmg" onclick="moverImg(-1)">&#10094;</a>
-                        <a class="nextimg" onclick="moverImg(1)">&#10095;</a>
-                        <img src="/Listar/GetImage/@Model.Imagenes.FirstOrDefault().ProdImagenId" onclick="mostrarGal();" alt="..." id="produnImagen">
-                    </div>
-                </div>
-            </div>
-            <div class="produn-col1">
-                <h6> @Html.DisplayFor(model => model.Marca)</h6>
-                <h1>@Html.DisplayFor(model => model.Descripcion)</h1>
-
-                <h4 style="line-height:4rem;">$ @Html.DisplayFor(model => model.Precio)</h4>
-                <div>
-                    <button class="btn btn-primary" style="width:100%;" onclick="AgregarCarr(this, @Model.ProductoId)">
-                        Agregar
-                    </button>
-                </div>
-
-            </div>
-        </div>
-        <div class="container-produn">
-            <div class="produn-col1">
-                <h4 style="line-height:2rem;">Descripcion </h4>
-                <p>
-                    @Model.Detalle
-
-=======
 <input id="productoId" type="text" value="@Model.ProductoId" style="display:none" />
 
 <div class="produn-marco">
@@ -109,7 +57,6 @@
             <hr />
             <p>
                 @Model.Detalle
->>>>>>> carro
             </p>
         </div>
         <div class="produn-col1">
@@ -142,115 +89,6 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<hr />
-<style>
-    .mens-ini {
-        position: absolute;        
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white;
-        padding: 2rem;
-        opacity:0;
-    }
-    .mens-centro {
-        padding: 2rem;
-        border: silver 2px solid;
-        border-radius: 4px;
-        position: absolute;
-        width: 90%;
-        left: 50%;
-        transform: translateX( -50%);
-        background-color: deepskyblue;
-        transition: opacity .7s;
-        transition: background-color .7s;
-        text-align: center;
-    }
-    .mens-desap {
-        opacity: 0;
-        transition: opacity .7s;
-        
-    }
- 
-</style>
-<script>
-    
-    window.onload = function () {
-
-        GetCategoriasP();
-    }
-
-    function GetCategoriasP() {
-        $.ajax({
-            url: '/Listar/GetCategoriasParents?ProductoId=@Model.ProductoId',
-            type: 'Get',
-            dataType: 'json'
-        }).then(function (data) {
-            let arr = JSON.parse(data);
-            let cont = document.getElementById("CategoriasP");
-
-            arr.forEach(function (elem, index, array) {
-
-                let op = document.createElement("a");
-                op.href = "/Listar/GetProductos?CategoriaId=" + elem.CategoriaId + "&GeneroId=0&MarcaId=0&ColorId=0&PrecioD=0&PrecioH=0&Descripcion=&PagNumero=1&PagCantidad=10&TipoOrden=1";            
-                op.className = "";
-                op.innerText = elem.Nombre;                
-                cont.appendChild(op);
-
-                if (index != (array.length-1)) {
-                    let span = document.createElement("span");
-                    span.innerText = " \\ ";
-                    cont.appendChild(span);
-                }
-
-            });
-
-        });
-    }
-
-    function CarroItem(itemId, prodId, NombreProd, cant, precio, total) {
-
-        this.CarroItemId = itemId;
-        this.ProductoId = prodId;
-        this.NombreProd = NombreProd;
-        this.Cantidad = cant;        
-        this.Precio = precio;
-        this.Total = total;
-    }
-    
-    function AgregarCarr(e, ProductoId) {
-
-        var key = "Carro";
-        var carro = [];
-        if (localStorage.getItem(key))
-            carro = JSON.parse(localStorage.getItem(key));
-
-        var index = carro.findIndex(v => v.ProductoId == ProductoId);
-        if (index >= 0)
-            carro[index].Cantidad += 1;
-        else {
-
-            var item = new CarroItem(1, ProductoId, '', 1, 0, 0);
-            carro.push(item);
-        }
-        localStorage.setItem(key, JSON.stringify(carro));
-
-
-        var div = document.createElement("div");
-        div.innerText = "Agregado al carro";        
-        
-        e.parentElement.appendChild(div);
-        div.className = "mens-ini";
-        
-        var t = document.getElementsByClassName("mens-centro");
-        for (var i = 0; i < t.length; t[i++].remove());
-                
-        setTimeout(function() { div.className = "mens-centro"; }, 10);
-        setTimeout(function() { div.className = "mens-centro mens-desap"; }, 800);
-        setTimeout(function() { div.remove(); }, 1100);
-        
-    }
-=======
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -271,7 +109,6 @@
 
 <script>
 
->>>>>>> carro
 
 </script>
 

@@ -108,15 +108,6 @@
     background-color: transparent;
 }
 /**************/
-<<<<<<< HEAD
-    .container-produn{
-        background-color: white;
-        display: flex;
-        flex-wrap: wrap;
-        min-height: 320px;            
-        border-radius: 8px;
-    }
-=======
 .produn-marco {
     background-color: whitesmoke;
     padding: 8px;
@@ -128,7 +119,6 @@
     min-height: 320px;            
     border-radius: 8px;
 }
->>>>>>> carro
 .produn-col1 {
     flex-grow: 1;
     flex-shrink: 1;
