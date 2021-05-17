@@ -11,7 +11,6 @@
 <div class="container">    
     <form asp-action="Create" class="submit-form" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
         <div class="row">
             <div class="col-sm-4 col-md-2">
                 <label asp-for="ProductoId" class="control-label"></label>
@@ -45,7 +44,6 @@
             </div>
             <div class="col-sm-8 col-md-8">
                 @Html.DropDownListFor(x => x.MarcaId, (IEnumerable<SelectListItem>)ViewBag.mar, htmlAttributes: new { @class = "form-control" })
-
                 <span asp-validation-for="MarcaId" class="text-danger"></span>
             </div>
         </div>
@@ -54,7 +52,6 @@
                 <label asp-for="GeneroId" class="control-label"></label>
             </div>
             <div class="col-sm-4 col-md-2">
-
                 @Html.DropDownListFor(x => x.GeneroId, (IEnumerable<SelectListItem>)ViewBag.gen, htmlAttributes: new { @class = "form-control" })
                 <span asp-validation-for="GeneroId" class="text-danger"></span>
             </div>
@@ -77,7 +74,15 @@
                 <span asp-validation-for="TalleId" class="text-danger"></span>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-sm-4 col-md-2">
+                <label asp-for="DeporteId" class="control-label"></label>
+            </div>
+            <div class="col-sm-4 col-md-2">
+                @Html.DropDownListFor(x => x.DeporteId, (IEnumerable<SelectListItem>)ViewBag.dep, htmlAttributes: new { @class = "form-control" })
+                <span asp-validation-for="DeporteId" class="text-danger"></span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-4 col-md-2">
                 <label asp-for="Precio" class="control-label"></label>
@@ -136,7 +141,6 @@
         <div class="row">
             <div class="col-sm-4 col-md-2">
             </div>
-
             <div class="col-sm-4 col-md-2">
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />

@@ -2,34 +2,74 @@
 
 function window_onload() {
 
-    getOfertas()
-        .then(function () { cardInit(); });
+    getOfertas();
 
 }
 function getOfertas() {
 
-    const promise = new Promise(function (resolve, reject) {
+    $.ajax({
+        url: "/Listar/GetProductosEnOferta?OfertaId=1",
+        type: 'get',
+        dataType: 'json'
+    }).then(function (data) {
+        AgregarOfertas(
+            document.querySelector("#contcarouselb0 .carouselb-inner"),
+            data);
+    });
+
+    for (let i = 1; i <= 3; i++) {
+
         $.ajax({
-            url: "/Listar/GetProductosEnOferta?OfertaId=1",
+            url: "/Listar/GetProductosHome?GeneroId=" + i,
             type: 'get',
             dataType: 'json'
         }).then(function (data) {
-            AgregarOfertas(data);
-            resolve();
+            AgregarOfertas(
+                document.querySelector("#contcarouselb" + i + " .carouselb-inner"),
+                data);
         });
-    });
-
-    return promise;
+    }
 }
-function AgregarOfertas(data) {
 
-    let arr = JSON.parse(data);
-    let cont = document.getElementById("carouselb-inner");
+function AgregarOfertas(cont, data) {
 
-    arr.forEach(function (value, index, array) {
+    let arr = JSON.parse(data);    
+
+    arr.forEach(function (value) {
         let contcard = ArmarProductoItem(value);
-        cont.appendChild(contcard);        
+        cont.appendChild(contcard);
     });
+
+    /*
+    let cont0 = document.querySelector("#contcarouselb0 .carouselb-inner");
+
+    arr.forEach(function (value) {
+        let contcard = ArmarProductoItem(value);
+        cont0.appendChild(contcard);
+    });
+
+    let conta = document.querySelector("#contcarouselb1 .carouselb-inner");
+
+    arr.forEach(function (value) {
+        let contcard = ArmarProductoItem(value);
+        conta.appendChild(contcard);        
+    });
+
+    let contb = document.querySelector("#contcarouselb2 .carouselb-inner");
+
+    arr.forEach(function (value) {
+        let contcard = ArmarProductoItem(value);
+        contb.appendChild(contcard);
+    });
+
+    let contc = document.querySelector("#contcarouselb3 .carouselb-inner");
+
+    arr.forEach(function (value) {
+        let contcard = ArmarProductoItem(value);
+        contc.appendChild(contcard);
+    });
+    */
+    
 }
 
 function ArmarProductoItem(elem) {

@@ -28,12 +28,12 @@ namespace Negoc.Controllers
         }
         public ActionResult List()
         {
-            return View(servicioProd.GetProductos().ToList());
+            return View();
         }
         // GET: Producto
         public ActionResult Index()
         {
-            return View(servicioProd.GetProductosList().ToList());
+            return View(servicioProd.GetProductosTodos().ToList());
         }
 
         // GET: Producto/Details/5
@@ -56,14 +56,16 @@ namespace Negoc.Controllers
         {
             CargarLists();
             try
-            {                
+            {
                 servicioProd.Agregar(producto, Request.Form.Files, _appEnvironment.WebRootPath);
 
                 return View();
             }
-            catch
+            catch 
             {
-                return View();
+
+                //return View();
+                throw;
             }
         }
         [HttpGet]

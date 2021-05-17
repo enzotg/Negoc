@@ -324,6 +324,13 @@ namespace Negoc.Services
                 
             return (long)res;
         }
+        public long GetProductosCantReg(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
+        {
+            var result = ArmarQry(categoriaId, generoId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, TipoOrden);
+            var res = result.ToList().Count();
+
+            return res;
+        }
 
         public List<Marca> GetMarcas(long categoriaId, byte generoId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int TipoOrden)
         {
@@ -368,27 +375,51 @@ namespace Negoc.Services
 
             return r;
         }
-
-        public List<Producto> GetProductos(int Cant = 20)
-        {
-            return _context.Producto.Take(Cant).ToList();
-        }
-
         public List<Marca> GetMarcas()
         {
             return _context.Marca.ToList();
         }
 
-        public List<ProductoList> GetProductosList(int Cant = 20)
+        public List<ProductoList> GetProductosTodos()
         {
-            return _context.Producto
-                .Include(x => x.Categoria)
-                .Include(x => x.Marca)
-                .Include(x=>x.Genero)
-                .Take(Cant)
-                .Select(x=> ToProdList(x))
-                .ToList();
+            var res = _context.Producto            
+                    .Include(x => x.Categoria)
+                    .Include(x => x.Marca)
+                    .Include(x => x.Color)
+                    .Include(x => x.Genero)
+                    .Include(x => x.Deporte)
+                    .Select(x => ToProdList(x))
+                    .ToList();
+
+            if (res == null)
+                return new List<ProductoList>();
+            else
+                return res;
         }
+
+        public List<ProductoList> GetProductosHome(int Cant = 20, byte GeneroId = 0)
+        {
+            var result = ArmarQry(0, GeneroId, 0, 0, 0, 0.0, 0.0,"", 1);
+
+            int pageNumber = 0;
+            int pageSize = 10;                   
+
+            var cantPag = GetProductosCantPag(0, GeneroId, 0, 0, 0, 0, 0, "", pageNumber, pageSize, 0);
+
+            Random r = new Random();
+            pageNumber = r.Next(1,(int)cantPag + 1);
+            
+            result = result
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+            
+            var res = result
+                 .Select(x => ToProdList(x))
+                .ToList();
+
+            return res;
+        }
+
         public IEnumerable<ProductoList> GetProductosEnOferta(long OfertaId)
         {
             var res = _context

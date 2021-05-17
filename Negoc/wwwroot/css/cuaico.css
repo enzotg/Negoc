@@ -1,0 +1,31 @@
+﻿.contenedor-cuaico {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.cuaico-a {
+    border: #799cd1 1px solid;
+    border-radius: 4px;
+    margin: 2px;
+    background-color: #cce5ff;
+    height: 100px;
+    flex: 1 0 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cuaico-b {
+    background-color: #b9d9fc;
+}
+
+.cuaico-c {
+    background-color: #9ccbfd;
+}
+.cuaico-d {
+    background-color: #6bb2ff;
+}
+.cuaico-cont-img {
+    display: block;
+}

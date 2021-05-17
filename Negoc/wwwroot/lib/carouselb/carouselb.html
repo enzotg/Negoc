@@ -9,17 +9,22 @@
     <script src="./carouselb.js"></script>
 </head>
 <body>
-<div>    
-    <div id="contcarouselb" class="contcarouselb" >
-        <div class="carouselb-cab">
-            <h1>Cabcr</h1>
+<div style="background-color: white;">    
+    <div id="contcarouselb1" class="contcarouselb" >
+        <div class="carouselb-cab" style="            
+            background-image: linear-gradient(to bottom right,  #cce5ff,#343a40);
+            color: whitesmoke;
+            display: flex;
+            justify-content: center;
+            align-items: center;">
+            <h1 >Masculino</h1>
         </div>
     
         <div id="carouselb-inner" class="carouselb-inner"  >
-            <a href="#contcarouselb" class="contcarouselb-control-ant" id="contcarouselb-Ant" onclick="carouselbAnterior()">
+            <a href="#contcarouselb" class="contcarouselb-control-ant" id="contcarouselb-Ant" onclick="carouselbAnterior('contcarouselb1')">
                 <span>&#10094;</span>
             </a>
-            <a href="#contcarouselb" class="contcarouselb-control-sig" id="contcarouselb-Sig" onclick="carouselbSiguiente()">
+            <a href="#contcarouselb" class="contcarouselb-control-sig" id="contcarouselb-Sig" onclick="carouselbSiguiente('contcarouselb1')">
                 <span>&#10095;</span>
             </a>
     

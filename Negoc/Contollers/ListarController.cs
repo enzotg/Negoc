@@ -24,6 +24,7 @@ namespace Negoc.Contollers
         {
             return View();
         }
+
         public IActionResult GetProductos(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int PagNumero=1, int PagCantidad=10, int TipoOrden=1)
         {
             var res = servicioProd.GetProductos(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad,TipoOrden);
@@ -33,20 +34,23 @@ namespace Negoc.Contollers
         public IActionResult GetProductosCantPag(long CategoriaId, byte GeneroId, long MarcaId, long ColorId, long DeporteId, double PrecioD, double PrecioH, string Descripcion, int PagNumero, int PagCantidad, int TipoOrden)
         {
             var res = servicioProd.GetProductosCantPag(CategoriaId, GeneroId, MarcaId, ColorId, DeporteId, PrecioD, PrecioH, Descripcion, PagNumero, PagCantidad, TipoOrden);
-            return Json( res);
-            //return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
+            return Json( res);            
         }
 
-        public IActionResult GetProductosCat(long CategoriaId)
+        public IActionResult GetProductosEnOferta(long OfertaId)
         {
-            var res = servicioProd.GetProductos(CategoriaId);            
+            var res = servicioProd.GetProductosEnOferta(OfertaId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
-        public IActionResult GetProductosCatGen(long CategoriaId, byte GeneroId)
+
+        public IActionResult GetProductosHome(byte GeneroId)
         {
-            var res = servicioProd.GetProductos(CategoriaId, GeneroId);
+            var res = servicioProd.GetProductosHome(10, GeneroId);
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
+
+
+        //-------------------------------------------------------
         public IActionResult GetCategoriasParents(long ProductoId)
         {
             var res = servicioProd.GetParents(ProductoId);
@@ -77,11 +81,6 @@ namespace Negoc.Contollers
         {
             var res = servicioProd.GetProductoList(ProductoId);
             return View("Producto", res);
-        }
-        public IActionResult GetProductosEnOferta(long OfertaId)
-        {
-            var res = servicioProd.GetProductosEnOferta(OfertaId);
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(res));
         }
         //----------------
         public IActionResult GetImagePr(long id)

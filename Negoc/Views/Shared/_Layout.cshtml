@@ -17,20 +17,69 @@
     <link href="~/lib/carouselb/carouselb.css" rel="stylesheet" />
 
     <link href="~/css/homeindex.css" rel="stylesheet" />
+    <link href="~/css/cuaico.css" rel="stylesheet" />
     <link href="~/css/listarindex.css" rel="stylesheet" />
     <link href="~/css/carroindex.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
 
 
 
     <title></title>
 
 </head>
-<body>    
+<body class="body-layout">
+    <div style="background-color: white;">
+
+        <div style="background-color:whitesmoke;padding:4px; display:flex;flex-direction:row-reverse; font-size: .7rem;">
+
+            <div style="padding:0 4px 0 4px;color:gray;margin-right:8px;background-color:#cce5ff;">
+                0810-5055-990171
+            </div>
+
+            <div style="padding:0 4px 0 4px;color:white;margin-right:8px;background-color:tomato;border-radius:2px;text-align:center">
+                Cuotas sin interés
+            </div>
+            <div style="padding:0 4px 0 4px;color:white;margin-right:8px;background-color:#17a2b8;">
+                Envio gratis
+            </div>
+        </div>
+
+        <div style="background-color: #343a40;width: 100%;height: 4px;"></div>
+        
+    </div>
     @await Component.InvokeAsync("MenuBar", new { CategoriaId = Convert.ToInt64(0), NivelId = Convert.ToInt64(2) })
 
-    @RenderBody()
+    @RenderSection("top", false)
 
-    <div class="text-black-50  card-footer ">Terminos</div>
+    <div class="contenido" >
+
+        @RenderBody()
+
+    </div>
+
+
+    <div style="height:260px;background-color:#343a40;padding:1rem">
+        <div style="color:white;font-size:small;margin-top:4rem">
+            <p>
+                Terminos
+            </p>
+            <p>
+                info@com.com.ar
+                0800-777-123456
+            </p>
+            <p>
+                NOSOTROS
+                Sucursales
+                Contacto
+            </p>
+            <p>
+                Trabaja con nosotros
+            </p>
+            <p>
+                Terminos y condicion
+            </p>
+        </div>
+    </div>
 </body>
 </html>
 
