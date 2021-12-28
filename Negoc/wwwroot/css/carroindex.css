@@ -65,7 +65,7 @@
 }
 
 .ContenedorCarro {
-    padding: 4px;
+    padding: 0px;
 }
 
 .carro-img {
@@ -110,7 +110,9 @@
 
 #totalCarro {
     text-align: right;
-    font-size: larger;
+    font-size: 2rem;
+    
+    margin-bottom:200px;
 }
 
 

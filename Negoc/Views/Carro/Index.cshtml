@@ -26,7 +26,33 @@
     </div>
     <div class="col col-cerrar"></div>
 </div>
+
+<div style="background-color:forestgreen;position:absolute;top:80%;left:80%;">
+
+    <div id="whatsapp_chat" >
+        <a href="#" onclick="prepWas()">
+            <img src="~/images/whatsapplogo.png" alt="Whatsapp" style="height:60px;width:60px;"/>            
+        </a>
+    </div>
+</div>
 <script>
 
+    function prepWas() {
+
+        let els = document.querySelectorAll(".fila");
+        let texto = "";
+        els.forEach(function (value, key) {
+
+            if (value.getAttribute("data-id") != null) {
+                let nombre = value.children[1].innerText;
+                let cant = value.children[2].firstElementChild.firstElementChild.firstElementChild.firstElementChild.value;
+
+                texto += nombre + " x " + cant + ". ";
+            }
+        });
+
+        window.location.href = "https://api.whatsapp.com/send?phone=5493815334777&amp;text=" + texto;
+               
+    }
 
 </script>

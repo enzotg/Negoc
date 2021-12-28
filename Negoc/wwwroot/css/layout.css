@@ -1,10 +1,10 @@
 ﻿
 body-layout {
-    background-color: ghostwhite;
+    background-color: whitesmoke;
 }
 .contenido {
     margin:0 24px 0 24px;
-    background-color:ghostwhite;
+    
 }
 
 @media only screen and (min-width: 1366px) {
